@@ -1,6 +1,6 @@
-import {Entity, Fragment, Query} from 'api/types'
+import {Entity, Fragment, Query} from '../types'
 import firstLetterToLowerCase from '@bast1oncz/strings/dist/firstLetterToLowerCase'
-import extractFragmentName from 'strings/extractFragmentName'
+import extractFragmentName from '../../strings/extractFragmentName'
 import gql from 'graphql-tag'
 
 export interface EntityResponseData<E extends Entity> {

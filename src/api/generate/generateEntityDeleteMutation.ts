@@ -1,7 +1,7 @@
 import {Fragment, Mutation} from 'api/types'
-import extractFragmentName from 'strings/extractFragmentName'
 import firstLetterToLowerCase from '@bast1oncz/strings/dist/firstLetterToLowerCase'
 import gql from 'graphql-tag'
+import extractFragmentName from '../../strings/extractFragmentName'
 
 export default function generateEntityDeleteMutation(fragment: Fragment, mutationName?: string, inputName?: string): Mutation {
   const fragmentName = extractFragmentName(fragment)

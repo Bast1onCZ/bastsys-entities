@@ -1,7 +1,7 @@
-import {Fragment, IdentifiableEntity} from 'api/types'
-import extractFragmentName from 'strings/extractFragmentName'
 import firstLetterToLowerCase from '@bast1oncz/strings/dist/firstLetterToLowerCase'
 import gql from 'graphql-tag'
+import {Fragment, IdentifiableEntity} from '../types'
+import extractFragmentName from '../../strings/extractFragmentName'
 
 export interface CreateEntityMutationResponseData<E = IdentifiableEntity> {
   entity: E
