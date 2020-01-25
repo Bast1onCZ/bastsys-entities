@@ -8,7 +8,7 @@
   "author": "bast1oncz",
   "license": "UNLICENSED",
   "dependencies": {
-    "@bast1oncz/objects": "^0.1.8",
+    "@bast1oncz/objects": "^0.2.0",
     "@bast1oncz/strings": "^0.0.18",
     "apollo-client": "^2.6.8",
     "graphql-tag": "^2.10.1",
