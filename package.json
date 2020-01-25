@@ -26,7 +26,7 @@
     "apollo-link": "^1.2.13",
     "typescript": "^3.7.5"
   },
-  "main": "dist",
+  "main": "dist/index",
   "files": [
     "dist"
   ]
