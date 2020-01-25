@@ -4,9 +4,9 @@ import {GraphQLEntityProviderProps} from './types'
 import UpdateMethodType from '../UpdateMethodType'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequest'
-import {getApolloContext} from '@apollo/react-common/lib/context/ApolloContext'
 import useEntityFieldDefinitions from '../useEntityFieldDefinitions'
 import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntityDefinitionImperativeHandle'
+import {useApolloClient} from '@apollo/react-hooks'
 
 const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProviderProps>((props, ref) => {
     const {children, sourceKey = '', updateKey, deleteKey, entity, updateMutation, deleteMutation} = props
@@ -18,7 +18,7 @@ const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProvider
     }), [sourceKey, updateKey, deleteKey, entity, updateMutation, deleteMutation])
     const {isPrepared, fieldRefs, registerFieldDefinition, unregisterFieldDefinition} = useEntityFieldDefinitions(settings)
 
-    const {client} = useContext(getApolloContext())
+    const client = useApolloClient()
     if(!client) {
         throw new Error('A configured apollo client is required')
     }
