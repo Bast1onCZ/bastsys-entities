@@ -1,7 +1,7 @@
 
-export type LocalUpdateMethodType = 'local'
-export type GraphQLUpdateMethodType = 'graphql'
-type UpdateMethodType = LocalUpdateMethodType | GraphQLUpdateMethodType
-
+enum UpdateMethodType {
+  LOCAL_UPDATE,
+  GRAPHQL_UPDATE
+}
 
 export default UpdateMethodType

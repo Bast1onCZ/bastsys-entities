@@ -1,6 +1,7 @@
 import React, {forwardRef, memo, useContext, useMemo} from 'react'
-import EditableEntityContext, {EditableEntityContextValue, EditableEntitySettings} from '../EditableEntityContext'
+import EditableEntityContext, {EditableEntityContextValue} from '../EditableEntityContext'
 import {GraphQLEntityProviderProps} from './types'
+import UpdateMethodType from '../UpdateMethodType'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequest'
 import {getApolloContext} from '@apollo/react-common/lib/context/ApolloContext'
@@ -11,8 +12,8 @@ const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProvider
     const {children, sourceKey = '', updateKey, deleteKey, entity, updateMutation, deleteMutation} = props
 
     const exposedEntity = toKey(sourceKey).getFrom(entity)
-    const settings = useMemo<EditableEntitySettings>(() => ({
-        type: 'graphql',
+    const settings = useMemo(() => ({
+        type: UpdateMethodType.GRAPHQL_UPDATE,
         sourceKey, updateKey, deleteKey, entity, updateMutation, deleteMutation
     }), [sourceKey, updateKey, deleteKey, entity, updateMutation, deleteMutation])
     const {isPrepared, fieldRefs, registerFieldDefinition, unregisterFieldDefinition} = useEntityFieldDefinitions(settings)
@@ -23,6 +24,7 @@ const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProvider
     }
 
     const contextValue: EditableEntityContextValue<any> = useMemo(() => ({
+        type: UpdateMethodType.GRAPHQL_UPDATE,
         entity: exposedEntity,
         settings,
         updateEntity: (request: AEntityUpdateRequest<any>) => {

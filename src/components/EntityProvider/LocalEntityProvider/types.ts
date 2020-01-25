@@ -1,8 +1,8 @@
-import {LocalUpdateMethodType} from '../UpdateMethodType'
+import UpdateMethodType from '../UpdateMethodType'
 import {BaseEntityProviderProps} from '../types'
 
 export interface LocalEntityProviderProps extends BaseEntityProviderProps {
-    type: LocalUpdateMethodType
+    type: UpdateMethodType.LOCAL_UPDATE
     /**
      * Updates entity hold in a local state
      *
@@ -12,5 +12,5 @@ export interface LocalEntityProviderProps extends BaseEntityProviderProps {
 }
 
 export function isLocalEntityProviderProps(value: any): value is LocalEntityProviderProps {
-    return value?.type === 'local'
+    return value?.type === UpdateMethodType.LOCAL_UPDATE
 }

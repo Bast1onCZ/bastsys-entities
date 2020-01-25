@@ -1,9 +1,9 @@
-import {GraphQLUpdateMethodType} from '../UpdateMethodType'
+import UpdateMethodType from '../UpdateMethodType'
 import {IdentifiableEntity, Mutation} from 'api/types'
 import {BaseEntityProviderProps} from '../types'
 
 export interface GraphQLEntityProviderProps extends BaseEntityProviderProps {
-    type: GraphQLUpdateMethodType
+    type: UpdateMethodType.GRAPHQL_UPDATE
     /**
      * Mutation that updates a value at entity
      */
@@ -16,5 +16,5 @@ export interface GraphQLEntityProviderProps extends BaseEntityProviderProps {
 }
 
 export function isGraphQLEntityProviderProps(value: any): value is GraphQLEntityProviderProps {
-    return value?.type === 'graphql'
+    return value?.type === UpdateMethodType.GRAPHQL_UPDATE
 }
