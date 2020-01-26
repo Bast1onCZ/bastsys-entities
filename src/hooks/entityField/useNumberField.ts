@@ -19,7 +19,7 @@ export interface UseNumberField {
     confirmChange: VoidFunction
 }
 
-export default function useNumberValue(def: SyncFieldDefinition, ref: Ref<any>): UseNumberField {
+export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>): UseNumberField {
     const {label, updateKey, sourceKey, deleteKey, validate} = def
     const {entity, updateEntity} = useEntityContext()
 
