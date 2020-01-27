@@ -26,6 +26,7 @@ const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProp
             updateRequest.setBaseKeys(sourceKey, updateKey, deleteKey)
             return updateRequest.performLocalUpdate(entity, updateEntity)
         }),
+        isSyncing: false,
         settings, registerFieldDefinition, unregisterFieldDefinition
     }), [exposedEntity,
         sourceKey, updateKey, deleteKey,
