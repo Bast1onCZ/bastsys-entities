@@ -38,7 +38,7 @@ export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>):
             ? undefined
             : newTempValue
         )
-    }, [])
+    }, [entityValue])
     const confirmChange = useCallback(() => {
         if (tempValue !== undefined) {
             const promise = updateEntity(new EntitySetValueRequest(def, +tempValue)) || new ImmediatePromise(undefined)
