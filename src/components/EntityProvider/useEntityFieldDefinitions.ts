@@ -23,7 +23,7 @@ export interface EntityFieldDefinitionsHookResult {
  *
  * @param settings
  */
-export default function useEntityFieldDefinitions<T extends EntityFieldKeyDefinition>(settings: EditableEntitySettings): EntityFieldDefinitionsHookResult {
+export default function useEntityFieldDefinitions<T extends EntityFieldKeyDefinition>(settings: EditableEntitySettings<any>): EntityFieldDefinitionsHookResult {
   const parentCtx = useContext(EditableEntityContext)
   const {registerFieldDefinition: parentRegister, unregisterFieldDefinition: parentUnregister, settings: parentSettings} = parentCtx || {}
   const shouldRegisterToParent = parentSettings?.entity === settings.entity

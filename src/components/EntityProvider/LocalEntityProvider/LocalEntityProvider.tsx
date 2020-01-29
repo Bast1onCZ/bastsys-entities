@@ -11,7 +11,7 @@ import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntit
 const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProps>((props, ref) => {
     const {entity, sourceKey = '', updateKey, deleteKey, children, updateEntity} = props
 
-    const settings: EditableEntitySettings = useMemo(() => ({
+    const settings: EditableEntitySettings<any> = useMemo(() => ({
         type: UpdateMethodType.LOCAL_UPDATE,
         onEntityUpdate: updateEntity,
         sourceKey, updateKey, deleteKey, entity,
