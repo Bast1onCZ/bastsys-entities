@@ -6,15 +6,15 @@ import {FieldReference} from '../../logic/fieldReferences'
 import {SyncFieldReference} from './useSyncFieldImperativeHandle'
 
 export interface EditableEntityContextValue<E extends Entity> {
-  entity: Entity
+  entity: E
   updateEntity: (updateRequest: AEntityUpdateRequest<E>) => void|Promise<any>
   isSyncing: boolean
   registerFieldDefinition: (def: SyncFieldReference) => void
   unregisterFieldDefinition: (def: SyncFieldReference) => void
-  settings: EditableEntitySettings
+  settings: EditableEntitySettings<E>
 }
 
-export interface EditableEntitySettings {
+export interface EditableEntitySettings<E extends Entity> {
   type: UpdateMethodType
   entity: Entity | undefined
   sourceKey: FieldReference
