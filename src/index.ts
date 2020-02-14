@@ -9,4 +9,4 @@ export {default as useNumberField} from './hooks/entityField/useNumberField'
 // List
 export {default as List} from './components/List'
 export {default as ListTable} from './components/List/ListTable'
-export {default as ListActions} from './components/List/ListActions'
+export {useListContext} from './components/List/ListContext'
