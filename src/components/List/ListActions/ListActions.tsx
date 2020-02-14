@@ -1,14 +1,14 @@
 import React, {memo} from 'react'
 import {ListActionsProps} from './types'
-import cls from './ListActions.scss'
+import Grid from '@material-ui/core/Grid'
 
 function ListActions(props: ListActionsProps) {
   const {children} = props
   
   return (
-    <div className={cls.ListActions}>
+    <Grid container>
       {children}
-    </div>
+    </Grid>
   )
 }
 
