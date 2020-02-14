@@ -1,9 +1,9 @@
 import {Ref, useContext, useEffect, useImperativeHandle} from 'react'
-import {EntityFieldKeyDefinition} from 'logic/fieldReferences'
-import SyncFieldType from 'components/syncField/SyncFieldType'
-import {ValidationResult} from 'hooks/useValidation'
+import {EntityFieldKeyDefinition} from '../../logic/fieldReferences'
+import SyncFieldType from '../syncField/SyncFieldType'
+import {ValidationResult} from '../../hooks/useValidation'
 import EditableEntityContext, {EditableEntityContextValue} from './EditableEntityContext'
-import {Entity} from 'api/types'
+import {Entity} from '../../api/types'
 import values from 'lodash/values'
 
 export interface SyncFieldReference extends EntityFieldKeyDefinition, ValidationResult {
