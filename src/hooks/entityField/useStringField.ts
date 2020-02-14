@@ -1,12 +1,12 @@
 import {Ref, useCallback, useContext, useMemo, useRef, useState} from 'react'
-import useTempValue from 'hooks/useTempValue'
-import {useDynamicValidation, ValidationResult} from 'hooks/useValidation'
-import {SyncFieldDefinition} from 'hooks/entityField/types'
+import useTempValue from '../useTempValue'
+import {useDynamicValidation, ValidationResult} from '../useValidation'
+import {SyncFieldDefinition} from './types'
 import EditableEntityContext, {EditableEntityContextValue} from '../../components/EntityProvider/EditableEntityContext'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
-import SyncFieldType from 'components/syncField/SyncFieldType'
+import SyncFieldType from '../../components/syncField/SyncFieldType'
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 
 export interface UseStringField {

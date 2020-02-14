@@ -1,0 +1,10 @@
+@import '~colors';
+
+tr.animatedRow {
+    transition: all 0.3s ease;
+
+    &:hover {
+        transform: translateX(-10px);
+        background: $color_item_row_background;
+    }
+}
