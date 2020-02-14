@@ -9,5 +9,5 @@ import {Fragment} from 'api/types'
 export default function extractFragmentName(fragment: Fragment) {
     const defs = fragment.definitions as any
 
-    return defs[defs.length - 1].name.value
+    return defs[0].name.value
 }
