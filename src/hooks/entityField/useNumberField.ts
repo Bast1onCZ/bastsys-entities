@@ -7,7 +7,7 @@ import useEntityContext from '../../components/EntityProvider/useEntityContext'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
-import SyncFieldType from '../../components/syncField/SyncFieldType'
+import SyncFieldType from '../../components/syncField/syncFieldType'
 
 export interface UseNumberField {
     tempValue?: number

@@ -1,6 +1,6 @@
 import {Ref, useContext, useEffect, useImperativeHandle} from 'react'
 import {EntityFieldKeyDefinition} from '../../logic/fieldReferences'
-import SyncFieldType from '../syncField/SyncFieldType'
+import SyncFieldType from '../syncField/syncFieldType'
 import {ValidationResult} from '../../hooks/useValidation'
 import EditableEntityContext, {EditableEntityContextValue} from './EditableEntityContext'
 import {Entity} from '../../api/types'

@@ -6,7 +6,7 @@ import EditableEntityContext, {EditableEntityContextValue} from '../../component
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
-import SyncFieldType from '../../components/syncField/SyncFieldType'
+import SyncFieldType from '../../components/syncField/syncFieldType'
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 
 export interface UseStringField {
