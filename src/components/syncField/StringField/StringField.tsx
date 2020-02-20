@@ -13,7 +13,7 @@ export interface StringFieldProps extends SyncFieldDefinition {
 }
 
 const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
-    const {multiline} = props
+    const {label, multiline} = props
     const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value} = useStringField(props, ref)
 
     const shownValue = isDirty ? tempValue : value
@@ -26,7 +26,7 @@ const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
         if(isSyncing) {
             inputProps.endAdornment = (
                 <InputAdornment position="end">
-                    <CircularProgress />
+                    <CircularProgress size={20} />
                 </InputAdornment>
             )
         } else if(isDirty) {
@@ -47,6 +47,7 @@ const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
 
     return (
         <TextField
+            label={label}
             inputRef={inputRef}
             value={shownValue}
             InputProps={InputProps}
