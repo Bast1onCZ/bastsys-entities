@@ -56,6 +56,7 @@ const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
             error={validation.hasError}
             helperText={validation.error}
             multiline={multiline}
+            fullWidth
         />
     )
 })
