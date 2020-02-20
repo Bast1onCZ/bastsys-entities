@@ -9,7 +9,7 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
-    "@bast1oncz/components": "^2.0.0",
+    "@bast1oncz/components": "^3.0.0",
     "@bast1oncz/objects": "^1.0.2",
     "@bast1oncz/state": "0.0.2",
     "@bast1oncz/strings": "^0.0.21",

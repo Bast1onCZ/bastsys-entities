@@ -1,6 +1,6 @@
 import React, {forwardRef, memo, useEffect} from 'react'
 import {useNumberField} from '../../../index'
-import RoundingNumericField from '@bast1oncz/components/dist/form/RoundingNumericField'
+import RoundingNumericField from '@bast1oncz/components/dist/components/form/RoundingNumericField'
 import useSolidValue from '@bast1oncz/state/dist/useSolidValue'
 import {RoundingNumericSyncFieldProps} from './types'
 
