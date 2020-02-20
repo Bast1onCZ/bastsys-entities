@@ -38,11 +38,10 @@ export default function useStringValue(def: SyncFieldDefinition, ref: Ref<any>):
     const changeTempValue = useCallback(tempValue => setTempValue(tempValue !== entityValue ? tempValue : undefined), [entityValue])
     const confirmChange = useCallback(() => {
         if (tempValue !== undefined) {
-            const promise = updateEntity(new EntitySetValueRequest(def, tempValue))
+            const promise = updateEntity(new EntitySetValueRequest(def, tempValue)) || new ImmediatePromise(undefined)
             // if async update has started
             setIsSyncing(true)
-            promise || new ImmediatePromise(undefined)
-                .then(resetTempValue)
+            promise.then(resetTempValue)
                 .finally(() => setIsSyncing(false))
         }
     }, [tempValue, updateEntity, sourceKey, updateKey])
