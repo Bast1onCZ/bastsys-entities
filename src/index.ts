@@ -5,6 +5,7 @@ export {default as UpdateMethodType} from './components/EntityProvider/UpdateMet
 
 export {default as useStringField} from './hooks/entityField/useStringField'
 export {default as useNumberField} from './hooks/entityField/useNumberField'
+export {default as useSelectField} from './hooks/entityField/useSelectField'
 
 // List
 export {default as List} from './components/List'
