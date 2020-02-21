@@ -27,7 +27,7 @@ export default function useStringValue(def: SyncFieldDefinition, ref: Ref<any>):
     const [isSyncing, setIsSyncing] = useState(false)
     const inputRef = useRef<HTMLInputElement>()
 
-    const entityValue = toKey(sourceKey).getFrom(entity)
+    const entityValue = toKey(sourceKey).getFrom(entity) || ''
     const localValue = tempValue !== undefined
         ? tempValue
         : entityValue
