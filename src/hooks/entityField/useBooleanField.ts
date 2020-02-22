@@ -31,7 +31,7 @@ export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>
             setSyncingValue(value)
             return promise.finally(resetSyncingValue)
         }
-    }, [])
+    }, [entityValue, def])
 
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.BOOLEAN,
