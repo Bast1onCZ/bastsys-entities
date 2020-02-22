@@ -12,7 +12,6 @@ function BooleanField(props: BooleanFieldProps) {
     const {value, isSyncing, confirmChange} = useBooleanField(props)
 
     const handleChange = useCallback((e, checked: boolean) => {
-        console.log('wanna change ', checked)
         confirmChange(checked)
     }, [confirmChange])
 
