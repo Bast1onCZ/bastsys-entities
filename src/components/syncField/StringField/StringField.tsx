@@ -40,7 +40,7 @@ const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
     }, [isDirty, isSyncing])
 
     const handleBlur = useCallback(() => {
-        if(validation.hasError) {
+        if(!validation.hasError) {
             // confirm change only if temp value is valid
             confirmChange()
         }
