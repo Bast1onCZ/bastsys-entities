@@ -23,13 +23,13 @@ export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>
     const {updateEntity} = useEntityContext()
     const validation = useValidation(exposedValue, def.validate)
 
-    const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
+    const [syncingValue, setSyncingValue, resetSyncingValue] = useResettableState<undefined|boolean>(undefined)
 
     const confirmChange = useCallback((value: boolean) => {
         if(entityValue !== value) {
             const promise = updateEntity(new EntitySetValueRequest(def, value)) || new ImmediatePromise()
-            setIsSyncing(true)
-            return promise.finally(resetIsSyncing)
+            setSyncingValue(value)
+            return promise.finally(resetSyncingValue)
         }
     }, [])
 
@@ -41,7 +41,7 @@ export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>
 
     return useMemo(() => ({
         confirmChange,
-        isSyncing,
-        value: exposedValue
-    }), [exposedValue, isSyncing, confirmChange])
+        isSyncing: syncingValue !== undefined,
+        value: syncingValue !== undefined ? syncingValue : exposedValue
+    }), [exposedValue, syncingValue, confirmChange])
 }
