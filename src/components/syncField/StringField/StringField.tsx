@@ -39,6 +39,12 @@ const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
         return inputProps
     }, [isDirty, isSyncing])
 
+    const handleBlur = useCallback(() => {
+        if(validation.hasError) {
+            // confirm change only if temp value is valid
+            confirmChange()
+        }
+    }, [confirmChange, validation.hasError])
     const handleKeyPress = useCallback((e: KeyboardEvent) => {
         if(!multiline && e.key === 'Enter') {
             inputRef.current?.blur()
@@ -52,7 +58,7 @@ const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
             value={shownValue}
             InputProps={InputProps}
             onChange={handleTempValueChange}
-            onBlur={confirmChange}
+            onBlur={handleBlur}
             onKeyPress={handleKeyPress}
             error={validation.hasError}
             helperText={validation.error}
