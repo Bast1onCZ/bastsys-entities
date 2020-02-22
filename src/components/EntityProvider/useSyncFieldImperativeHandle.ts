@@ -16,7 +16,7 @@ export interface SyncFieldReference extends EntityFieldKeyDefinition, Validation
  * @param ref
  * @param input
  */
-export default function useSyncFieldImperativeHandle(ref: Ref<SyncFieldReference>, input: SyncFieldReference) {
+export default function useSyncFieldImperativeHandle(ref: Ref<SyncFieldReference>|undefined, input: SyncFieldReference) {
   // Context
   const {sourceKey, updateKey, deleteKey} = input
   

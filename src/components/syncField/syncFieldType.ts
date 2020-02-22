@@ -5,7 +5,8 @@ enum SyncFieldType {
   SELECT,
   HTML,
   IMAGE,
-  ITEM_LIST
+  ITEM_LIST,
+  BOOLEAN
 }
 
 export default SyncFieldType
