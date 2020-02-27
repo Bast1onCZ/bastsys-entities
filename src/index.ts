@@ -2,6 +2,7 @@
 // Editing entities
 export {default as EntityProvider} from './components/EntityProvider'
 export {default as UpdateMethodType} from './components/EntityProvider/UpdateMethodType'
+export {default as useEntityContext} from './components/EntityProvider/useEntityContext'
 
 export {default as useEntityValue} from './hooks/entityField/utils/useEntityValue'
 
