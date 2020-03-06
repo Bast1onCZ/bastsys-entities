@@ -10,10 +10,11 @@ import DirtyIcon from '@material-ui/icons/CreateOutlined'
 
 export interface StringFieldProps extends SyncFieldDefinition {
     multiline?: boolean
+    disabled?: boolean
 }
 
 const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
-    const {label, multiline} = props
+    const {label, multiline, disabled} = props
     const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value} = useStringField(props, ref)
 
     const shownValue = isDirty ? tempValue : value
@@ -63,6 +64,7 @@ const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
             error={validation.hasError}
             helperText={validation.error}
             multiline={multiline}
+            disabled={disabled}
             fullWidth
         />
     )
