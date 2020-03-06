@@ -4,8 +4,9 @@ import {SyncFieldReference} from './useSyncFieldImperativeHandle'
 import {FieldReference} from 'logic/fieldReferences'
 import {GraphQLEntityProviderProps} from './GraphQLEntityProvider/types'
 import {LocalEntityProviderProps} from './LocalEntityProvider/types'
+import {ReadonlyEntityProviderProps} from './ReadonlyEntityProvider/types'
 
-export type EntityProviderProps = LocalEntityProviderProps | GraphQLEntityProviderProps
+export type EntityProviderProps = ReadonlyEntityProviderProps | LocalEntityProviderProps | GraphQLEntityProviderProps
 
 export interface EditableEntityProviderReference {
   isPrepared: boolean

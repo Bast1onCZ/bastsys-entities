@@ -6,9 +6,15 @@ import {isGraphQLEntityProviderProps} from './GraphQLEntityProvider/types'
 import GraphQLEntityProvider from './GraphQLEntityProvider/GraphQLEntityProvider'
 import NotImplementedError from '@bast1oncz/objects/dist/error/NotImplementedError'
 import {EntityDefinition} from './useEntityDefinitionImperativeHandle'
+import {isReadonlyEntityProviderProps} from './ReadonlyEntityProvider/types'
+import ReadonlyEntityProvider from './ReadonlyEntityProvider/ReadonlyEntityProvider'
 
 const EntityProvider = forwardRef<EntityDefinition, EntityProviderProps>((props, ref) => {
-    if (isLocalEntityProviderProps(props)) {
+    if(isReadonlyEntityProviderProps(props)) {
+        return (
+            <ReadonlyEntityProvider ref={ref} {...props} />
+        )
+    } else if (isLocalEntityProviderProps(props)) {
         return (
             <LocalEntityProvider ref={ref} {...props} />
         )
