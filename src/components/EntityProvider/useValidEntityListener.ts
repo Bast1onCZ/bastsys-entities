@@ -14,7 +14,7 @@ export default function useValidEntityListener(ref: RefObject<EntityProviderRefe
   
   useEffect(() => {
     const id = setInterval(() => {
-      if (!disabled && chargeRef.current && ref.current?.isPrepared && !ref.current?.hasError) {
+      if (!disabled && chargeRef.current && ref.current?.isPrepared && ref.current?.isValid) {
         chargeRef.current = false
         listener()
       }

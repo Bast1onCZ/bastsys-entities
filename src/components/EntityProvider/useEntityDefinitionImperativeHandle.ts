@@ -1,5 +1,6 @@
 import {Ref, useImperativeHandle, useMemo} from 'react'
 import {SyncFieldReference} from './useSyncFieldImperativeHandle'
+import {EntityProviderReference} from './types'
 
 export interface EntityDefinitionImperativeHandleInput {
     isPrepared: boolean
@@ -10,7 +11,7 @@ export interface EntityDefinition extends EntityDefinitionImperativeHandleInput 
    isValid: boolean
 }
 
-export default function useEntityDefinitionImperativeHandle(input: EntityDefinitionImperativeHandleInput, ref: Ref<EntityDefinition>): void {
+export default function useEntityDefinitionImperativeHandle(input: EntityDefinitionImperativeHandleInput, ref: Ref<EntityProviderReference>): void {
     const {isPrepared, fieldRefs} = input
 
     const isValid = useMemo(() => {

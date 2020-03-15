@@ -11,7 +11,7 @@ export type EntityProviderProps = ReadonlyEntityProviderProps | LocalEntityProvi
 export interface EntityProviderReference {
   isPrepared: boolean
   fieldRefs: SyncFieldReference[]
-  hasError: boolean
+  isValid: boolean
 }
 
 export interface BaseEntityProviderProps {
