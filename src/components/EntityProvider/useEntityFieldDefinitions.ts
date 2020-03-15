@@ -4,8 +4,8 @@ import {EntityFieldKeyDefinition} from 'logic/fieldReferences'
 import EditableEntityContext, {EditableEntitySettings} from './EditableEntityContext'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
 import changeObject from '@bast1oncz/objects/dist/changeObject'
-import useForceUpdate from '../../hooks/forceUpdate'
 import values from 'lodash/values'
+import useForceUpdate from '@bast1oncz/state/dist/useForceUpdate'
 
 export interface EntityFieldReferences {
   [index: string]: SyncFieldReference
