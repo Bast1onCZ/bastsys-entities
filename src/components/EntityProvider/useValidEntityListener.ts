@@ -8,7 +8,7 @@ import {EntityProviderReference} from './types'
  * @param disabled
  * @param listener
  */
-export function useValidEntityListener(ref: RefObject<EntityProviderReference>, listener: VoidFunction, disabled: boolean = false): void {
+export default function useValidEntityListener(ref: RefObject<EntityProviderReference>, listener: VoidFunction, disabled: boolean = false): void {
   const chargeRef = useRef<boolean>()
   chargeRef.current = true
   
