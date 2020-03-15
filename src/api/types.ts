@@ -22,11 +22,20 @@ export interface UnidentifiableEntity {
 export type Entity = IdentifiableEntity|UnidentifiableEntity
 
 export interface Translatable<T extends Translation = Translation> {
-    translations: [T]
+    translations: T[]
 }
 export interface Translation {
     locale: string
     [field: string]: string
+}
+
+export interface Language extends Translatable {
+    code: string,
+    translations: LanguageTranslation[]
+}
+
+interface LanguageTranslation extends Translation {
+    name: string
 }
 
 export type Query = DocumentNode
