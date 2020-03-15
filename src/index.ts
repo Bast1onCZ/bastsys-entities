@@ -6,6 +6,8 @@ export {default as UpdateMethodType} from './components/EntityProvider/UpdateMet
 export {default as useEntityContext} from './components/EntityProvider/useEntityContext'
 export {default as useValidEntityListener} from './components/EntityProvider/useValidEntityListener'
 
+export {EntityDefinition} from './components/EntityProvider/useEntityDefinitionImperativeHandle'
+
 export {default as useEntityValue} from './hooks/entityField/utils/useEntityValue'
 
 export {default as useStringField} from './hooks/entityField/useStringField'
