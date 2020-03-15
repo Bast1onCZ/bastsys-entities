@@ -26,7 +26,7 @@
   "peerDependencies": {
     "@material-ui/core": "^4.9.2",
     "@material-ui/icons": "^4.9.1",
-    "@bast1oncz/components": "^2.0.0",
+    "@bast1oncz/components": "^3.0.0",
     "leave-confirm": "^1.0.0"
   },
   "devDependencies": {
