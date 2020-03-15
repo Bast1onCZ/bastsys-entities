@@ -6,3 +6,10 @@ declare module '*.scss' {
     const classNames: IClassNames
     export default classNames
 }
+
+declare module '*.png' {
+    type SourceUrl = string
+
+    const imageSource: SourceUrl
+    export default imageSource
+}
