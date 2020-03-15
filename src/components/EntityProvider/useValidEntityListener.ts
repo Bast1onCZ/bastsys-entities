@@ -1,5 +1,5 @@
 import {RefObject, useEffect, useRef} from 'react'
-import {EditableEntityProviderReference} from './types'
+import {EntityProviderReference} from './types'
 
 /**
  * Triggers given listener function, when entity can be created. Can be triggered max once per render
@@ -8,7 +8,7 @@ import {EditableEntityProviderReference} from './types'
  * @param disabled
  * @param listener
  */
-export function useValidEntityListener(ref: RefObject<EditableEntityProviderReference>, listener: VoidFunction, disabled: boolean = false): void {
+export function useValidEntityListener(ref: RefObject<EntityProviderReference>, listener: VoidFunction, disabled: boolean = false): void {
   const chargeRef = useRef<boolean>()
   chargeRef.current = true
   

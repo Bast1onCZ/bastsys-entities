@@ -8,7 +8,7 @@ import {ReadonlyEntityProviderProps} from './ReadonlyEntityProvider/types'
 
 export type EntityProviderProps = ReadonlyEntityProviderProps | LocalEntityProviderProps | GraphQLEntityProviderProps
 
-export interface EditableEntityProviderReference {
+export interface EntityProviderReference {
   isPrepared: boolean
   fieldRefs: SyncFieldReference[]
   hasError: boolean
