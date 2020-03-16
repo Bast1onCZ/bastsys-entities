@@ -6,7 +6,7 @@ import useEntityContext from '../../components/EntityProvider/useEntityContext'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
-import useValidation from '../useValidation'
+import {useDynamicValidation} from '../useValidation'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 
 export interface UseBooleanField extends UseSyncField<boolean> {
@@ -21,7 +21,7 @@ export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>
     const entityValue = useEntityValue(def)
     const exposedValue = useEntityValue(def, isBoolean, false)
     const {updateEntity} = useEntityContext()
-    const validation = useValidation(exposedValue, def.validate)
+    const validation = useDynamicValidation(exposedValue, def.validate)
 
     const [syncingValue, setSyncingValue, resetSyncingValue] = useResettableState<undefined|boolean>(undefined)
 

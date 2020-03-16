@@ -1,10 +1,11 @@
 import {ReactChild} from 'react'
 import {EntityFieldKeyDefinition} from '../../logic/fieldReferences'
 import {ValidatorFunction} from '../useValidation'
+import {ReferableValue} from '../../components/syncField/EntityReference'
 
 export interface SyncFieldDefinition extends EntityFieldKeyDefinition {
   label?: ReactChild
-  validate?: ValidatorFunction
+  validate?: ReferableValue<ValidatorFunction>
 }
 
 export interface UseSyncField<T> {

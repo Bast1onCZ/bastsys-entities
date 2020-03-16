@@ -22,13 +22,12 @@ export interface ErrorReferences {
 }
 
 /**
- *
  * @param {any} value
  * @param {function(value)|null} validate - function must return a string for an error or (null || undefined) for a value that is ok; if validation function not given, value is considered always valid
  *
  * @return {{hasError: boolean, error: (string|undefined)}}
  */
-export default function useValidation(value: unknown, validate?: ValidatorFunction): ValidationResult {
+function useValidation(value: unknown, validate?: ValidatorFunction): ValidationResult {
     const error = (validate && validate(value)) || undefined
     const hasError = !!error
 

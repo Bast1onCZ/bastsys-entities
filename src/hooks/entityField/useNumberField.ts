@@ -1,6 +1,6 @@
 import useTempValue from '../useTempValue'
 import {Ref, useCallback, useMemo, useState} from 'react'
-import useValidation, {ValidationResult} from '../useValidation'
+import {useDynamicValidation, ValidationResult} from '../useValidation'
 import {SyncFieldDefinition} from './types'
 import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import useEntityContext from '../../components/EntityProvider/useEntityContext'
@@ -28,8 +28,8 @@ export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>):
 
     const entityValue = toKey(sourceKey).getFrom(entity)
 
-    const entityValueValidation = useValidation(entityValue, validate)
-    const tempValueValidation = useValidation(tempValue !== undefined ? tempValue : entityValue, validate)
+    const entityValueValidation = useDynamicValidation(entityValue, validate)
+    const tempValueValidation = useDynamicValidation(tempValue !== undefined ? tempValue : entityValue, validate)
 
     const changeTempValue = useCallback((newTempValue: string | number) => {
         const parsedTempValue = +newTempValue // parsed number

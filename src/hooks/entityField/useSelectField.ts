@@ -9,7 +9,7 @@ import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 import useResettableState from '@bast1oncz/state/dist/useResettableState'
 import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import SyncFieldType from '../../components/syncField/syncFieldType'
-import useValidation, {ValidationResult} from '../useValidation'
+import {useDynamicValidation, ValidationResult} from '../useValidation'
 
 export interface UseSelectField {
     value: IdentifiableEntity['id']
@@ -23,7 +23,7 @@ export default function useSelectField(def: SyncFieldDefinition, ref: Ref<any>):
 
     const {entity, updateEntity} = useEntityContext()
     const value = toKey(sourceKey).getFrom(entity)
-    const validation = useValidation(value, validate)
+    const validation = useDynamicValidation(value, validate)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const confirmChange = useCallback((id: IdentifiableEntity['id']|null) => {

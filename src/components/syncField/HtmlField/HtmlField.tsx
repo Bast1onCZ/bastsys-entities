@@ -7,9 +7,7 @@ import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../EntityProv
 import ChipVariables from '@bast1oncz/components/dist/components/ChipVariables'
 import EditIcon from '@material-ui/icons/Edit'
 
-import useResettableState from 'hooks/state/useResettableState'
-import useTempValue from 'hooks/useTempValue'
-import useValidation from 'hooks/useValidation'
+import useTempValue from '../../../hooks/useTempValue'
 
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import EntitySetValueRequest from '../../../logic/updateRequest/EntitySetValueRequest'
@@ -18,6 +16,8 @@ import React, {forwardRef, memo, useCallback} from 'react'
 import 'tinymce/tinymce'
 import {useEntityContext} from '../../../index'
 import Grid from '@material-ui/core/Grid'
+import {useDynamicValidation} from '../../../hooks/useValidation'
+import useResettableState from '../../../hooks/state/useResettableState'
 
 const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) => {
     const {sourceKey, updateKey, deleteKey, validate, label, disabled, variables, tinymceInit, hidden} = props
@@ -26,7 +26,7 @@ const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) =>
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const entityValue = toKey(sourceKey).getFrom(entity)
-    const validation = useValidation(entityValue, validate)
+    const validation = useDynamicValidation(entityValue, validate)
 
     const shownValue = tempValue !== undefined
         ? tempValue

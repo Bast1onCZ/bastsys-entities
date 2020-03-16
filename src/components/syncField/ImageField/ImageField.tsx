@@ -9,7 +9,6 @@ import SyncFieldType from '../syncFieldType'
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import ImageMimeType from './ImageMimeType'
 import useResettableState from 'hooks/state/useResettableState'
-import useValidation from '../../../hooks/useValidation'
 import useFileDialog from '@bast1oncz/components/dist/hooks/input/useFileDialog'
 
 import ImagePlaceholder from './ImagePlaceholder.png'
@@ -19,6 +18,7 @@ import React, {CSSProperties, forwardRef, memo, useCallback} from 'react'
 import {useEntityContext} from '../../../index'
 import useIncrementalIdState from '@bast1oncz/state/dist/useIncrementalIdState'
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
+import {useDynamicValidation} from '../../../hooks/useValidation'
 
 const IMAGE_SOURCE_TYPE = {
     DATA_URL: 1,
@@ -56,7 +56,7 @@ const ImageField = forwardRef<SyncFieldReference, ImageFieldProps>((props, ref) 
     const rawEntityValue = toKey(props.sourceKey).getFrom(entity)
     const valueType = isValidValue(rawEntityValue)
     const entityValue = valueType ? rawEntityValue : DEFAULT_ENTITY_VALUE
-    const validation = useValidation(rawEntityValue, validate)
+    const validation = useDynamicValidation(rawEntityValue, validate)
 
     // update
     const [isUpdating, setIsUpdating, resetIsUpdating] = useResettableState(false)
