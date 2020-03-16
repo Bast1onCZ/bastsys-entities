@@ -1,5 +1,5 @@
-import React, {forwardRef, memo, useContext, useMemo, useState} from 'react'
-import EditableEntityContext, {EditableEntityContextValue} from '../EditableEntityContext'
+import React, {forwardRef, memo, useMemo} from 'react'
+import EditableEntityContext, {EntityContextValue} from '../EntityContext'
 import {GraphQLEntityProviderProps} from './types'
 import UpdateMethodType from '../UpdateMethodType'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
@@ -10,7 +10,7 @@ import {useApolloClient} from '@apollo/react-hooks'
 import useResettableState from '../../../hooks/state/useResettableState'
 
 const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProviderProps>((props, ref) => {
-    const {children, sourceKey = '', updateKey, deleteKey, entity, updateMutation, deleteMutation} = props
+    const {children, sourceKey = '', updateKey = '', deleteKey = '', entity, updateMutation, deleteMutation} = props
 
     const exposedEntity = toKey(sourceKey).getFrom(entity)
     const settings = useMemo(() => ({
@@ -26,7 +26,7 @@ const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProvider
 
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
-    const contextValue: EditableEntityContextValue<any> = useMemo(() => ({
+    const contextValue: EntityContextValue<any> = useMemo(() => ({
         type: UpdateMethodType.GRAPHQL_UPDATE,
         entity: exposedEntity,
         settings,

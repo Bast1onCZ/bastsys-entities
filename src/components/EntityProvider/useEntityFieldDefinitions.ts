@@ -1,7 +1,7 @@
 import {useCallback, useContext, useMemo, useRef} from 'react'
 import {SyncFieldReference} from './useSyncFieldImperativeHandle'
 import {EntityFieldKeyDefinition} from 'logic/fieldReferences'
-import EditableEntityContext, {EditableEntitySettings} from './EditableEntityContext'
+import EditableEntityContext, {EntitySettings} from './EntityContext'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
 import changeObject from '@bast1oncz/objects/dist/changeObject'
 import values from 'lodash/values'
@@ -23,7 +23,7 @@ export interface EntityFieldDefinitionsHookResult {
  *
  * @param settings
  */
-export default function useEntityFieldDefinitions<T extends EntityFieldKeyDefinition>(settings: EditableEntitySettings<any>): EntityFieldDefinitionsHookResult {
+export default function useEntityFieldDefinitions<T extends EntityFieldKeyDefinition>(settings: EntitySettings<any>): EntityFieldDefinitionsHookResult {
   const parentCtx = useContext(EditableEntityContext)
   const {registerFieldDefinition: parentRegister, unregisterFieldDefinition: parentUnregister, settings: parentSettings} = parentCtx || {}
   const shouldRegisterToParent = parentSettings?.entity === settings.entity

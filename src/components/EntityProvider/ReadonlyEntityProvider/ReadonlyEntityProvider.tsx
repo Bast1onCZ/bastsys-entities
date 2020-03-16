@@ -1,6 +1,6 @@
 import React, {forwardRef, memo, useMemo} from 'react'
 import {ReadonlyEntityProviderProps} from './types'
-import EditableEntityContext, {EditableEntityContextValue, EditableEntitySettings} from '../EditableEntityContext'
+import EditableEntityContext, {EntityContextValue, EntitySettings} from '../EntityContext'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import NotImplementedError from '@bast1oncz/objects/dist/error/NotImplementedError'
 import useEntityFieldDefinitions from '../useEntityFieldDefinitions'
@@ -12,7 +12,7 @@ const ReadonlyEntityProvider = forwardRef<EntityDefinition, ReadonlyEntityProvid
 
     const exposedEntity = useMemo(() => toKey(sourceKey || '').getFrom(entity), [sourceKey, entity])
 
-    const settings: EditableEntitySettings<any> = useMemo(() => ({
+    const settings: EntitySettings<any> = useMemo(() => ({
         type: UpdateMethodType.READ_ONLY,
         onEntityUpdate: () => {
             new NotImplementedError()
@@ -21,7 +21,7 @@ const ReadonlyEntityProvider = forwardRef<EntityDefinition, ReadonlyEntityProvid
     }), [sourceKey, entity])
     const {isPrepared, fieldRefs, registerFieldDefinition, unregisterFieldDefinition} = useEntityFieldDefinitions(settings)
 
-    const ctxValue = useMemo<EditableEntityContextValue<any>>(() => {
+    const ctxValue = useMemo<EntityContextValue<any>>(() => {
         return {
             entity: exposedEntity,
             updateEntity: () => {

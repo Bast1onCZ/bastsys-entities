@@ -1,17 +1,17 @@
 import React, {forwardRef, memo, useMemo} from 'react'
 import {LocalEntityProviderProps} from './types'
-import {EditableEntityContextValue, EditableEntitySettings} from '../EditableEntityContext'
+import {EntityContextValue, EntitySettings} from '../EntityContext'
 import useEntityFieldDefinitions from '../useEntityFieldDefinitions'
 import UpdateMethodType from '../UpdateMethodType'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequest'
-import EditableEntityContext from '../EditableEntityContext'
+import EditableEntityContext from '../EntityContext'
 import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntityDefinitionImperativeHandle'
 
 const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProps>((props, ref) => {
     const {entity, sourceKey = '', updateKey, deleteKey, children, updateEntity} = props
 
-    const settings: EditableEntitySettings<any> = useMemo(() => ({
+    const settings: EntitySettings<any> = useMemo(() => ({
         type: UpdateMethodType.LOCAL_UPDATE,
         onEntityUpdate: updateEntity,
         sourceKey, updateKey, deleteKey, entity,
@@ -20,7 +20,7 @@ const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProp
 
     const exposedEntity = toKey(sourceKey).getFrom(entity)
     const {isPrepared, fieldRefs, registerFieldDefinition, unregisterFieldDefinition} = useEntityFieldDefinitions(settings)
-    const contextValue: EditableEntityContextValue<any> = useMemo(() => ({
+    const contextValue: EntityContextValue<any> = useMemo(() => ({
         entity: exposedEntity,
         updateEntity: ((updateRequest: AEntityUpdateRequest<any>) => {
             updateRequest.setBaseKeys(sourceKey, updateKey, deleteKey)

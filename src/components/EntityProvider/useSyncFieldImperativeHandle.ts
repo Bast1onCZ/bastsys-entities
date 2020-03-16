@@ -2,7 +2,7 @@ import {Ref, useContext, useEffect, useImperativeHandle} from 'react'
 import {EntityFieldKeyDefinition} from '../../logic/fieldReferences'
 import SyncFieldType from '../syncField/syncFieldType'
 import {ValidationResult} from '../../hooks/useValidation'
-import EditableEntityContext, {EditableEntityContextValue} from './EditableEntityContext'
+import EditableEntityContext, {EntityContextValue} from './EntityContext'
 import {Entity} from '../../api/types'
 import values from 'lodash/values'
 
@@ -20,7 +20,7 @@ export default function useSyncFieldImperativeHandle(ref: Ref<SyncFieldReference
   // Context
   const {sourceKey, updateKey, deleteKey} = input
   
-  const editableEntityContext = useContext(EditableEntityContext) as EditableEntityContextValue<Entity>
+  const editableEntityContext = useContext(EditableEntityContext) as EntityContextValue<Entity>
   useEffect(() => {
       editableEntityContext.registerFieldDefinition(input)
       

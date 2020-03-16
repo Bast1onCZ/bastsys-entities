@@ -5,8 +5,9 @@ import {FieldReference} from '../../logic/fieldReferences'
 import {GraphQLEntityProviderProps} from './GraphQLEntityProvider/types'
 import {LocalEntityProviderProps} from './LocalEntityProvider/types'
 import {ReadonlyEntityProviderProps} from './ReadonlyEntityProvider/types'
+import {EntitySettings} from './EntityContext'
 
-export type EntityProviderProps = ReadonlyEntityProviderProps | LocalEntityProviderProps | GraphQLEntityProviderProps
+export type EntityProviderProps = ReadonlyEntityProviderProps | LocalEntityProviderProps | GraphQLEntityProviderProps | DependentEntityProviderProps
 
 export interface EntityProviderReference {
   isPrepared: boolean
@@ -23,4 +24,8 @@ export interface BaseEntityProviderProps {
   sourceKey?: FieldReference
   updateKey?: FieldReference
   deleteKey?: FieldReference
+}
+
+export interface DependentEntityProviderProps extends Omit<BaseEntityProviderProps, 'entity'>, EntitySettings<Entity> {
+  sourceKey: FieldReference
 }
