@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo, MemoExoticComponent} from 'react'
 import {SyncFieldDefinition} from '../../hooks/entityField/types'
 import getTranslation from '../../logic/getTranslation'
 import {FieldReference} from '../../logic/fieldReferences'
@@ -19,10 +19,10 @@ export type TranslatedSyncFieldProps<P extends TranslatableSyncFieldProps> = Omi
     deleteKey?: IdentityFieldReference
 }
 
-export type TranslatableFieldComponentType<P extends TranslatableSyncFieldProps> = (props: TranslatedSyncFieldProps<P>) => JSX.Element
+export type TranslatableFieldComponentType<P extends TranslatableSyncFieldProps> = MemoExoticComponent<(props: TranslatedSyncFieldProps<P>) => JSX.Element>
 
 export default function withTranslatedField<P extends TranslatableSyncFieldProps>(FieldComponent: any): TranslatableFieldComponentType<P> {
-    return (props: TranslatedSyncFieldProps<P>) => {
+    return memo((props: TranslatedSyncFieldProps<P>) => {
         const {
             sourceKey, updateKey, deleteKey, label, hidden,
             ...restProps
@@ -32,22 +32,22 @@ export default function withTranslatedField<P extends TranslatableSyncFieldProps
         return (
             <>
                 {languages.map((language) => {
-                        const {code} = language
-                        const identity = {locale: code}
+                    const {code} = language
+                    const identity = {locale: code}
 
-                        return (
-                            <FieldComponent
-                                {...restProps}
-                                key={code}
-                                sourceKey={sourceKey(identity)}
-                                updateKey={updateKey && updateKey(identity)}
-                                deleteKey={deleteKey && deleteKey(identity)}
-                                label={label && `${label} (${getTranslation(language, 'name', shownLanguageCode)})`}
-                                hidden={code !== editedLanguageCode || hidden}
-                            />
-                        )
-                    })}
+                    return (
+                        <FieldComponent
+                            {...restProps}
+                            key={code}
+                            sourceKey={sourceKey(identity)}
+                            updateKey={updateKey && updateKey(identity)}
+                            deleteKey={deleteKey && deleteKey(identity)}
+                            label={label && `${label} (${getTranslation(language, 'name', shownLanguageCode)})`}
+                            hidden={code !== editedLanguageCode || hidden}
+                        />
+                    )
+                })}
             </>
         )
-    }
+    })
 }

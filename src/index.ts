@@ -12,6 +12,15 @@ export {default as useNumberField} from './hooks/entityField/useNumberField'
 export {default as useSelectField} from './hooks/entityField/useSelectField'
 export {default as useBooleanField} from './hooks/entityField/useBooleanField'
 
+export {default as StringField, TranslatedStringField} from './components/syncField/StringField'
+export {default as HtmlField, TranslatedHtmlField} from './components/syncField/HtmlField'
+export {default as NumberField, TranslatedNumberField} from './components/syncField/NumberField'
+export {default as RoundingNumericField, TranslatedRoundingNumericField} from './components/syncField/RoundingNumericField'
+export {default as SelectField, TranslatedSelectField} from './components/syncField/SelectField'
+export {default as ImageField, TranslatedImageField} from './components/syncField/ImageField'
+export {default as BooleanField, TranslatedBooleanField} from './components/syncField/BooleanField'
+export {default as ItemListField} from './components/syncField/ItemListField'
+
 // List
 export {default as List} from './components/List'
 export {useListContext} from './components/List/ListContext'

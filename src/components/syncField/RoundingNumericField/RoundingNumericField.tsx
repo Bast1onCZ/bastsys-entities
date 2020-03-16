@@ -1,12 +1,12 @@
 import React, {forwardRef, memo, useEffect} from 'react'
 import {useNumberField} from '../../../index'
-import RoundingNumericField from '@bast1oncz/components/dist/components/form/RoundingNumericField'
 import useSolidValue from '@bast1oncz/state/dist/useSolidValue'
+import RoundingNumericBareField from '@bast1oncz/components/dist/components/form/RoundingNumericField'
 import {RoundingNumericSyncFieldProps} from './types'
 
-const RoundingNumericSyncField = forwardRef<any, RoundingNumericSyncFieldProps>((props, ref) => {
+const RoundingNumericField = forwardRef<any, RoundingNumericSyncFieldProps>((props, ref) => {
     const {sync, ...restProps} = props
-    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value} = useNumberField(sync, ref)
+    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, value} = useNumberField(sync, ref)
 
     const shownValue = (isDirty ? tempValue : value) as number
 
@@ -18,7 +18,7 @@ const RoundingNumericSyncField = forwardRef<any, RoundingNumericSyncFieldProps>(
     }, [value, solidTempValue])
 
     return (
-        <RoundingNumericField
+        <RoundingNumericBareField
             {...restProps}
             value={shownValue}
             onChange={changeTempValue}
@@ -27,4 +27,4 @@ const RoundingNumericSyncField = forwardRef<any, RoundingNumericSyncFieldProps>(
     )
 })
 
-export default memo(RoundingNumericSyncField)
+export default memo(RoundingNumericField)

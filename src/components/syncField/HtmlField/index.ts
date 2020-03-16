@@ -1,7 +1,5 @@
 import HtmlField from './HtmlField'
 import withTranslatedField from '../withTranslatedField'
-import {HtmlFieldProps} from './types'
 
-export const TranslatedHtmlField = withTranslatedField<HtmlFieldProps>(HtmlField)
-
+export const TranslatedHtmlField = withTranslatedField(HtmlField)
 export default HtmlField
