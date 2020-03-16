@@ -2,7 +2,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
 import {isEntityReference} from '../EntityReference'
-import {NumberSyncFieldProps} from './types'
+import {NumberFieldProps} from './types'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import React, {forwardRef, memo, useMemo, useRef} from 'react'
 import EditIcon from '@material-ui/icons/EditOutlined'
@@ -20,7 +20,7 @@ const useCls = makeStyles({
     }
 })
 
-const NumberField = forwardRef<SyncFieldReference, NumberSyncFieldProps>((props, ref) => {
+const NumberField = forwardRef<SyncFieldReference, NumberFieldProps>((props, ref) => {
     const {entity} = useEntityContext()
     const cls = useCls()
 

@@ -5,8 +5,7 @@ import RoundingNumericBareField from '@bast1oncz/components/dist/components/form
 import {RoundingNumericSyncFieldProps} from './types'
 
 const RoundingNumericField = forwardRef<any, RoundingNumericSyncFieldProps>((props, ref) => {
-    const {sync, ...restProps} = props
-    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, value} = useNumberField(sync, ref)
+    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, value} = useNumberField(props, ref)
 
     const shownValue = (isDirty ? tempValue : value) as number
 
@@ -19,10 +18,13 @@ const RoundingNumericField = forwardRef<any, RoundingNumericSyncFieldProps>((pro
 
     return (
         <RoundingNumericBareField
-            {...restProps}
             value={shownValue}
             onChange={changeTempValue}
-            disabled={isSyncing || restProps.disabled}
+            disabled={isSyncing || props.disabled}
+            min={props.min}
+            max={props.max}
+            rounding={props.rounding}
+            step={props.step}
         />
     )
 })
