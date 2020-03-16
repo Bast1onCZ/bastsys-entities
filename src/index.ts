@@ -16,7 +16,7 @@ export {default as StringField, TranslatedStringField} from './components/syncFi
 export {default as HtmlField, TranslatedHtmlField} from './components/syncField/HtmlField'
 export {default as NumberField, TranslatedNumberField} from './components/syncField/NumberField'
 export {default as RoundingNumericField, TranslatedRoundingNumericField} from './components/syncField/RoundingNumericField'
-export {default as SelectField, TranslatedSelectField} from './components/syncField/SelectField'
+export {default as SelectField, TranslatedSelectField, SelectOption} from './components/syncField/SelectField'
 export {default as ImageField, TranslatedImageField} from './components/syncField/ImageField'
 export {default as BooleanField, TranslatedBooleanField} from './components/syncField/BooleanField'
 export {default as ItemListField} from './components/syncField/ItemListField'
