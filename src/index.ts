@@ -20,6 +20,8 @@ export {default as SelectField, TranslatedSelectField, SelectOption} from './com
 export {default as ImageField, TranslatedImageField} from './components/syncField/ImageField'
 export {default as BooleanField, TranslatedBooleanField} from './components/syncField/BooleanField'
 export {default as ItemListField} from './components/syncField/ItemListField'
+export {default as AnyTranslationRequiredValidator} from './validator/AnyTranslationRequiredValidator'
+export {default as requiredValidator} from './validator/requiredValidator'
 
 // List
 export {default as List} from './components/List'
