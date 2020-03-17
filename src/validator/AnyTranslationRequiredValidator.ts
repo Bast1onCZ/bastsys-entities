@@ -2,7 +2,7 @@ import {Entity, Translatable} from 'api/types'
 import ObjectPathKey, {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import {ValidatorFunction} from '../hooks/useValidation'
 import { EntityReference } from '../components/syncField/EntityReference'
-import { FieldReference } from 'logic/fieldReferences'
+import { FieldReference} from '../logic/fieldReferences'
 import requiredValidator from './requiredValidator'
 
 export default class AnyTranslationRequiredValidator<E extends Entity> implements EntityReference<E, ValidatorFunction> {
