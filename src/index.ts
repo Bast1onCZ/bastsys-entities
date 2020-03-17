@@ -23,7 +23,7 @@ export {default as ItemListField} from './components/syncField/ItemListField'
 export {default as AnyTranslationRequiredValidator} from './validator/AnyTranslationRequiredValidator'
 export {default as requiredValidator} from './validator/requiredValidator'
 
-export {default as TranslationsProvider} from './components/TranslationsProvider'
+export {default as TranslationsProvider, useTranslationsContext} from './components/TranslationsProvider'
 
 // List
 export {default as List} from './components/List'
