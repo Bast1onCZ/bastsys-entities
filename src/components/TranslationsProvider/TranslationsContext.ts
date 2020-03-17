@@ -1,10 +1,11 @@
 import {Language} from '../../api/types'
 import prepareContext from '@bast1oncz/components/dist/logic/prepareContext'
+import {SolidDeep} from '@bast1oncz/objects/dist/types/operations'
 
 export interface TranslationsContextValue {
     shownLanguageCode: string
     editedLanguageCode: string
-    languages: Language[]
+    languages: SolidDeep<Language>[]
     setShownLanguageCode?: (shownLanguageCode: string) => void
     setEditedLanguageCode?: (editedLanguageCode: string) => void
 }
