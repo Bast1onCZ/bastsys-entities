@@ -5,6 +5,8 @@ export interface TranslationsContextValue {
     shownLanguageCode: string
     editedLanguageCode: string
     languages: Language[]
+    setShownLanguageCode?: (shownLanguageCode: string) => void
+    setEditedLanguageCode?: (editedLanguageCode: string) => void
 }
 
 const {context, useContext} = prepareContext<TranslationsContextValue>('Translations')
