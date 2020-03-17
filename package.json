@@ -6,7 +6,7 @@
     "compile": "tsc"
   },
   "author": "bast1oncz",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "files": [
     "dist"
   ],
