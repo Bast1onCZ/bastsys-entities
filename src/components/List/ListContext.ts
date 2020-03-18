@@ -1,6 +1,6 @@
-import {createContext, useContext} from 'react'
 import {Fragment, IdentifiableEntity} from '../../api/types'
 import {Filter, OrderByInput} from './types'
+import prepareContext from '@bast1oncz/components/dist/logic/prepareContext'
 
 export interface ListContextValue<E extends IdentifiableEntity> {
     entityFragment: Fragment
@@ -15,16 +15,10 @@ export interface ListContextValue<E extends IdentifiableEntity> {
     setOrderBy: (orderBy: OrderByInput[]) => void
     filter: Filter
     setFilter: (filter: Filter) => void
+    getDetailUrl?: (entity: IdentifiableEntity) => string
 }
 
-const ListContext = createContext<ListContextValue<any> | null>(null)
+const {context: ListContext, useContext} = prepareContext<ListContextValue<any>>('List')
 
-export function useListContext<E extends IdentifiableEntity>(): ListContextValue<E> {
-    const ctx = useContext(ListContext)
-    if(!ctx) {
-        throw new Error()
-    }
-    return ctx
-}
-
+export const useListContext = useContext
 export default ListContext
