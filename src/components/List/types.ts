@@ -1,4 +1,4 @@
-import {Entity, Fragment} from '../../api/types'
+import {Entity, Fragment, IdentifiableEntity} from '../../api/types'
 import {ReactNode} from 'react'
 
 export enum OrderByDirection {
@@ -28,6 +28,7 @@ export interface ListProps<TFilter extends Filter> {
   pageLimitOptions?: [number]
   defaultFilter?: TFilter
   children?: ReactNode
+  getDetailUrl?: (entity?: IdentifiableEntity) => string
 }
 
 export interface Filter {
