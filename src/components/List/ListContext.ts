@@ -15,7 +15,7 @@ export interface ListContextValue<E extends IdentifiableEntity> {
     setOrderBy: (orderBy: OrderByInput[]) => void
     filter: Filter
     setFilter: (filter: Filter) => void
-    getDetailUrl?: (entity: IdentifiableEntity) => string
+    getDetailUrl?: (entity?: IdentifiableEntity) => string
 }
 
 const {context: ListContext, useContext} = prepareContext<ListContextValue<any>>('List')
