@@ -1,4 +1,4 @@
-import useResettableState from './state/useResettableState'
+import useResettableState from '@bast1oncz/state/dist/useResettableState'
 import useLeaveConfirm from 'leave-confirm/dist/useLeaveConfirm'
 
 interface TempValueHookResult {

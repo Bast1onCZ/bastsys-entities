@@ -17,7 +17,7 @@ import 'tinymce/tinymce'
 import {useEntityContext} from '../../../index'
 import Grid from '@material-ui/core/Grid'
 import {useDynamicValidation} from '../../../hooks/useValidation'
-import useResettableState from '../../../hooks/state/useResettableState'
+import useResettableState from '@bast1oncz/state/dist/useResettableState'
 
 const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) => {
     const {sourceKey, updateKey, deleteKey, validate, label, disabled, variables, tinymceInit, hidden} = props
