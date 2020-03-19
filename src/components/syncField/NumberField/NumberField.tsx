@@ -9,7 +9,7 @@ import EditIcon from '@material-ui/icons/EditOutlined'
 import NumberFormat from 'react-number-format'
 import useValueChangeHandler from '@bast1oncz/components/dist/hooks/input/useValueChangeHandler'
 import {makeStyles} from '@material-ui/core/styles'
-import { useEntityContext } from 'components/EntityProvider/EntityContext'
+import { useEntityContext } from '../../EntityProvider/EntityContext'
 import useNumberField from '../../../hooks/entityField/useNumberField'
 
 const useCls = makeStyles({
