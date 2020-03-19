@@ -1,9 +1,9 @@
-import {Entity, IdentifiableEntity, Mutation} from 'api/types'
-import {EntityFieldKeyDefinition, FieldReference} from 'logic/fieldReferences'
+import {Entity, IdentifiableEntity, Mutation} from '../../api/types'
+import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
 import AEntityUpdateRequest from './AEntityUpdateRequest'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
 import cloneDeep from 'lodash/cloneDeep'
-import {EntityResponseData} from 'api/generate/generateEntityQuery'
+import {EntityResponseData} from '../../api/generate/generateEntityQuery'
 
 export default class EntitySetFileValueRequest<T extends Entity> extends AEntityUpdateRequest<T> {
   private sourceKey: FieldReference

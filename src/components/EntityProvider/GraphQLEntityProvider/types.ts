@@ -1,5 +1,5 @@
 import UpdateMethodType from '../UpdateMethodType'
-import {IdentifiableEntity, Mutation} from 'api/types'
+import {IdentifiableEntity, Mutation} from '../../../api/types'
 import {BaseEntityProviderProps} from '../types'
 
 export interface GraphQLEntityProviderProps extends BaseEntityProviderProps {

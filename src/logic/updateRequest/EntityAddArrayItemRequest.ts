@@ -1,10 +1,10 @@
 import cloneDeep from 'lodash/cloneDeep'
-import {IdentifiableEntity, Mutation, UnidentifiableEntity} from 'api/types'
-import {EntityFieldKeyDefinition, FieldReference} from 'logic/fieldReferences'
+import {IdentifiableEntity, Mutation, UnidentifiableEntity} from '../../api/types'
+import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
 import AEntityUpdateRequest, {UpdateEntityFunction} from './AEntityUpdateRequest'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
-import localEntityToUpdateObject from 'logic/localEntityToUpdateObject'
-import {EntityResponseData} from 'api/generate/generateEntityQuery'
+import localEntityToUpdateObject from '../localEntityToUpdateObject'
+import {EntityResponseData} from '../../api/generate/generateEntityQuery'
 
 interface EntityItemListFieldKeyDefinition extends EntityFieldKeyDefinition {
   itemFieldDefinitions: EntityFieldKeyDefinition[]

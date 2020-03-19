@@ -1,4 +1,4 @@
-import {Entity} from 'api/types'
+import {Entity} from '../../api/types'
 
 type EntityReferenceFunction<E extends Entity, R> = (entity: E) => R
 

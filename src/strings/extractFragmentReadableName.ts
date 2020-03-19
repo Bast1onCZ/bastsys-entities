@@ -1,4 +1,4 @@
-import {Fragment} from 'api/types'
+import {Fragment} from '../api/types'
 import pascalToReadableCase from '@bast1oncz/strings/dist/pascalToReadableCase'
 import extractFragmentName from 'strings/extractFragmentName'
 

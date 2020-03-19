@@ -1,4 +1,4 @@
-import {Entity, Translatable} from 'api/types'
+import {Entity, Translatable} from '../api/types'
 import ObjectPathKey, {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import {ValidatorFunction} from '../hooks/useValidation'
 import { EntityReference } from '../components/syncField/EntityReference'

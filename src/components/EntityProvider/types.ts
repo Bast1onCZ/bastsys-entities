@@ -1,4 +1,4 @@
-import {Entity} from 'api/types'
+import {Entity} from '../../api/types'
 import {ReactNode} from 'react'
 import {SyncFieldReference} from './useSyncFieldImperativeHandle'
 import {FieldReference} from '../../logic/fieldReferences'

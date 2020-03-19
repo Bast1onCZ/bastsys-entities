@@ -1,8 +1,8 @@
-import {Entity, IdentifiableEntity, Mutation} from 'api/types'
+import {Entity, IdentifiableEntity, Mutation} from '../../api/types'
 import AEntityUpdateRequest, {UpdateEntityFunction} from './AEntityUpdateRequest'
-import {EntityFieldKeyDefinition, FieldReference} from 'logic/fieldReferences'
+import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
-import {EntityResponseData} from 'api/generate/generateEntityQuery'
+import {EntityResponseData} from '../../api/generate/generateEntityQuery'
 
 /**
  * Deletes a value from an entity

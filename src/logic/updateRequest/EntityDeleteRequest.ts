@@ -1,4 +1,4 @@
-import {Entity, IdentifiableEntity, Mutation} from 'api/types'
+import {Entity, IdentifiableEntity, Mutation} from '../../api/types'
 import AEntityUpdateRequest from './AEntityUpdateRequest'
 
 export interface EntitiesResponseData<E extends Entity> {

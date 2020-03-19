@@ -1,8 +1,8 @@
 import cloneDeep from 'lodash/cloneDeep'
 import AEntityUpdateRequest from './AEntityUpdateRequest'
-import {Entity, IdentifiableEntity, Mutation} from 'api/types'
+import {Entity, IdentifiableEntity, Mutation} from '../../api/types'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
-import {FieldReference} from 'logic/fieldReferences'
+import {FieldReference} from '../fieldReferences'
 import {EntitiesResponseData} from './EntityDeleteRequest'
 
 interface EntityDeleteArrayItemRequestConstructorInput {

@@ -1,13 +1,13 @@
+import {EntityFieldKeyDefinition} from './fieldReferences'
+import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {Entity} from '../api/types'
+
 /**
  * Transforms local entity to an update object entity that can be send to api
  *
  * @param fieldDefs
  * @param localEntity
  */
-import {EntityFieldKeyDefinition} from 'logic/fieldReferences'
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
-import {Entity} from '../api/types'
-
 export default function localEntityToUpdateObject(fieldDefs: EntityFieldKeyDefinition[], localEntity: Entity): Entity {
     return fieldDefs.reduce((acc, def) => {
         const {sourceKey, updateKey = sourceKey} = def

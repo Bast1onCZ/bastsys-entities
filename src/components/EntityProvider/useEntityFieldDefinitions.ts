@@ -1,6 +1,6 @@
 import {useCallback, useContext, useMemo, useRef} from 'react'
 import {SyncFieldReference} from './useSyncFieldImperativeHandle'
-import {EntityFieldKeyDefinition} from 'logic/fieldReferences'
+import {EntityFieldKeyDefinition} from '../../logic/fieldReferences'
 import EditableEntityContext, {EntitySettings} from './EntityContext'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
 import changeObject from '@bast1oncz/objects/dist/changeObject'
