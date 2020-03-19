@@ -1,5 +1,5 @@
 import React, {memo, ReactNode} from 'react'
-import {TranslationsContextValue} from './TranslationsContext'
+import TranslationsContext , {TranslationsContextValue} from './TranslationsContext'
 
 interface TranslationsProviderProps extends TranslationsContextValue {
     children: ReactNode
@@ -9,9 +9,9 @@ function TranslationsProvider(props: TranslationsProviderProps) {
     const {children, ...restProps} = props
 
     return (
-        <TranslationsProvider {...restProps}>
+        <TranslationsContext.Provider value={restProps}>
             {children}
-        </TranslationsProvider>
+        </TranslationsContext.Provider>
     )
 }
 
