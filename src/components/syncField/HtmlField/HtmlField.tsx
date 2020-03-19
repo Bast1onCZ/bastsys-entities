@@ -14,7 +14,7 @@ import EntitySetValueRequest from '../../../logic/updateRequest/EntitySetValueRe
 import React, {forwardRef, memo, useCallback} from 'react'
 
 import 'tinymce/tinymce'
-import {useEntityContext} from '../../../index'
+import useEntityContext from '../../EntityProvider/useEntityContext'
 import Grid from '@material-ui/core/Grid'
 import {useDynamicValidation} from '../../../hooks/useValidation'
 import useResettableState from '@bast1oncz/state/dist/useResettableState'

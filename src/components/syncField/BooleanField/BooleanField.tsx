@@ -1,6 +1,6 @@
 import React, {memo, useCallback} from 'react'
 import { SyncFieldDefinition} from '../../../hooks/entityField/types'
-import { useBooleanField} from '../../../index'
+import useBooleanField from '../../../hooks/entityField/useBooleanField'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 

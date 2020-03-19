@@ -7,9 +7,10 @@ import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHan
 import React, {forwardRef, memo, useMemo, useRef} from 'react'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import NumberFormat from 'react-number-format'
-import {useEntityContext, useNumberField} from '../../../index'
 import useValueChangeHandler from '@bast1oncz/components/dist/hooks/input/useValueChangeHandler'
 import {makeStyles} from '@material-ui/core/styles'
+import { useEntityContext } from 'components/EntityProvider/EntityContext'
+import useNumberField from '../../../hooks/entityField/useNumberField'
 
 const useCls = makeStyles({
     numberField: {

@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography'
 import {IdentifiableEntity} from '../../../api/types'
 import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
 import UpdateMethodType from '../../EntityProvider/UpdateMethodType'
-import {EntityProvider, EntityProviderReference, useEntityContext, useValidEntityListener} from '../../../index'
 import {DragInfo, ItemListSyncFieldProps} from './types'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import AddIcon from '@material-ui/icons/Add'
@@ -25,6 +24,10 @@ import {ReactSortable} from 'react-sortablejs'
 import $ from '@bast1oncz/strings/dist/classString'
 import {SyncFieldElement} from '../types'
 import {makeStyles} from '@material-ui/styles'
+import {useEntityContext} from '../../EntityProvider/EntityContext'
+import {EntityProviderReference} from '../../EntityProvider'
+import useValidEntityListener from '../../EntityProvider/useValidEntityListener'
+import EntityProvider from '../../EntityProvider/EntityProvider'
 
 const useCls = makeStyles((theme: any) => ({
     row: {

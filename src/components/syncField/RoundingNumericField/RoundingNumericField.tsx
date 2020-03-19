@@ -1,8 +1,8 @@
 import React, {forwardRef, memo, useEffect} from 'react'
-import {useNumberField} from '../../../index'
 import useSolidValue from '@bast1oncz/state/dist/useSolidValue'
 import RoundingNumericBareField from '@bast1oncz/components/dist/components/form/RoundingNumericField'
 import {RoundingNumericSyncFieldProps} from './types'
+import useNumberField from '../../../hooks/entityField/useNumberField'
 
 const RoundingNumericField = forwardRef<any, RoundingNumericSyncFieldProps>((props, ref) => {
     const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, value} = useNumberField(props, ref)
