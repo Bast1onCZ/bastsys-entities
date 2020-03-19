@@ -7,13 +7,14 @@ import {InputProps} from '@material-ui/core/Input'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import DirtyIcon from '@material-ui/icons/CreateOutlined'
+import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 
 export interface StringFieldProps extends SyncFieldDefinition {
     multiline?: boolean
     disabled?: boolean
 }
 
-const StringField = forwardRef<any, StringFieldProps>((props, ref) => {
+const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref) => {
     const {label, multiline, disabled} = props
     const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value} = useStringField(props, ref)
 

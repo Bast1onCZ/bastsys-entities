@@ -9,7 +9,6 @@ import {IdentifiableEntity} from '../../../api/types'
 import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
 import UpdateMethodType from '../../EntityProvider/UpdateMethodType'
 import {DragInfo, ItemListSyncFieldProps} from './types'
-import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/DeleteOutline'
 import useResettableState from '@bast1oncz/state/dist/useResettableState'
@@ -45,7 +44,7 @@ const SortableTableBody = forwardRef((props, ref) => {
     return (<TableBody {...props} ref={ref}/>)
 })
 
-const ItemListField = forwardRef<SyncFieldReference, ItemListSyncFieldProps>((props) => {
+const ItemListField = ((props: ItemListSyncFieldProps) => {
     const {label, disabled, children, orderable} = props
     const cls = useCls()
 

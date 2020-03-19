@@ -8,6 +8,7 @@ import {IdentifiableEntity} from '../../../api/types'
 import MenuItem from '@material-ui/core/MenuItem'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import FormHelperText from '@material-ui/core/FormHelperText'
+import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 
 export interface SelectFieldProps extends SyncFieldDefinition {
     label?: ReactChild
@@ -26,7 +27,7 @@ export interface SelectOption {
 
 const loaderStyle = {margin: '7.5px 0'}
 
-const SelectField = forwardRef<any, SelectFieldProps>((props, ref) => {
+const SelectField = forwardRef<SyncFieldReference, SelectFieldProps>((props, ref) => {
     const {label, options, deletable, disabled} = props
     const {value, isSyncing, confirmChange, validation} = useSelectField(props, ref)
 

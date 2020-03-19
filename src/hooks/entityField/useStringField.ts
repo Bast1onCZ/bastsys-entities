@@ -5,7 +5,7 @@ import {SyncFieldDefinition} from './types'
 import EditableEntityContext, {EntityContextValue} from '../../components/EntityProvider/EntityContext'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
-import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
+import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 
@@ -19,7 +19,7 @@ export interface UseStringField {
     confirmChange: VoidFunction
 }
 
-export default function useStringValue(def: SyncFieldDefinition, ref: Ref<any>): UseStringField {
+export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFieldReference>): UseStringField {
     const {sourceKey, updateKey, deleteKey, label, validate} = def
 
     const {entity, updateEntity} = useContext(EditableEntityContext) as EntityContextValue<any>
