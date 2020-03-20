@@ -14,8 +14,8 @@ abstract class AEntityUpdateRequest<T extends Entity> {
   
   public setBaseKeys(baseSourceKey: FieldReference, baseUpdateKey: FieldReference = '', baseDeleteKey: FieldReference = '') {
     this.baseSourceKey = baseSourceKey
-    this.baseUpdateKey = baseUpdateKey
-    this.baseDeleteKey = baseDeleteKey
+    this.baseUpdateKey = baseUpdateKey || baseSourceKey
+    this.baseDeleteKey = baseDeleteKey || baseUpdateKey || baseSourceKey
   }
 
   public setApolloClient(apolloClient: ApolloClient<any>) {
