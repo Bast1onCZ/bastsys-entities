@@ -2,12 +2,16 @@ import {Ref, useCallback, useContext, useMemo, useState} from 'react'
 import useTempValue from '../useTempValue'
 import {useDynamicValidation, ValidationResult} from '../useValidation'
 import {SyncFieldDefinition} from './types'
-import EditableEntityContext, {EntityContextValue} from '../../components/EntityProvider/EntityContext'
+import EditableEntityContext, {
+    EntityContextValue,
+    useEntityContext
+} from '../../components/EntityProvider/EntityContext'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
+import useResettableState from '@bast1oncz/state/dist/useResettableState'
 
 export interface UseStringField {
     tempValue?: string
@@ -22,9 +26,9 @@ export interface UseStringField {
 export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFieldReference>): UseStringField {
     const {sourceKey, updateKey, deleteKey, label, validate} = def
 
-    const {entity, updateEntity} = useContext(EditableEntityContext) as EntityContextValue<any>
+    const {entity, updateEntity} = useEntityContext()
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue(`${label || 'Input'} value will be lost`)
-    const [isSyncing, setIsSyncing] = useState(false)
+    const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const entityValue = toKey(sourceKey).getFrom(entity) || ''
     const localValue = tempValue !== undefined
@@ -41,7 +45,7 @@ export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFi
             // if async update has started
             setIsSyncing(true)
             promise.then(resetTempValue)
-                .finally(() => setIsSyncing(false))
+                .finally(resetIsSyncing)
         }
     }, [tempValue, updateEntity, sourceKey, updateKey])
 
