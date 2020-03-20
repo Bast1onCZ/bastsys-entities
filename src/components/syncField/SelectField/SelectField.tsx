@@ -18,6 +18,7 @@ export interface SelectFieldProps extends SyncFieldDefinition {
      */
     deletable?: boolean
     disabled?: boolean
+    hidden?: boolean
 }
 
 export interface SelectOption {
@@ -28,56 +29,58 @@ export interface SelectOption {
 const loaderStyle = {margin: '7.5px 0'}
 
 const SelectField = forwardRef<SyncFieldReference, SelectFieldProps>((props, ref) => {
-    const {label, options, deletable, disabled} = props
+    const {label, options, deletable, disabled, hidden} = props
     const {value, isSyncing, confirmChange, validation} = useSelectField(props, ref)
 
-    const handleSelectChange = useCallback((e: ChangeEvent<{value: any}>) => {
+    const handleSelectChange = useCallback((e: ChangeEvent<{ value: any }>) => {
         const value = e.target.value
         confirmChange(value === '' ? null : value)
     }, [confirmChange])
 
     const showLoader = !options || isSyncing
     const renderValue = useCallback((value) => {
-        if(!options || showLoader) {
+        if (!options || showLoader) {
             console.log('loader')
             return (
-                <LinearProgress style={loaderStyle} />
+                <LinearProgress style={loaderStyle}/>
             )
         }
         return options.find(option => option.id === value)?.label || null
     }, [options, showLoader])
 
-    return (
-        <FormControl
-            error={validation.hasError}
-            disabled={showLoader || disabled}
-            fullWidth
-        >
-            <InputLabel shrink={showLoader || !!value}>{label}</InputLabel>
-            <Select
-                value={value || ''}
-                onChange={handleSelectChange}
-                renderValue={renderValue}
-                displayEmpty={showLoader}
+    return hidden
+        ? null
+        : (
+            <FormControl
+                error={validation.hasError}
+                disabled={showLoader || disabled}
+                fullWidth
             >
-                {deletable &&
+                <InputLabel shrink={showLoader || !!value}>{label}</InputLabel>
+                <Select
+                    value={value || ''}
+                    onChange={handleSelectChange}
+                    renderValue={renderValue}
+                    displayEmpty={showLoader}
+                >
+                    {deletable &&
                     <MenuItem value="">
                         <em>{label}</em>
                     </MenuItem>
-                }
-                {options?.map(option => {
-                    const {id, label} = option
+                    }
+                    {options?.map(option => {
+                        const {id, label} = option
 
-                    return (
-                        <MenuItem key={id} value={id}>
-                            {label}
-                        </MenuItem>
-                    )
-                })}
-            </Select>
-            {validation.hasError && <FormHelperText>{validation.error}</FormHelperText>}
-        </FormControl>
-    )
+                        return (
+                            <MenuItem key={id} value={id}>
+                                {label}
+                            </MenuItem>
+                        )
+                    })}
+                </Select>
+                {validation.hasError && <FormHelperText>{validation.error}</FormHelperText>}
+            </FormControl>
+        )
 })
 
 export default memo(SelectField)

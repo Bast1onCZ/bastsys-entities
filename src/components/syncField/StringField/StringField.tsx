@@ -10,12 +10,13 @@ import DirtyIcon from '@material-ui/icons/CreateOutlined'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 
 export interface StringFieldProps extends SyncFieldDefinition {
+    hidden?: boolean
     multiline?: boolean
     disabled?: boolean
 }
 
 const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref) => {
-    const {label, multiline, disabled} = props
+    const {label, multiline, disabled, hidden} = props
     const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value} = useStringField(props, ref)
 
     const shownValue = isDirty ? tempValue : value
@@ -25,16 +26,16 @@ const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref
     const inputRef = useRef<HTMLInputElement>()
     const InputProps = useMemo<InputProps>(() => {
         const inputProps: InputProps = {}
-        if(isSyncing) {
+        if (isSyncing) {
             inputProps.endAdornment = (
                 <InputAdornment position="end">
-                    <CircularProgress size={20} />
+                    <CircularProgress size={20}/>
                 </InputAdornment>
             )
-        } else if(isDirty) {
+        } else if (isDirty) {
             inputProps.endAdornment = (
                 <InputAdornment position="end">
-                    <DirtyIcon />
+                    <DirtyIcon/>
                 </InputAdornment>
             )
         }
@@ -42,33 +43,35 @@ const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref
     }, [isDirty, isSyncing])
 
     const handleBlur = useCallback(() => {
-        if(!validation.hasError) {
+        if (!validation.hasError) {
             // confirm change only if temp value is valid
             confirmChange()
         }
     }, [confirmChange, validation.hasError])
     const handleKeyPress = useCallback((e: KeyboardEvent) => {
-        if(!multiline && e.key === 'Enter') {
+        if (!multiline && e.key === 'Enter') {
             inputRef.current?.blur()
         }
     }, [multiline])
 
-    return (
-        <TextField
-            label={label}
-            inputRef={inputRef}
-            value={shownValue}
-            InputProps={InputProps}
-            onChange={handleTempValueChange}
-            onBlur={handleBlur}
-            onKeyPress={handleKeyPress}
-            error={validation.hasError}
-            helperText={validation.error}
-            multiline={multiline}
-            disabled={disabled}
-            fullWidth
-        />
-    )
+    return hidden
+        ? null
+        : (
+            <TextField
+                label={label}
+                inputRef={inputRef}
+                value={shownValue}
+                InputProps={InputProps}
+                onChange={handleTempValueChange}
+                onBlur={handleBlur}
+                onKeyPress={handleKeyPress}
+                error={validation.hasError}
+                helperText={validation.error}
+                multiline={multiline}
+                disabled={disabled}
+                fullWidth
+            />
+        )
 })
 
 export default memo(StringField)
