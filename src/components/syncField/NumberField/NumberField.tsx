@@ -58,7 +58,11 @@ const NumberField = forwardRef<SyncFieldReference, NumberFieldProps>((props, ref
                     <NumberFormat
                         {...restProps}
                         getInputRef={inputRef}
-                        onValueChange={values => onChange({target: values.floatValue})}
+                        onValueChange={values => onChange({
+                            target: {
+                                value: values.floatValue
+                            }
+                        })}
                         prefix={format.prefix}
                         suffix={format.suffix}
                         thousandSeparator={format.thousandSeparator}
