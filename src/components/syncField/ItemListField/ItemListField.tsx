@@ -142,7 +142,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
         promise
             .then(resetTempItem)
             .finally(resetTempItemCreating)
-    }, [tempItem])
+    }, [sourceKey, updateKey, deleteKey, tempItem])
     useValidEntityListener(tempItemEntityRef, tempItemCreate, !tempItemActive || tempItemCreating)
 
     const isSyncing = isSyncingOrder || isRemoving || tempItemCreating
