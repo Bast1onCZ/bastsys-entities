@@ -28,8 +28,8 @@ export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>):
 
     const entityValue = toKey(sourceKey).getFrom(entity)
 
-    const entityValueValidation = useDynamicValidation(entityValue, validate)
-    const tempValueValidation = useDynamicValidation(tempValue !== undefined ? tempValue : entityValue, validate)
+    const entityValueValidation = useDynamicValidation(entity, entityValue, validate)
+    const tempValueValidation = useDynamicValidation(entity, tempValue !== undefined ? tempValue : entityValue, validate)
 
     const changeTempValue = useCallback((newTempValue: string | number) => {
         const parsedTempValue = +newTempValue // parsed number

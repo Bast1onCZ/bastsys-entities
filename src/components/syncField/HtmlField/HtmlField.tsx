@@ -26,7 +26,7 @@ const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) =>
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const entityValue = toKey(sourceKey).getFrom(entity)
-    const validation = useDynamicValidation(entityValue, validate)
+    const validation = useDynamicValidation(entity, entityValue, validate)
 
     const shownValue = tempValue !== undefined
         ? tempValue

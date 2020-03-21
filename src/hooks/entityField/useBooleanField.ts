@@ -18,10 +18,11 @@ function isBoolean(value: unknown): value is boolean {
 }
 
 export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>): UseBooleanField {
+    const {entity} = useEntityContext()
     const entityValue = useEntityValue(def)
     const exposedValue = useEntityValue(def, isBoolean, false)
     const {updateEntity} = useEntityContext()
-    const validation = useDynamicValidation(exposedValue, def.validate)
+    const validation = useDynamicValidation(entity, exposedValue, def.validate)
 
     const [syncingValue, setSyncingValue, resetSyncingValue] = useResettableState<undefined|boolean>(undefined)
 

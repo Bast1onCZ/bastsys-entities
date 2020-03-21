@@ -23,7 +23,7 @@ export default function useSelectField(def: SyncFieldDefinition, ref: Ref<any>):
 
     const {entity, updateEntity} = useEntityContext()
     const value = toKey(sourceKey).getFrom(entity)
-    const validation = useDynamicValidation(value, validate)
+    const validation = useDynamicValidation(entity, value, validate)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const confirmChange = useCallback((id: IdentifiableEntity['id']|null) => {

@@ -56,7 +56,7 @@ const ImageField = forwardRef<SyncFieldReference, ImageFieldProps>((props, ref) 
     const rawEntityValue = toKey(props.sourceKey).getFrom(entity)
     const valueType = isValidValue(rawEntityValue)
     const entityValue = valueType ? rawEntityValue : DEFAULT_ENTITY_VALUE
-    const validation = useDynamicValidation(rawEntityValue, validate)
+    const validation = useDynamicValidation(entity, rawEntityValue, validate)
 
     // update
     const [isUpdating, setIsUpdating, resetIsUpdating] = useResettableState(false)
