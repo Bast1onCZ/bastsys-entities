@@ -33,7 +33,7 @@ const useCls = makeStyles((theme: any) => ({
         transition: 'all 0.3s ease',
     },
     active: {
-        background: theme.palette.secondary.light
+        background: theme.palette.primary.light
     },
     draggable: {
         cursor: 'pointer'
