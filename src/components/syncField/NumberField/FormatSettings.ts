@@ -26,7 +26,7 @@ export function getPriceFormat(currency: Currency): FormatSettings {
   return {
     allowNegative: false,
     thousandSeparator: ' ',
-    decimalSeparator: ',',
+    // decimalSeparator: ',',
     decimalScale: 2,
     fixedDecimalScale: true,
     prefix,
@@ -36,6 +36,6 @@ export function getPriceFormat(currency: Currency): FormatSettings {
 
 export const WEIGHT_FORMAT: FormatSettings = {
   allowNegative: false,
-  decimalSeparator: ',',
+  // decimalSeparator: ',',
   suffix: ' kg'
 }
