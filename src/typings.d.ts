@@ -13,3 +13,9 @@ declare module '*.png' {
     const imageSource: SourceUrl
     export default imageSource
 }
+
+declare module '@date-io/type' {
+    import Moment from '@date-io/moment'
+
+    export default Moment
+}

@@ -14,8 +14,8 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
     const {value, changeTempValue, validation, isDirty, isSyncing, confirmChange} = useStringField(props, ref)
 
     const inputRef = useRef<HTMLDivElement>(null)
-    const handleTempChange = useCallback((date: string) => {
-        changeTempValue(date)
+    const handleTempChange = useCallback((date) => {
+        changeTempValue(date.toString())
     }, [changeTempValue])
     const handleKeyPress = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
         if(e.key === 'Enter') {
