@@ -182,7 +182,10 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                         if (settings.type === UpdateMethodType.LOCAL_UPDATE) {
                             itemKey.pushObjectKeyPointer(i)
                         } else if (settings.type === UpdateMethodType.GRAPHQL_UPDATE) {
-                            itemKey.pushArrayObjectIdentityPointer({id: item.id})
+                            if(!id) {
+                                throw new Error('Item id not defined')
+                            }
+                            itemKey.pushArrayObjectIdentityPointer(itemIdSourceKey.setAt({}, id))
                         }
 
                         return (

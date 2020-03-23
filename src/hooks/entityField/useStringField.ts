@@ -1,11 +1,8 @@
-import {Ref, useCallback, useContext, useMemo, useState} from 'react'
+import {Ref, useCallback, useMemo} from 'react'
 import useTempValue from '../useTempValue'
 import {useDynamicValidation, ValidationResult} from '../useValidation'
 import {SyncFieldDefinition} from './types'
-import EditableEntityContext, {
-    EntityContextValue,
-    useEntityContext
-} from '../../components/EntityProvider/EntityContext'
+import {useEntityContext} from '../../components/EntityProvider/EntityContext'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../components/EntityProvider/useSyncFieldImperativeHandle'
