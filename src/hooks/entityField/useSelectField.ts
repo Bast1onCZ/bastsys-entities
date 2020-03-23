@@ -27,10 +27,15 @@ export default function useSelectField(def: SyncFieldDefinition, ref: Ref<any>):
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const confirmChange = useCallback((id: IdentifiableEntity['id']|null) => {
+        if(value === id) {
+            // entity value is the same as new value
+            return null
+        }
+
         const promise = (id ? updateEntity(new EntitySetValueRequest(def, id)) : updateEntity(new EntityDeleteValueRequest(def))) || new ImmediatePromise(undefined)
         setIsSyncing(true)
         promise.finally(resetIsSyncing)
-    }, [updateEntity])
+    }, [value, updateEntity])
 
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.SELECT,
