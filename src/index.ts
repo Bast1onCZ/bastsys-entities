@@ -13,6 +13,7 @@ export {default as useSelectField} from './hooks/entityField/useSelectField'
 export {default as useBooleanField} from './hooks/entityField/useBooleanField'
 
 export {default as StringField, TranslatedStringField} from './components/syncField/StringField'
+export {default as DateField, TranslatedDateField} from './components/syncField/DateField'
 export {default as HtmlField, TranslatedHtmlField} from './components/syncField/HtmlField'
 export {default as NumberField, TranslatedNumberField} from './components/syncField/NumberField'
 export {default as RoundingNumericField, TranslatedRoundingNumericField} from './components/syncField/RoundingNumericField'
