@@ -32,7 +32,7 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
         ? null
         : (
             <KeyboardDatePicker
-                ref={inputRef}
+                inputRef={inputRef}
                 value={value}
                 onChange={handleTempChange}
                 label={props.label}
