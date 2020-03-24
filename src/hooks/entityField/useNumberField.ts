@@ -10,7 +10,7 @@ import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 
 export interface UseNumberField {
-    tempValue?: number
+    tempValue?: string|number
     value: number
     validation: ValidationResult
     isDirty: boolean
@@ -23,7 +23,7 @@ export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>):
     const {label, updateKey, sourceKey, deleteKey, validate} = def
     const {entity, updateEntity} = useEntityContext()
 
-    const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue(`${label || 'Input'} value will be lost`)
+    const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<string|number>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing] = useState(false)
 
     const entityValue = toKey(sourceKey).getFrom(entity)

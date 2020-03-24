@@ -122,7 +122,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
     // Creating - temp item
     const {
         tempValue: tempItem, setTempValue: setTempItem, resetTempValue: resetTempItem, isActive: tempItemActive
-    } = useTempValue(`The last value of ${label || 'list of entities'} will be lost`)
+    } = useTempValue<object>(`The last value of ${label || 'list of entities'} will be lost`)
     const activateTempItem = useCallback(() => setTempItem({}), [])
     const changeTempItem = useCallback(newTempEntity => {
         setTempItem(newTempEntity)
@@ -131,17 +131,19 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
     const [tempItemCreating, setTempItemCreating, resetTempItemCreating] = useResettableState(false)
     const tempItemEntityRef = useRef<EntityProviderReference>({fieldRefs: [], isValid: true, isPrepared: false})
     const tempItemCreate = useCallback(() => {
-        const request = new EntityAddArrayItemRequest({
-            sourceKey,
-            updateKey,
-            deleteKey,
-            itemFieldDefinitions: tempItemEntityRef.current.fieldRefs
-        }, tempItem)
-        setTempItemCreating(true)
-        const promise = updateEntity(request) || new Promise(resolve => resolve())
-        promise
-            .then(resetTempItem)
-            .finally(resetTempItemCreating)
+        if(tempItem !== undefined) {
+            const request = new EntityAddArrayItemRequest({
+                sourceKey,
+                updateKey,
+                deleteKey,
+                itemFieldDefinitions: tempItemEntityRef.current.fieldRefs
+            }, tempItem)
+            setTempItemCreating(true)
+            const promise = updateEntity(request) || new Promise(resolve => resolve())
+            promise
+                .then(resetTempItem)
+                .finally(resetTempItemCreating)
+        }
     }, [sourceKey, updateKey, deleteKey, tempItem])
     useValidEntityListener(tempItemEntityRef, tempItemCreate, !tempItemActive || tempItemCreating)
 

@@ -1,21 +1,24 @@
 import React, {forwardRef, KeyboardEvent, memo, useCallback, useRef} from 'react'
 import {SyncFieldDefinition} from '../../../hooks/entityField/types'
-import {useStringField} from '../../../index'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import {KeyboardDatePicker} from '@material-ui/pickers'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import {MaterialUiPickersDate} from '@material-ui/pickers/typings/date'
+import useDateTimeField from '../../../hooks/entityField/useDateTimeField'
+import { Moment } from 'moment'
 
 export interface DateFieldProps extends SyncFieldDefinition {
     hidden?: boolean
     disabled?: boolean
+    deletable?: boolean
 }
 
 const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) => {
-    const {value, changeTempValue, validation, isDirty, isSyncing, confirmChange} = useStringField(props, ref)
+    const {shownValue, validation, changeTempValue, isDirty, isSyncing, confirmChange} = useDateTimeField(props, ref)
 
     const inputRef = useRef<HTMLDivElement>(null)
-    const handleTempChange = useCallback((date) => {
-        changeTempValue(date.toString())
+    const handleTempChange = useCallback((date: MaterialUiPickersDate) => {
+        changeTempValue(date as Moment)
     }, [changeTempValue])
     const handleKeyPress = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
         if (e.key === 'Enter') {
@@ -33,12 +36,12 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
         : (
             <KeyboardDatePicker
                 inputRef={inputRef}
-                value={value}
+                value={shownValue}
                 onChange={handleTempChange}
                 label={props.label}
                 onKeyPress={handleKeyPress}
                 onBlur={handleBlur}
-                format="MM/dd/yyyy"
+                format="DD/MM/YYYY"
                 error={validation.hasError}
                 helperText={validation.error}
                 disabled={isSyncing || props.disabled}

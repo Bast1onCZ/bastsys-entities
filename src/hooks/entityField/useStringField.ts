@@ -24,7 +24,7 @@ export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFi
     const {sourceKey, updateKey, deleteKey, label, validate} = def
 
     const {entity, updateEntity} = useEntityContext()
-    const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue(`${label || 'Input'} value will be lost`)
+    const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<string>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const entityValue = toKey(sourceKey).getFrom(entity) || ''

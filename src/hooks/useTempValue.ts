@@ -1,9 +1,9 @@
 import useResettableState from '@bast1oncz/state/dist/useResettableState'
 import useLeaveConfirm from 'leave-confirm/dist/useLeaveConfirm'
 
-interface TempValueHookResult {
-  tempValue: any,
-  setTempValue: (any) => void,
+interface TempValueHookResult<T> {
+  tempValue: T|undefined,
+  setTempValue: (value?: T) => void,
   resetTempValue: () => void,
   isActive: boolean
 }
@@ -18,8 +18,8 @@ interface TempValueHookResult {
  * @param {string} leaveConfirmMessage
  * @returns {{resetTempValue: function, setTempValue: function, tempValue: any|undefined, isActive: boolean}}
  */
-export default function useTempValue(leaveConfirmMessage: string): TempValueHookResult {
-  const [tempValue, setTempValue, resetTempValue] = useResettableState(undefined)
+export default function useTempValue<T>(leaveConfirmMessage: string): TempValueHookResult<T> {
+  const [tempValue, setTempValue, resetTempValue] = useResettableState<T|undefined>(undefined)
   const isActive = tempValue !== undefined
   
   useLeaveConfirm(leaveConfirmMessage, isActive)
