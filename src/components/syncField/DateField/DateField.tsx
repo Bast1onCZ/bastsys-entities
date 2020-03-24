@@ -5,7 +5,8 @@ import {KeyboardDatePicker} from '@material-ui/pickers'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import {MaterialUiPickersDate} from '@material-ui/pickers/typings/date'
 import useDateTimeField from '../../../hooks/entityField/useDateTimeField'
-import { Moment } from 'moment'
+import {Moment} from 'moment'
+import DirtyIcon from '@material-ui/icons/CreateOutlined'
 
 export interface DateFieldProps extends SyncFieldDefinition {
     hidden?: boolean
@@ -16,11 +17,16 @@ export interface DateFieldProps extends SyncFieldDefinition {
 const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) => {
     const {shownValue, validation, changeTempValue, isDirty, isSyncing, confirmChange} = useDateTimeField(props, ref)
 
-    const inputRef = useRef<HTMLDivElement>(null)
+    const inputRef = useRef<HTMLInputElement>(null)
     const handleTempChange = useCallback((date: MaterialUiPickersDate) => {
-        changeTempValue(date as Moment)
+        const mmt = date as Moment | null
+        changeTempValue(mmt)
+
+        if (mmt?.isValid() && document.activeElement !== inputRef.current) {
+            confirmChange()
+        }
     }, [changeTempValue])
-    const handleKeyPress = useCallback((e: KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyPress = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             inputRef.current?.blur()
         }
@@ -45,7 +51,11 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
                 error={validation.hasError}
                 helperText={validation.error}
                 disabled={isSyncing || props.disabled}
-                keyboardIcon={isSyncing ? <CircularProgress size={20} color="secondary"/> : undefined}
+                keyboardIcon={
+                    isSyncing ? <CircularProgress size={20} color="secondary"/>
+                        : isDirty ? <DirtyIcon color="secondary"/>
+                        : undefined
+                }
             />
         )
 })
