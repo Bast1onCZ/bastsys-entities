@@ -20,12 +20,13 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
     const inputRef = useRef<HTMLInputElement>(null)
     const handleTempChange = useCallback((date: MaterialUiPickersDate) => {
         const mmt = date as Moment | null
-        changeTempValue(mmt)
 
         if (mmt?.isValid() && document.activeElement !== inputRef.current) {
-            confirmChange()
+            confirmChange(mmt)
+        } else {
+            changeTempValue(mmt)
         }
-    }, [changeTempValue])
+    }, [changeTempValue, confirmChange])
     const handleKeyPress = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             inputRef.current?.blur()

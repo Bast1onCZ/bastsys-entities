@@ -52,9 +52,10 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
 
         setTempValue(tempValue)
     }, [entityValue])
-    const confirmChange = useCallback(() => {
-        if (tempValue !== undefined) {
-            const datetimeValue = tempValue?.format() || null
+    const confirmChange = useCallback((newValue?: Moment|null) => {
+        newValue = newValue === undefined ? tempValue : newValue
+        if (newValue !== undefined) {
+            const datetimeValue = newValue?.format() || null
             const promise = updateEntity(new EntitySetValueRequest(def, datetimeValue)) || new ImmediatePromise(undefined)
             // if async update has started
             setIsSyncing(true)
