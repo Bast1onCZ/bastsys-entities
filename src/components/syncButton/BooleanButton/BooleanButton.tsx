@@ -4,12 +4,12 @@ import {FieldReference} from '../../../logic/fieldReferences'
 import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
 import useBooleanButton from '../../../hooks/entityIndicator/useBooleanIndicator'
 
-export type SyncPacketProps<T> = Omit<SmartButtonProps, 'onClick'> & {
+export type SyncButtonProps<T> = Omit<SmartButtonProps, 'onClick'> & {
     updateKey: FieldReference
     onCompleted?: (prevEntity: T, newEntity: T) => void
 }
 
-function BooleanButton<T>(props: SyncPacketProps<T>) {
+function BooleanButton<T>(props: SyncButtonProps<T>) {
     const {
         updateKey, onCompleted,
         disabled: disabledProp, loading: loadingProp, children,
