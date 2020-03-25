@@ -22,6 +22,10 @@ export {default as ImageField, TranslatedImageField} from './components/syncFiel
 export {default as BooleanField, TranslatedBooleanField} from './components/syncField/BooleanField'
 export {default as DateField, TranslatedDateField} from './components/syncField/DateField'
 
+export {default as useBooleanIndicator} from './hooks/entityIndicator/useBooleanIndicator'
+
+export {default as BooleanButton} from './components/syncField/BooleanField'
+
 export {default as ItemListField} from './components/syncField/ItemListField'
 export {default as AnyTranslationRequiredValidator} from './validator/AnyTranslationRequiredValidator'
 export {default as requiredValidator} from './validator/requiredValidator'
