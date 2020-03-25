@@ -31,7 +31,9 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
     const shownValue = useMemo<Moment|null>(() => {
         return tempValue !== undefined
             ? tempValue
-            : moment(entityValue)
+            : entityValue
+                ? moment(entityValue)
+                : null
     }, [entityValue, tempValue])
 
     const validDatetimeValidation = useDynamicValidation(entity, shownValue, ValidDatetimeValidator)
