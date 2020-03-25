@@ -12,9 +12,7 @@ import SyncFieldType from '../../components/syncField/syncFieldType'
 import moment, {Moment, isMoment} from 'moment'
 
 function ValidDatetimeValidator(value: unknown): string|undefined {
-    if(isMoment(value) && !value.isValid) {
-        value.isValid()
-
+    if(isMoment(value) && !value.isValid()) {
         return ' '
     }
 }
@@ -52,7 +50,7 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
             }
         }
 
-        setTempValue(tempValue)
+        setTempValue(newTempValue)
     }, [entityValue])
     const confirmChange = useCallback((newValue?: Moment|null) => {
         newValue = newValue === undefined ? tempValue : newValue

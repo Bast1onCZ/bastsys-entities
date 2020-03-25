@@ -15,7 +15,7 @@ export interface DateFieldProps extends SyncFieldDefinition {
 }
 
 const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) => {
-    const {shownValue, validation, changeTempValue, isDirty, isSyncing, confirmChange} = useDateTimeField(props, ref)
+    const {tempValue, shownValue, validation, changeTempValue, isDirty, isSyncing, confirmChange} = useDateTimeField(props, ref)
 
     const inputRef = useRef<HTMLInputElement>(null)
     const handleTempChange = useCallback((date: MaterialUiPickersDate) => {
@@ -33,10 +33,10 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
         }
     }, [])
     const handleBlur = useCallback(() => {
-        if (!validation.hasError) {
+        if (tempValue && tempValue.isValid() &&  !validation.hasError) {
             confirmChange()
         }
-    }, [validation.hasError, confirmChange])
+    }, [tempValue, validation.hasError, confirmChange])
 
     return props.hidden
         ? null
