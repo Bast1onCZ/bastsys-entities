@@ -24,7 +24,7 @@ export {default as DateField, TranslatedDateField} from './components/syncField/
 
 export {default as useBooleanIndicator} from './hooks/entityIndicator/useBooleanIndicator'
 
-export {default as BooleanButton} from './components/syncField/BooleanField'
+export {default as BooleanButton} from './components/syncButton/BooleanButton'
 
 export {default as ItemListField} from './components/syncField/ItemListField'
 export {default as AnyTranslationRequiredValidator} from './validator/AnyTranslationRequiredValidator'
