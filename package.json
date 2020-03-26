@@ -1,6 +1,6 @@
 {
   "name": "@bast1oncz/entities",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Local and remote graphql entity handling",
   "scripts": {
     "compile": "tsc"
