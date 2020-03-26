@@ -21,6 +21,7 @@ export {default as SelectField, TranslatedSelectField, SelectOption} from './com
 export {default as ImageField, TranslatedImageField} from './components/syncField/ImageField'
 export {default as BooleanField, TranslatedBooleanField} from './components/syncField/BooleanField'
 export {default as DateField, TranslatedDateField} from './components/syncField/DateField'
+export {default as DateTimeField, TranslatedDateTimeField} from './components/syncField/DateTimeField'
 
 export {default as useBooleanIndicator} from './hooks/entityIndicator/useBooleanIndicator'
 
