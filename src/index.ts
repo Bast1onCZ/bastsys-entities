@@ -35,4 +35,5 @@ export {default as TranslationsProvider, useTranslationsContext} from './compone
 
 // List
 export {default as List} from './components/List'
+export {default as Filter} from './components/Filter'
 export {useListContext} from './components/List/ListContext'
