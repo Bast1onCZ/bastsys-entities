@@ -21,19 +21,22 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
     const handleTempChange = useCallback((date: MaterialUiPickersDate) => {
         const mmt = date as Moment | null
 
-        if (mmt?.isValid() && document.activeElement !== inputRef.current) {
+        if (
+            (props.deletable && date === null && document.activeElement !== inputRef.current) || // date can be deleted && was deleted && was cleared from modal
+            (mmt?.isValid() && document.activeElement !== inputRef.current) // date is valid and input is not active - confirmed from modal
+        ) {
             confirmChange(mmt)
         } else {
             changeTempValue(mmt)
         }
-    }, [changeTempValue, confirmChange])
+    }, [props.deletable, changeTempValue, confirmChange])
     const handleKeyPress = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             inputRef.current?.blur()
         }
     }, [])
     const handleBlur = useCallback(() => {
-        if (tempValue && tempValue.isValid() &&  !validation.hasError) {
+        if (!validation.hasError) {
             confirmChange()
         }
     }, [tempValue, validation.hasError, confirmChange])

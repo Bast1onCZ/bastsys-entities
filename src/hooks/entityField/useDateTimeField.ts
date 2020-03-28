@@ -75,7 +75,7 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
             promise.then(resetTempValue)
                 .finally(resetIsSyncing)
         }
-    }, [tempValue, updateEntity, sourceKey, updateKey])
+    }, [tempValue, updateEntity, sourceKey, updateKey, deleteKey])
 
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.DATE_TIME,
