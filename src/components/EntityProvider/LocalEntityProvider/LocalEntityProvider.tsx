@@ -1,11 +1,10 @@
 import React, {forwardRef, memo, useMemo} from 'react'
 import {LocalEntityProviderProps} from './types'
-import {EntityContextValue, EntitySettings} from '../EntityContext'
+import EditableEntityContext, {EntityContextValue, EntitySettings} from '../EntityContext'
 import useEntityFieldDefinitions from '../useEntityFieldDefinitions'
 import UpdateMethodType from '../UpdateMethodType'
 import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
 import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequest'
-import EditableEntityContext from '../EntityContext'
 import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntityDefinitionImperativeHandle'
 
 const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProps>((props, ref) => {
