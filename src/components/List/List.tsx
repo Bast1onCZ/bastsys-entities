@@ -8,7 +8,6 @@ import ListContext, {ListContextValue} from './ListContext'
 function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListProps<F>) {
     const {
         entityFragment,
-        withoutFilter,
         defaultPageLimit = 10,
         defaultFilter = {},
         getDetailUrl,
@@ -27,6 +26,7 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         setPageLimit(newPageLimit)
     }, [page, pageLimit])
 
+    const [filterName, setFilterName] = useState<string|null>(null)
     const [filter, setFilter] = useState<Filter>(defaultFilter)
 
     const pagination = useMemo<PaginationInput>(() => ({
@@ -34,7 +34,10 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         limit: pageLimit
     }), [page, pageLimit])
 
-    const listQuery = useMemo(() => generateEntityListQuery(entityFragment, {withoutFilter}), [entityFragment, withoutFilter])
+    const listQuery = useMemo(() => generateEntityListQuery(entityFragment, {
+        filterName: filterName || undefined,
+        withoutFilter: !filterName
+    }), [entityFragment, filterName])
     const queryResponse = useQuery<ListResponse<E>>(listQuery, {
         fetchPolicy: 'cache-and-network',
         variables: {
@@ -50,6 +53,8 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         error: !!queryResponse.error,
         entities: queryResponse.data?.list?.edges,
         lastPage: Math.ceil((queryResponse.data?.list?.totalCount || 0) / pageLimit),
+        filterName,
+        setFilterName,
         filter,
         setFilter, // const
         orderBy,
@@ -59,7 +64,7 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         setPageLimit: changePageLimit,
         setOrderBy, // const
         getDetailUrl
-    }), [entityFragment, queryResponse, filter, orderBy, page, pageLimit, changePageLimit, getDetailUrl])
+    }), [entityFragment, queryResponse, filterName, filter, orderBy, page, pageLimit, changePageLimit, getDetailUrl])
 
     return (
         <ListContext.Provider value={contextValue}>

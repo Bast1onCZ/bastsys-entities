@@ -14,6 +14,8 @@ export interface ListContextValue<E extends IdentifiableEntity> {
     setPageLimit: (pageLimit: number) => void
     orderBy: OrderByInput[]
     setOrderBy: (orderBy: OrderByInput[]) => void
+    filterName: string|null
+    setFilterName: (filterName: string|null) => void
     filter: Filter
     setFilter: (filter: Filter) => void
     getDetailUrl?: (entity?: IdentifiableEntity) => string
