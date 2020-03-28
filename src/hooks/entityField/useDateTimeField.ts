@@ -10,6 +10,7 @@ import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueReque
 import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 import moment, {Moment, isMoment} from 'moment'
+import EntityDeleteValueRequest from '../../logic/updateRequest/EntityDeleteValueRequest'
 
 /**
  * Validates whether currently typed date is valid
@@ -67,7 +68,8 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
         newValue = newValue === undefined ? tempValue : newValue
         if (newValue !== undefined) {
             const datetimeValue = newValue?.format(MOMENT_FORMAT) || null
-            const promise = updateEntity(new EntitySetValueRequest(def, datetimeValue)) || new ImmediatePromise(undefined)
+            const request = datetimeValue !== null ? new EntitySetValueRequest(def, datetimeValue) : new EntityDeleteValueRequest(def)
+            const promise = updateEntity(request) || new ImmediatePromise(undefined)
             // if async update has started
             setIsSyncing(true)
             promise.then(resetTempValue)
