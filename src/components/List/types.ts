@@ -25,7 +25,7 @@ export type PaginationInput = {
 export interface ListProps<TFilter extends Filter> {
   entityFragment: Fragment
   withoutFilter?: boolean
-  pageLimitOptions?: [number]
+  defaultPageLimit?: number
   defaultFilter?: TFilter
   children?: ReactNode
   getDetailUrl?: (entity?: IdentifiableEntity) => string

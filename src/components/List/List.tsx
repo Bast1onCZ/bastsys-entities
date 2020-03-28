@@ -9,7 +9,7 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
     const {
         entityFragment,
         withoutFilter,
-        pageLimitOptions = [10, 50, 100],
+        defaultPageLimit = 10,
         defaultFilter = {},
         getDetailUrl,
         children
@@ -17,7 +17,7 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
 
     const [orderBy, setOrderBy] = useState<OrderByInput[]>([])
     const [page, setPage] = useState<number>(1)
-    const [pageLimit, setPageLimit] = useState<number>(pageLimitOptions[0])
+    const [pageLimit, setPageLimit] = useState<number>(defaultPageLimit)
     const changePageLimit = useCallback((newPageLimit: number) => {
         // changes page limit so that new page is adjusted
         const currentOffset = (page - 1) * pageLimit
@@ -49,6 +49,7 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         loading: queryResponse.loading,
         error: !!queryResponse.error,
         entities: queryResponse.data?.list?.edges,
+        lastPage: Math.ceil((queryResponse.data?.list?.totalCount || 0) / pageLimit),
         filter,
         setFilter, // const
         orderBy,
@@ -56,7 +57,7 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         setPage,
         pageLimit,
         setPageLimit: changePageLimit,
-        setOrderBy, // cons
+        setOrderBy, // const
         getDetailUrl
     }), [entityFragment, queryResponse, filter, orderBy, page, pageLimit, changePageLimit, getDetailUrl])
 
