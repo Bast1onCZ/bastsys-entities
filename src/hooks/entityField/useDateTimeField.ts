@@ -11,11 +11,22 @@ import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 import moment, {Moment, isMoment} from 'moment'
 
+/**
+ * Validates whether currently typed date is valid
+ *
+ * @param value
+ * @constructor
+ */
 function ValidDatetimeValidator(value: unknown): string|undefined {
     if(isMoment(value) && !value.isValid()) {
         return ' '
     }
 }
+
+/**
+ * Format compatible with bastsys api
+ */
+const MOMENT_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
 export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<SyncFieldReference>) {
     const {sourceKey, updateKey, deleteKey, label, validate} = def
@@ -30,7 +41,7 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
         return tempValue !== undefined
             ? tempValue
             : entityValue
-                ? moment(entityValue)
+                ? moment(entityValue, MOMENT_FORMAT)
                 : null
     }, [entityValue, tempValue])
 
@@ -55,7 +66,7 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
     const confirmChange = useCallback((newValue?: Moment|null) => {
         newValue = newValue === undefined ? tempValue : newValue
         if (newValue !== undefined) {
-            const datetimeValue = newValue?.format() || null
+            const datetimeValue = newValue?.format(MOMENT_FORMAT) || null
             const promise = updateEntity(new EntitySetValueRequest(def, datetimeValue)) || new ImmediatePromise(undefined)
             // if async update has started
             setIsSyncing(true)
