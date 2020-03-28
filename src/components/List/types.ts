@@ -22,7 +22,7 @@ export type PaginationInput = {
   offset?: number,
 }
 
-export interface ListProps<TFilter extends Filter> {
+export interface ListProps<TFilter extends FilterType> {
   entityFragment: Fragment
   defaultPageLimit?: number
   defaultFilter?: TFilter
@@ -30,7 +30,7 @@ export interface ListProps<TFilter extends Filter> {
   getDetailUrl?: (entity?: IdentifiableEntity) => string
 }
 
-export interface Filter {
+export interface FilterType {
 
 }
 

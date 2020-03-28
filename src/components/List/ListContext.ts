@@ -1,5 +1,5 @@
 import {Fragment, IdentifiableEntity} from '../../api/types'
-import {Filter, OrderByInput} from './types'
+import {FilterType, OrderByInput} from './types'
 import prepareContext from '@bast1oncz/components/dist/logic/prepareContext'
 
 export interface ListContextValue<E extends IdentifiableEntity> {
@@ -15,9 +15,8 @@ export interface ListContextValue<E extends IdentifiableEntity> {
     orderBy: OrderByInput[]
     setOrderBy: (orderBy: OrderByInput[]) => void
     filterName: string|null
-    setFilterName: (filterName: string|null) => void
-    filter: Filter
-    setFilter: (filter: Filter) => void
+    filter: FilterType
+    setFilter: (filter: FilterType) => void
     getDetailUrl?: (entity?: IdentifiableEntity) => string
 }
 

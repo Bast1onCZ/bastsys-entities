@@ -1,11 +1,13 @@
-import React, {memo, useCallback, useMemo, useState} from 'react'
-import {Filter, ListProps, ListResponse, OrderByInput, PaginationInput} from './types'
+import React, {Children, memo, ReactElement, useCallback, useMemo, useState} from 'react'
+import {FilterType, ListProps, ListResponse, OrderByInput, PaginationInput} from './types'
 import {useQuery} from '@apollo/react-hooks'
 import generateEntityListQuery from '../../api/generate/generateEntityListQuery'
 import {IdentifiableEntity} from '../../api/types'
 import ListContext, {ListContextValue} from './ListContext'
+import Filter from '../Filter'
+import {FilterProps} from '../Filter/Filter'
 
-function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListProps<F>) {
+function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: ListProps<F>) {
     const {
         entityFragment,
         defaultPageLimit = 10,
@@ -26,8 +28,14 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         setPageLimit(newPageLimit)
     }, [page, pageLimit])
 
-    const [filterName, setFilterName] = useState<string|null>(null)
-    const [filter, setFilter] = useState<Filter>(defaultFilter)
+    let filterName: string|null = null
+    Children.forEach(children, (child) => {
+        if((child as ReactElement)?.type === Filter) {
+            filterName = (child as ReactElement<FilterProps>).props.name
+        }
+    })
+
+    const [filter, setFilter] = useState<FilterType>(defaultFilter)
 
     const pagination = useMemo<PaginationInput>(() => ({
         offset: (page - 1) * pageLimit,
@@ -54,7 +62,6 @@ function List<E extends IdentifiableEntity, F extends Filter = {}>(props: ListPr
         entities: queryResponse.data?.list?.edges,
         lastPage: Math.ceil((queryResponse.data?.list?.totalCount || 0) / pageLimit),
         filterName,
-        setFilterName,
         filter,
         setFilter, // const
         orderBy,
