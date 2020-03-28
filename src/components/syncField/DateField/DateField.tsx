@@ -57,6 +57,7 @@ const DateField = forwardRef<SyncFieldReference, DateFieldProps>((props, ref) =>
                         : isDirty ? <DirtyIcon color="secondary"/>
                         : undefined
                 }
+                clearable={props.deletable}
                 fullWidth
             />
         )
