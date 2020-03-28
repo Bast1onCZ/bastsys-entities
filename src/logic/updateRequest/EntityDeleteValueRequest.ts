@@ -3,6 +3,7 @@ import AEntityUpdateRequest, {UpdateEntityFunction} from './AEntityUpdateRequest
 import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
 import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
 import {EntityResponseData} from '../../api/generate/generateEntityQuery'
+import cloneDeep from 'lodash/cloneDeep'
 
 /**
  * Deletes a value from an entity
@@ -29,7 +30,7 @@ export default class EntityDeleteValueRequest<E extends Entity> extends AEntityU
   performLocalUpdate(entity: E, updateEntity: UpdateEntityFunction) {
     const newEntity = joinKeys(this.baseSourceKey, this.sourceKey)
       .setAt(
-        entity,
+        cloneDeep(entity),
         undefined
       )
 
