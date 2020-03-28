@@ -1,5 +1,5 @@
 import {Entity, Translatable} from '../api/types'
-import ObjectPathKey, {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import ObjectPathKey, {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import {ValidatorFunction} from '../hooks/useValidation'
 import { EntityReference } from '../components/syncField/EntityReference'
 import { FieldReference} from '../logic/fieldReferences'

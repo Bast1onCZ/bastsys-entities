@@ -2,7 +2,7 @@ import {Entity, IdentifiableEntity, Mutation} from '../../api/types'
 import cloneDeep from 'lodash/cloneDeep'
 import AEntityUpdateRequest, {UpdateEntityFunction} from './AEntityUpdateRequest'
 import {EntityFieldKeyDefinition} from '../fieldReferences'
-import ObjectPathKey, {ObjectKeyPointer, toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import ObjectPathKey, {ObjectKeyPointer, toKey} from '@bast1oncz/objects/ObjectPathKey'
 import {EntityResponseData} from '../../api/generate/generateEntityQuery'
 
 interface IOrderable {

@@ -1,5 +1,5 @@
 import {useCallback, useMemo} from 'react'
-import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
+import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
 import {useEntityContext} from '../../index'
 import useBooleanSetResetState from '@bast1oncz/state/dist/useBooleanSetResetState'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'

@@ -5,8 +5,8 @@ import {SyncFieldDefinition} from './types'
 import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import useEntityContext from '../../components/EntityProvider/useEntityContext'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
-import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
+import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 
 export interface UseNumberField {

@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 import AEntityUpdateRequest from './AEntityUpdateRequest'
 import {Entity, IdentifiableEntity, Mutation} from '../../api/types'
-import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import {FieldReference} from '../fieldReferences'
 import {EntitiesResponseData} from './EntityDeleteRequest'
 

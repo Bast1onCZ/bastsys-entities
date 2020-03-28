@@ -1,5 +1,5 @@
 import {SyncFieldDefinition} from '../types'
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import useEntityContext from '../../../components/EntityProvider/useEntityContext'
 
 export type TypeValidatorFunction<T> = (value: any) => value is T

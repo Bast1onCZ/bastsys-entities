@@ -3,11 +3,11 @@ import useTempValue from '../useTempValue'
 import {useDynamicValidation, ValidationResult} from '../useValidation'
 import {SyncFieldDefinition} from './types'
 import {useEntityContext} from '../../components/EntityProvider/EntityContext'
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import SyncFieldType from '../../components/syncField/syncFieldType'
-import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
+import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
 import useResettableState from '@bast1oncz/state/dist/useResettableState'
 
 export interface UseStringField {

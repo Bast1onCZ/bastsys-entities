@@ -13,8 +13,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.3",
-    "@bast1oncz/components": "^3.4.1",
-    "@bast1oncz/objects": "^1.4.3",
+    "@bast1oncz/components": "^3.5.0",
+    "@bast1oncz/objects": "^2.0.0",
     "@bast1oncz/state": "^1.4.0",
     "@bast1oncz/strings": "^1.0.0",
     "@material-ui/core": "^4.9.7",
@@ -45,8 +45,8 @@
     "@types/graphql": "^14.5.0",
     "@types/lodash": "^4.14.149",
     "@types/moment": "^2.13.0",
-    "@types/node": "^13.9.4",
-    "@types/react": "^16.9.25",
+    "@types/node": "^13.9.5",
+    "@types/react": "^16.9.26",
     "apollo-link": "^1.2.13",
     "typescript": "^3.8.3"
   }

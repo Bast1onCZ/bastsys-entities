@@ -3,7 +3,7 @@ import {LocalEntityProviderProps} from './types'
 import EditableEntityContext, {EntityContextValue, EntitySettings} from '../EntityContext'
 import useEntityFieldDefinitions from '../useEntityFieldDefinitions'
 import UpdateMethodType from '../UpdateMethodType'
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequest'
 import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntityDefinitionImperativeHandle'
 

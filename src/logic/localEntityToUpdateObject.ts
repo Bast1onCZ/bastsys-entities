@@ -1,5 +1,5 @@
 import {EntityFieldKeyDefinition} from './fieldReferences'
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import {Entity} from '../api/types'
 
 /**

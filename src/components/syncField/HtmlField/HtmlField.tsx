@@ -9,7 +9,7 @@ import EditIcon from '@material-ui/icons/Edit'
 
 import useTempValue from '../../../hooks/useTempValue'
 
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import EntitySetValueRequest from '../../../logic/updateRequest/EntitySetValueRequest'
 import React, {forwardRef, memo, useCallback} from 'react'
 

@@ -1,4 +1,4 @@
-import ObjectPathKey from '@bast1oncz/objects/dist/ObjectPathKey'
+import ObjectPathKey from '@bast1oncz/objects/ObjectPathKey'
 
 export type FieldReference = ObjectPathKey | string
 export type FunctionalFieldReference<T> = (translationIdentity: T) => FieldReference

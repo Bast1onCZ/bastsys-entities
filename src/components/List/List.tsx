@@ -1,9 +1,15 @@
-import React, {Children, memo, ReactElement, useCallback, useMemo, useState} from 'react'
+import React, {
+    memo,
+    useCallback,
+    useMemo,
+    useState
+} from 'react'
 import {FilterType, ListProps, ListResponse, OrderByInput, PaginationInput} from './types'
 import {useQuery} from '@apollo/react-hooks'
 import generateEntityListQuery from '../../api/generate/generateEntityListQuery'
 import {IdentifiableEntity} from '../../api/types'
 import ListContext, {ListContextValue} from './ListContext'
+import filterChildren from '@bast1oncz/objects/react/filterChildren'
 import Filter from '../Filter'
 import {FilterProps} from '../Filter/Filter'
 
@@ -28,12 +34,12 @@ function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: Li
         setPageLimit(newPageLimit)
     }, [page, pageLimit])
 
-    let filterName: string|null = null
-    Children.forEach(children, (child) => {
-        if((child as ReactElement)?.type === Filter) {
-            filterName = (child as ReactElement<FilterProps>).props.name
-        }
-    })
+    const filterElements = filterChildren<FilterProps, typeof Filter>(children, Filter)
+    if(filterElements.length > 1) {
+        throw new Error('List cannot contain more <Filter /> elements at once')
+    }
+
+    const filterName = filterElements[0]?.props?.name
 
     const [filter, setFilter] = useState<FilterType>(defaultFilter)
 

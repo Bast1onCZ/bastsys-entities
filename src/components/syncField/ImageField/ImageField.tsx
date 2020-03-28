@@ -1,4 +1,4 @@
-import {toKey} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -17,7 +17,7 @@ import EntitySetFileValueRequest from '../../../logic/updateRequest/EntitySetFil
 import React, {CSSProperties, forwardRef, memo, useCallback} from 'react'
 import {useEntityContext} from '../../EntityProvider/EntityContext'
 import useIncrementalIdState from '@bast1oncz/state/dist/useIncrementalIdState'
-import ImmediatePromise from '@bast1oncz/objects/dist/ImmediatePromise'
+import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
 import {useDynamicValidation} from '../../../hooks/useValidation'
 
 const IMAGE_SOURCE_TYPE = {

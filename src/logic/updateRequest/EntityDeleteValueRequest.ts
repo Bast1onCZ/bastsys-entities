@@ -1,7 +1,7 @@
 import {Entity, IdentifiableEntity, Mutation} from '../../api/types'
 import AEntityUpdateRequest, {UpdateEntityFunction} from './AEntityUpdateRequest'
 import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
-import {joinKeys} from '@bast1oncz/objects/dist/ObjectPathKey'
+import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import {EntityResponseData} from '../../api/generate/generateEntityQuery'
 import cloneDeep from 'lodash/cloneDeep'
 
