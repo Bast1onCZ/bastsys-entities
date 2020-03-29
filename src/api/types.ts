@@ -9,7 +9,7 @@ export type Uuid = string
  * Represents an entity with Uuid
  */
 export interface IdentifiableEntity {
-    id: Uuid
+    id: string|Uuid
 }
 
 /**

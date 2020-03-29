@@ -12,6 +12,7 @@ import ListContext, {ListContextValue} from './ListContext'
 import filterChildren from '@bast1oncz/objects/react/filterChildren'
 import Filter from '../Filter'
 import {FilterProps} from '../Filter/Filter'
+import useResettableState from '@bast1oncz/state/dist/useResettableState'
 
 function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: ListProps<F>) {
     const {
@@ -48,6 +49,8 @@ function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: Li
         limit: pageLimit
     }), [page, pageLimit])
 
+    const [selection, setSelection, resetSelection] = useResettableState<IdentifiableEntity['id'][]>([])
+
     const listQuery = useMemo(() => generateEntityListQuery(entityFragment, {
         filterName: filterName || undefined,
         withoutFilter: !filterName
@@ -58,7 +61,8 @@ function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: Li
             orderBy,
             pagination,
             filter
-        }
+        },
+        onCompleted: resetSelection
     })
 
     const contextValue = useMemo<ListContextValue<E>>(() => ({
@@ -67,6 +71,8 @@ function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: Li
         error: !!queryResponse.error,
         entities: queryResponse.data?.list?.edges,
         lastPage: Math.ceil((queryResponse.data?.list?.totalCount || 0) / pageLimit),
+        selection,
+        setSelection,
         filterName,
         filter,
         setFilter, // const
@@ -77,7 +83,7 @@ function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: Li
         setPageLimit: changePageLimit,
         setOrderBy, // const
         getDetailUrl
-    }), [entityFragment, queryResponse, filterName, filter, orderBy, page, pageLimit, changePageLimit, getDetailUrl])
+    }), [entityFragment, queryResponse, selection, filterName, filter, orderBy, page, pageLimit, changePageLimit, getDetailUrl])
 
     return (
         <ListContext.Provider value={contextValue}>

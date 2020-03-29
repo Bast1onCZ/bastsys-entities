@@ -17,6 +17,8 @@ export interface ListContextValue<E extends IdentifiableEntity> {
     filterName: string|null
     filter: FilterType
     setFilter: (filter: FilterType) => void
+    selection: IdentifiableEntity['id'][]
+    setSelection: (selection: IdentifiableEntity['id'][]) => void
     getDetailUrl?: (entity?: IdentifiableEntity) => string
 }
 
