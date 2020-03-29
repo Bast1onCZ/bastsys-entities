@@ -34,6 +34,6 @@ export {default as requiredValidator} from './validator/requiredValidator'
 export {default as TranslationsProvider, useTranslationsContext} from './components/TranslationsProvider'
 
 // List
-export {default as List} from './components/List'
+export {default as List, useSelection} from './components/List'
 export {default as Filter} from './components/Filter'
 export {useListContext} from './components/List/ListContext'
