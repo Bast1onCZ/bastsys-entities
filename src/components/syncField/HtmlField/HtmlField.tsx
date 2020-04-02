@@ -1,11 +1,11 @@
 import Typography from '@material-ui/core/Typography'
-import {Editor} from '@tinymce/tinymce-react'
 import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
 import {HtmlFieldProps} from './types'
 import SyncFieldType from '../syncFieldType'
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import ChipVariables from '@bast1oncz/components/dist/components/ChipVariables'
 import EditIcon from '@material-ui/icons/Edit'
+import HtmlEditor from '@bast1oncz/components/dist/components/HtmlEditor'
 
 import useTempValue from '../../../hooks/useTempValue'
 
@@ -13,14 +13,13 @@ import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import EntitySetValueRequest from '../../../logic/updateRequest/EntitySetValueRequest'
 import React, {forwardRef, memo, useCallback} from 'react'
 
-import 'tinymce/tinymce'
 import useEntityContext from '../../EntityProvider/useEntityContext'
 import Grid from '@material-ui/core/Grid'
 import {useDynamicValidation} from '../../../hooks/useValidation'
 import useResettableState from '@bast1oncz/state/dist/useResettableState'
 
 const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) => {
-    const {sourceKey, updateKey, deleteKey, validate, label, disabled, variables, tinymceInit, hidden} = props
+    const {sourceKey, updateKey, deleteKey, validate, label, disabled, variables, hidden} = props
     const {entity, updateEntity} = useEntityContext()
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
@@ -95,24 +94,14 @@ const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) =>
                     {validation.error}
                 </Typography>
                 }
-                <Editor
-                    init={{
-                        selector: 'textarea',
-                        ...tinymceInit
-                    }}
+                <HtmlEditor
                     value={shownValue}
                     disabled={disabled || isSyncing}
-                    onEditorChange={setTempValue}
+                    onChange={setTempValue}
                     onBlur={handleChangeConfirm}
                 />
             </div>
         )
 })
-HtmlField.defaultProps = {
-    tinymceInit: {
-        min_height: 500,
-        max_height: 500
-    }
-}
 
 export default memo(HtmlField)
