@@ -1,59 +1,17 @@
 import Typography from '@material-ui/core/Typography'
 import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
 import {HtmlFieldProps} from './types'
-import SyncFieldType from '../syncFieldType'
-import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
+import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import ChipVariables from '@bast1oncz/components/dist/components/ChipVariables'
 import EditIcon from '@material-ui/icons/Edit'
 import HtmlEditor from '@bast1oncz/components/dist/components/HtmlEditor'
-
-import useTempValue from '../../../hooks/useTempValue'
-
-import {toKey} from '@bast1oncz/objects/ObjectPathKey'
-import EntitySetValueRequest from '../../../logic/updateRequest/EntitySetValueRequest'
-import React, {forwardRef, memo, useCallback} from 'react'
-
-import useEntityContext from '../../EntityProvider/useEntityContext'
+import React, {forwardRef, memo} from 'react'
 import Grid from '@material-ui/core/Grid'
-import {useDynamicValidation} from '../../../hooks/useValidation'
-import useResettableState from '@bast1oncz/state/dist/useResettableState'
+import useStringField from '../../../hooks/entityField/useStringField'
 
 const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) => {
-    const {sourceKey, updateKey, deleteKey, validate, label, disabled, variables, hidden} = props
-    const {entity, updateEntity} = useEntityContext()
-    const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue(`${label || 'Input'} value will be lost`)
-    const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
-
-    const entityValue = toKey(sourceKey).getFrom(entity)
-    const validation = useDynamicValidation(entity, entityValue, validate)
-
-    const shownValue = tempValue !== undefined
-        ? tempValue
-        : entityValue
-
-    const handleChangeConfirm = useCallback(() => {
-        if (tempValue === entityValue) {
-            return
-        }
-
-        const promise = updateEntity(new EntitySetValueRequest(props, tempValue))
-        if (promise) {
-            setIsSyncing(true)
-            promise
-                .then(resetTempValue)
-                .finally(resetIsSyncing)
-        } else {
-            resetTempValue()
-        }
-    }, [tempValue, updateEntity])
-
-    useSyncFieldImperativeHandle(ref, {
-        type: SyncFieldType.HTML,
-        sourceKey,
-        updateKey,
-        deleteKey,
-        ...validation
-    })
+    const {label, disabled, variables, hidden} = props
+    const {value, tempValue, validation, isDirty, isSyncing, changeTempValue, confirmChange} = useStringField(props, ref)
 
     return hidden
         ? null
@@ -67,7 +25,8 @@ const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) =>
                     </Grid>
                     {(isDirty || isSyncing) &&
                     <Grid item>
-                        <SmartButton type="icon" color="secondary" loading={isSyncing}>
+                        <SmartButton type="icon" color="secondary" loading={isSyncing} disabled={validation.hasError}
+                                     onClick={confirmChange}>
                             <EditIcon/>
                         </SmartButton>
                     </Grid>
@@ -95,10 +54,10 @@ const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) =>
                 </Typography>
                 }
                 <HtmlEditor
-                    value={shownValue}
+                    value={isDirty ? tempValue : value}
                     disabled={disabled || isSyncing}
-                    onChange={setTempValue}
-                    onBlur={handleChangeConfirm}
+                    onChange={changeTempValue}
+                    onBlur={confirmChange}
                 />
             </div>
         )
