@@ -11,5 +11,6 @@ export interface SyncFieldDefinition extends EntityFieldKeyDefinition {
 export interface UseSyncField<T> {
   value: T
   isSyncing: boolean
+  disabled: boolean
   confirmChange: ((value: T) => void|Promise<unknown>) | ((value?: T) => void|Promise<unknown>)
 }

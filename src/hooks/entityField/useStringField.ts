@@ -18,12 +18,13 @@ export interface UseStringField {
     isSyncing: boolean
     changeTempValue: (tempValue: string) => void
     confirmChange: VoidFunction
+    disabled: boolean
 }
 
 export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFieldReference>): UseStringField {
     const {sourceKey, updateKey, deleteKey, label, validate} = def
 
-    const {entity, updateEntity} = useEntityContext()
+    const {entity, updateEntity, disabled} = useEntityContext()
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<string>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
@@ -58,10 +59,10 @@ export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFi
         isDirty, isSyncing, tempValue,
         validation: localValueValidation,
         value: entityValue,
-        changeTempValue, confirmChange
+        changeTempValue, confirmChange, disabled
     }), [isDirty, isSyncing, tempValue,
         localValueValidation,
         entityValue,
-        changeTempValue, confirmChange
+        changeTempValue, confirmChange, disabled
     ])
 }

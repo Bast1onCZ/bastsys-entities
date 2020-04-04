@@ -49,9 +49,9 @@ function isValidValue(value) {
 }
 
 const ImageField = forwardRef<SyncFieldReference, ImageFieldProps>((props, ref) => {
-    const {sourceKey, updateKey, deleteKey, validate, label, mimeTypes = Object.values(ImageMimeType), hidden, deletable} = props
+    const {sourceKey, updateKey, deleteKey, validate, label, mimeTypes = Object.values(ImageMimeType), hidden, deletable, disabled} = props
 
-    const {entity, updateEntity} = useEntityContext()
+    const {entity, updateEntity, disabled: entityDisabled} = useEntityContext()
 
     const rawEntityValue = toKey(props.sourceKey).getFrom(entity)
     const valueType = isValidValue(rawEntityValue)
@@ -110,7 +110,7 @@ const ImageField = forwardRef<SyncFieldReference, ImageFieldProps>((props, ref) 
                     <SmartButton
                         color="secondary"
                         variant="contained"
-                        disabled={!valueType || isSyncing}
+                        disabled={!valueType || isSyncing || disabled || entityDisabled}
                         loading={isDeleting}
                         onClick={handleFileDelete}
                     >
@@ -120,7 +120,7 @@ const ImageField = forwardRef<SyncFieldReference, ImageFieldProps>((props, ref) 
                     <SmartButton
                         color="primary"
                         variant="contained"
-                        disabled={isSyncing}
+                        disabled={isSyncing || disabled || entityDisabled}
                         loading={isUpdating}
                         onClick={openFileDialog}
                     >

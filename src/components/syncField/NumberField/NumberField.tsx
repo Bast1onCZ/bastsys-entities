@@ -33,7 +33,7 @@ const NumberField = forwardRef<SyncFieldReference, NumberFieldProps>((props, ref
 
     const inputRef = useRef({blur: () => undefined})
 
-    const {value, tempValue, changeTempValue, confirmChange, isSyncing, isDirty, validation} = useNumberField(props, ref)
+    const {value, tempValue, changeTempValue, confirmChange, isSyncing, isDirty, validation, disabled} = useNumberField(props, ref)
     const shownValue = isDirty ? tempValue : value
 
     const changeValueHandler = useValueChangeHandler(changeTempValue)
@@ -85,7 +85,7 @@ const NumberField = forwardRef<SyncFieldReference, NumberFieldProps>((props, ref
                 value={shownValue}
                 error={validation.hasError}
                 helperText={validation.error}
-                disabled={props.disabled || isSyncing}
+                disabled={props.disabled || isSyncing || disabled}
                 fullWidth
                 InputProps={{
                     inputComponent: CustomNumberFormat,

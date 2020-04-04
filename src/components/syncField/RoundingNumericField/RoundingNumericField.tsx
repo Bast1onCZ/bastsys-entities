@@ -11,7 +11,7 @@ export interface RoundingNumericSyncFieldProps extends Omit<RoundingNumericField
 }
 
 const RoundingNumericField = forwardRef<SyncFieldReference, RoundingNumericSyncFieldProps>((props, ref) => {
-    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, value} = useNumberField(props, ref)
+    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, value, disabled} = useNumberField(props, ref)
 
     const shownValue = (isDirty ? tempValue : value) as number
 
@@ -28,7 +28,7 @@ const RoundingNumericField = forwardRef<SyncFieldReference, RoundingNumericSyncF
             <RoundingNumericBareField
                 value={shownValue}
                 onChange={changeTempValue}
-                disabled={isSyncing || props.disabled}
+                disabled={isSyncing || props.disabled || disabled}
                 min={props.min}
                 max={props.max}
                 rounding={props.rounding}

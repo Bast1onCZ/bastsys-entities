@@ -15,13 +15,14 @@ export interface UseSelectField {
     value: IdentifiableEntity['id']
     confirmChange: (id: IdentifiableEntity['id']|null) => void
     isSyncing: boolean
+    disabled: boolean
     validation: ValidationResult
 }
 
 export default function useSelectField(def: SyncFieldDefinition, ref: Ref<any>): UseSelectField {
     const {sourceKey, updateKey, deleteKey, validate} = def
 
-    const {entity, updateEntity} = useEntityContext()
+    const {entity, updateEntity, disabled} = useEntityContext()
     const value = toKey(sourceKey).getFrom(entity)
     const validation = useDynamicValidation(entity, value, validate)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
@@ -49,6 +50,7 @@ export default function useSelectField(def: SyncFieldDefinition, ref: Ref<any>):
         value,
         confirmChange,
         isSyncing,
-        validation
-    }), [value, confirmChange, validation, isSyncing])
+        validation,
+        disabled
+    }), [value, confirmChange, validation, isSyncing, disabled])
 }

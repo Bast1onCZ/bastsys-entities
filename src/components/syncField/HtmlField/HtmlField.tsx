@@ -11,7 +11,7 @@ import useStringField from '../../../hooks/entityField/useStringField'
 
 const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) => {
     const {label, disabled, variables, hidden} = props
-    const {value, tempValue, validation, isDirty, isSyncing, changeTempValue, confirmChange} = useStringField(props, ref)
+    const {value, tempValue, validation, isDirty, isSyncing, changeTempValue, confirmChange, disabled: entityDisabled} = useStringField(props, ref)
 
     return hidden
         ? null
@@ -55,7 +55,7 @@ const HtmlField = forwardRef<SyncFieldReference, HtmlFieldProps>((props, ref) =>
                 }
                 <HtmlEditor
                     value={isDirty ? tempValue : value}
-                    disabled={disabled || isSyncing}
+                    disabled={disabled || isSyncing || entityDisabled}
                     onChange={changeTempValue}
                     onBlur={confirmChange}
                 />

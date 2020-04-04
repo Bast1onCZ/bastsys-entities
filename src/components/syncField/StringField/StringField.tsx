@@ -17,7 +17,7 @@ export interface StringFieldProps extends SyncFieldDefinition {
 
 const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref) => {
     const {label, multiline, disabled, hidden} = props
-    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value} = useStringField(props, ref)
+    const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value, disabled: entityDisabled} = useStringField(props, ref)
 
     const shownValue = isDirty ? tempValue : value
 
@@ -68,7 +68,7 @@ const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref
                 error={validation.hasError}
                 helperText={validation.error}
                 multiline={multiline}
-                disabled={disabled}
+                disabled={disabled || entityDisabled}
                 fullWidth
             />
         )

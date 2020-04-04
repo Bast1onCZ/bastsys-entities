@@ -15,13 +15,14 @@ export interface UseNumberField {
     validation: ValidationResult
     isDirty: boolean
     isSyncing: boolean
+    disabled: boolean
     changeTempValue: (tempValue: string | number) => void
     confirmChange: VoidFunction
 }
 
 export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>): UseNumberField {
     const {label, updateKey, sourceKey, deleteKey, validate} = def
-    const {entity, updateEntity} = useEntityContext()
+    const {entity, updateEntity, disabled} = useEntityContext()
 
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<string|number>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing] = useState(false)
@@ -57,6 +58,6 @@ export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>):
     })
 
     return useMemo(() => ({
-        changeTempValue, confirmChange, tempValue, isDirty, isSyncing, validation: tempValueValidation, value: entityValue
-    }), [changeTempValue, confirmChange, tempValue, isDirty, isSyncing, tempValueValidation, entityValue])
+        changeTempValue, confirmChange, tempValue, isDirty, isSyncing, validation: tempValueValidation, value: entityValue, disabled
+    }), [changeTempValue, confirmChange, tempValue, isDirty, isSyncing, tempValueValidation, entityValue, disabled])
 }

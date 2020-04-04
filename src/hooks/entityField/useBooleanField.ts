@@ -18,7 +18,7 @@ function isBoolean(value: unknown): value is boolean {
 }
 
 export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>): UseBooleanField {
-    const {entity} = useEntityContext()
+    const {entity, disabled} = useEntityContext()
     const entityValue = useEntityValue(def)
     const exposedValue = useEntityValue(def, isBoolean, false)
     const {updateEntity} = useEntityContext()
@@ -43,6 +43,7 @@ export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>
     return useMemo(() => ({
         confirmChange,
         isSyncing: syncingValue !== undefined,
+        disabled,
         value: syncingValue !== undefined ? syncingValue : exposedValue
-    }), [exposedValue, syncingValue, confirmChange])
+    }), [exposedValue, syncingValue, disabled, confirmChange])
 }

@@ -15,7 +15,7 @@ export interface DateTimeFieldProps extends SyncFieldDefinition {
 }
 
 const DateTimeField = forwardRef<SyncFieldReference, DateTimeFieldProps>((props, ref) => {
-    const {tempValue, shownValue, validation, changeTempValue, isDirty, isSyncing, confirmChange} = useDateTimeField(props, ref)
+    const {tempValue, shownValue, validation, changeTempValue, isDirty, isSyncing, confirmChange, disabled} = useDateTimeField(props, ref)
 
     const inputRef = useRef<HTMLInputElement>(null)
     const handleTempChange = useCallback((date: MaterialUiPickersDate) => {
@@ -54,7 +54,7 @@ const DateTimeField = forwardRef<SyncFieldReference, DateTimeFieldProps>((props,
                 format="DD/MM/YYYY HH:mm"
                 error={validation.hasError}
                 helperText={validation.error}
-                disabled={isSyncing || props.disabled}
+                disabled={isSyncing || props.disabled || disabled}
                 keyboardIcon={
                     isSyncing ? <CircularProgress size={20} color="secondary"/>
                         : isDirty ? <DirtyIcon color="secondary"/>

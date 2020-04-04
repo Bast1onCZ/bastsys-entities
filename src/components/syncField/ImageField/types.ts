@@ -6,4 +6,5 @@ export interface ImageFieldProps extends SyncFieldDefinition {
   mimeTypes?: ImageMimeType[]
   deletable?: boolean
   hidden?: boolean
+  disabled?: boolean
 }

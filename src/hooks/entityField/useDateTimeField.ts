@@ -4,7 +4,7 @@ import {useEntityContext} from '../../components/EntityProvider/EntityContext'
 import useTempValue from '../useTempValue'
 import useResettableState from '@bast1oncz/state/dist/useResettableState'
 import {toKey} from '@bast1oncz/objects/ObjectPathKey'
-import {useDynamicValidation} from '../useValidation'
+import {useDynamicValidation, ValidationResult} from '../useValidation'
 import {Ref, useCallback, useMemo} from 'react'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
@@ -24,15 +24,27 @@ function ValidDatetimeValidator(value: unknown): string|undefined {
     }
 }
 
+export interface UseDateTimeField {
+    isDirty: boolean
+    isSyncing: boolean
+    disabled: boolean
+    tempValue: Moment|null|undefined
+    shownValue: Moment|null
+    validation: ValidationResult
+    value: string,
+    changeTempValue: (tempValue: Moment|null) => void
+    confirmChange: (newValue?: Moment|null) => void
+}
+
 /**
  * Format compatible with bastsys api
  */
 const MOMENT_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 
-export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<SyncFieldReference>) {
+export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<SyncFieldReference>): UseDateTimeField {
     const {sourceKey, updateKey, deleteKey, label, validate} = def
 
-    const {entity, updateEntity} = useEntityContext()
+    const {entity, updateEntity, disabled} = useEntityContext()
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<Moment|null>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
@@ -89,10 +101,10 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
         isDirty, isSyncing, tempValue, shownValue,
         validation: currentValidation,
         value: entityValue,
-        changeTempValue, confirmChange
+        changeTempValue, confirmChange, disabled
     }), [isDirty, isSyncing, tempValue, shownValue,
         currentValidation,
         entityValue,
-        changeTempValue, confirmChange
+        changeTempValue, confirmChange, disabled
     ])
 }

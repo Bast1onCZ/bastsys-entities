@@ -9,6 +9,7 @@ export interface LocalEntityProviderProps extends BaseEntityProviderProps {
      * @param Entity
      */
     updateEntity: (Entity) => void
+    disabled?: boolean
 }
 
 export function isLocalEntityProviderProps(value: any): value is LocalEntityProviderProps {

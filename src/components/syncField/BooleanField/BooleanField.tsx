@@ -7,10 +7,11 @@ import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHan
 
 export interface BooleanFieldProps extends SyncFieldDefinition {
     hidden?: boolean
+    disabled?: boolean
 }
 
 const BooleanField = forwardRef<SyncFieldReference, BooleanFieldProps>((props, ref) => {
-    const {value, isSyncing, confirmChange} = useBooleanField(props, ref)
+    const {value, isSyncing, confirmChange, disabled: entityDisabled} = useBooleanField(props, ref)
 
     const handleChange = useCallback((e, checked: boolean) => {
         confirmChange(checked)
@@ -20,7 +21,7 @@ const BooleanField = forwardRef<SyncFieldReference, BooleanFieldProps>((props, r
         ? null
         : (
             <FormControlLabel
-                disabled={isSyncing}
+                disabled={isSyncing || props.disabled || entityDisabled}
                 control={
                     <Checkbox checked={value} onChange={handleChange}/>
                 }

@@ -30,7 +30,7 @@ const loaderStyle = {margin: '7.5px 0'}
 
 const SelectField = forwardRef<SyncFieldReference, SelectFieldProps>((props, ref) => {
     const {label, options, deletable, disabled, hidden} = props
-    const {value, isSyncing, confirmChange, validation} = useSelectField(props, ref)
+    const {value, isSyncing, confirmChange, validation, disabled: entityDisabled} = useSelectField(props, ref)
 
     const handleSelectChange = useCallback((e: ChangeEvent<{ value: any }>) => {
         const value = e.target.value
@@ -53,7 +53,7 @@ const SelectField = forwardRef<SyncFieldReference, SelectFieldProps>((props, ref
         : (
             <FormControl
                 error={validation.hasError}
-                disabled={showLoader || disabled}
+                disabled={showLoader || disabled || entityDisabled}
                 fullWidth
             >
                 <InputLabel shrink={showLoader || !!value}>{label}</InputLabel>

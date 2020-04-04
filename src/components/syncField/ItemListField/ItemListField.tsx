@@ -173,7 +173,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                     list={items}
                     onChange={handleOrderDragChange}
                     setList={handleOrderDragConfirm}
-                    disabled={!orderable || isSyncing}
+                    disabled={!orderable || isSyncing || disabled}
                     ghostClass={cls.active}
                 >
                     {/* Items */}

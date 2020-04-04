@@ -9,6 +9,10 @@ export interface EntityContextValue<E extends Entity> {
   entity: E
   updateEntity: (updateRequest: AEntityUpdateRequest<E>) => void|Promise<any>
   isSyncing: boolean
+  /**
+   * If true, whole entity cannot be edited
+   */
+  disabled: boolean
   registerFieldDefinition: (def: SyncFieldReference) => void
   unregisterFieldDefinition: (def: SyncFieldReference) => void
   settings: EntitySettings<E>
@@ -17,6 +21,7 @@ export interface EntityContextValue<E extends Entity> {
 export interface EntitySettings<E extends Entity> {
   type: UpdateMethodType
   entity: Entity | undefined
+  disabled: boolean
   sourceKey: FieldReference
   updateKey?: FieldReference
   deleteKey?: FieldReference
