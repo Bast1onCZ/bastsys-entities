@@ -9,7 +9,8 @@
   "main": "index.js",
   "files": [
     "**/*.js",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "**/*.png"
   ],
   "license": "UNLICENSED",
   "dependencies": {
