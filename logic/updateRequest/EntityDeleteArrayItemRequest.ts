@@ -59,7 +59,7 @@ export default class EntityDeleteArrayItemRequest<T extends Entity> extends AEnt
     return this.apolloClient.mutate({
       mutation: updateMutation,
       variables: {
-        filter: {id: [entity.id]},
+        filter: {id: entity.id},
         input
       }
     })
