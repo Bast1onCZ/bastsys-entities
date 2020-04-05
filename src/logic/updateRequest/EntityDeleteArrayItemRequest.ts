@@ -16,8 +16,8 @@ interface EntityDeleteArrayItemRequestConstructorInput {
  * Handle entity array item delete
  */
 export default class EntityDeleteArrayItemRequest<T extends Entity> extends AEntityUpdateRequest<T> {
-  sourceKey: FieldReference
-  deleteKey: FieldReference
+  private sourceKey: FieldReference
+  private updateKey: FieldReference
   itemIdentity: object
 
   /**
@@ -27,7 +27,7 @@ export default class EntityDeleteArrayItemRequest<T extends Entity> extends AEnt
     super()
 
     this.sourceKey = input.sourceKey
-    this.deleteKey = input.deleteKey || input.updateKey || input.sourceKey
+    this.updateKey = input.updateKey || input.sourceKey
 
     this.itemIdentity = input.itemIdentity
   }
@@ -51,13 +51,13 @@ export default class EntityDeleteArrayItemRequest<T extends Entity> extends AEnt
    * @param deleteMutation
    */
   performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntitiesResponseData<T>> {
-    const input = joinKeys(this.baseDeleteKey, this.deleteKey)
+    const input = joinKeys(this.baseUpdateKey, this.updateKey)
         .clone()
         .pushArrayObjectIdentityPointer(this.itemIdentity)
-        .setAt({}, this.itemIdentity)
+        .setAt({}, {...this.itemIdentity, delete: true})
 
     return this.apolloClient.mutate({
-      mutation: deleteMutation,
+      mutation: updateMutation,
       variables: {
         filter: {id: [entity.id]},
         input
