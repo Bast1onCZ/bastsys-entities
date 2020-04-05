@@ -6,9 +6,10 @@
     "compile": "tsc"
   },
   "author": "bast1oncz",
-  "main": "dist/index.js",
+  "main": "index.js",
   "files": [
-    "dist"
+    "**.js",
+    "**.d.ts"
   ],
   "license": "UNLICENSED",
   "dependencies": {
