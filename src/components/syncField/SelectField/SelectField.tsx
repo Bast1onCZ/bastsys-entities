@@ -56,7 +56,7 @@ const SelectField = forwardRef<SyncFieldReference, SelectFieldProps>((props, ref
                 disabled={showLoader || disabled || entityDisabled}
                 fullWidth
             >
-                <InputLabel shrink={showLoader || !!value}>{label}</InputLabel>
+                {label && <InputLabel shrink={showLoader || !!value}>{label}</InputLabel>}
                 <Select
                     value={value || ''}
                     onChange={handleSelectChange}
