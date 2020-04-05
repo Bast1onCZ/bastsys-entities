@@ -45,7 +45,7 @@ const SortableTableBody = forwardRef<any, TableBodyProps>((props, ref) => {
 })
 
 const ItemListField = ((props: ItemListSyncFieldProps) => {
-    const {label, disabled, children, orderable} = props
+    const {label, disabled = false, children, orderable} = props
     const cls = useCls()
 
     const sourceKey = toKey(props.sourceKey)
@@ -197,6 +197,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                                     sourceKey={joinKeys(settings.sourceKey, itemKey)}
                                     updateKey={settings.updateKey && joinKeys(settings.updateKey, itemKey)}
                                     deleteKey={settings.deleteKey && joinKeys(settings.deleteKey, itemKey)}
+                                    disabled={disabled}
                                 >
                                     {React.Children.map(children, (child: SyncFieldElement, i) => {
                                         return (
