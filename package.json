@@ -8,8 +8,8 @@
   "author": "bast1oncz",
   "main": "index.js",
   "files": [
-    "**.js",
-    "**.d.ts"
+    "**/*.js",
+    "**/*.d.ts"
   ],
   "license": "UNLICENSED",
   "dependencies": {
