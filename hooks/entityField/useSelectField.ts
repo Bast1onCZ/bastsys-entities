@@ -55,14 +55,20 @@ export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): Us
 
         return isEntitySelect
     }, [value, options])
+    const idSourceKey = useMemo(() => {
+        if(isEntitySelect) {
+            return joinKeys(sourceKey, 'id')
+        }
+        return sourceKey
+    }, [sourceKey, isEntitySelect])
 
-    const valueId = isEntitySelect ? value?.id : value
+    const currentValueId = isEntitySelect ? value?.id : value
 
     const validation = useDynamicValidation(entity, value, validate)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const confirmChange = useCallback((id: IdentifiableEntity['id']|null) => {
-        if(valueId === id) {
+        if(currentValueId === id) {
             // entity value is the same as new value
             return
         }
@@ -70,8 +76,7 @@ export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): Us
         let request: AEntityUpdateRequest<any>
         if(id) {
             const option = (options as SelectOption[]).find(option => option.id === id)
-            const valueToSet = (option as SelectOption).entity || {id: (option as SelectOption).id}
-
+            const valueToSet = isEntitySelect ? (option as SelectOption).entity : id
             request = new EntitySetValueRequest(def, valueToSet)
         } else {
             request = new EntityDeleteValueRequest(def)
@@ -80,14 +85,7 @@ export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): Us
         const promise = updateEntity(request) || new ImmediatePromise(undefined)
         setIsSyncing(true)
         promise.finally(resetIsSyncing)
-    }, [valueId, updateEntity, options])
-
-    const idSourceKey = useMemo(() => {
-        if(isEntitySelect) {
-            return joinKeys(sourceKey, 'id')
-        }
-        return sourceKey
-    }, [sourceKey, isEntitySelect])
+    }, [currentValueId, updateEntity, options, isEntitySelect])
 
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.SELECT,
@@ -98,10 +96,10 @@ export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): Us
     })
 
     return useMemo(() => ({
-        value: valueId,
+        value: currentValueId,
         confirmChange,
         isSyncing,
         validation,
         disabled
-    }), [valueId, confirmChange, validation, isSyncing, disabled])
+    }), [currentValueId, confirmChange, validation, isSyncing, disabled])
 }

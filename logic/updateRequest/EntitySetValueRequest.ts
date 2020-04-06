@@ -44,7 +44,7 @@ export default class EntitySetValueRequest<E extends Entity> extends AEntityUpda
         cloneDeep(entity),
         this.value
       )
-    console.log({request: this, newEntity, entity})
+
     return updateEntity(newEntity)
   }
 
