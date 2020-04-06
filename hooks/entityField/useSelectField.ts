@@ -2,7 +2,7 @@ import {SyncFieldDefinition} from './types'
 import {ReactChild, Ref, useCallback, useMemo} from 'react'
 import {IdentifiableEntity, isIdentifiableEntity} from '../../api/types'
 import useEntityContext from '../../components/EntityProvider/useEntityContext'
-import {toKey} from '@bast1oncz/objects/ObjectPathKey'
+import {joinKeys, toKey} from '@bast1oncz/objects/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import EntityDeleteValueRequest from '../../logic/updateRequest/EntityDeleteValueRequest'
 import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
@@ -37,7 +37,7 @@ export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): Us
     const value = toKey(sourceKey).getFrom(entity)
 
     const isEntitySelect = useMemo(() => {
-        const isEntitySelect = (options || []).some(option => option.entity)
+        const isEntitySelect = isIdentifiableEntity(value) || (options || []).some(option => option.entity)
         if(isEntitySelect) {
             if(options?.some(option => !option.entity)) {
                 throw new Error('Entity is not defined in all options')
@@ -80,9 +80,16 @@ export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): Us
         promise.finally(resetIsSyncing)
     }, [valueId, updateEntity, options])
 
+    const idSourceKey = useMemo(() => {
+        if(isEntitySelect) {
+            return joinKeys(sourceKey, 'id')
+        }
+        return sourceKey
+    }, [sourceKey, isEntitySelect])
+
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.SELECT,
-        sourceKey,
+        sourceKey: idSourceKey,
         updateKey,
         deleteKey,
         ...validation

@@ -16,18 +16,20 @@ const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProp
         sourceKey, updateKey, deleteKey, entity, disabled
     }), [updateEntity, sourceKey, updateKey, deleteKey, entity, disabled])
 
-
     const exposedEntity = toKey(sourceKey).getFrom(entity)
+
     const {isPrepared, fieldRefs, registerFieldDefinition, unregisterFieldDefinition} = useEntityFieldDefinitions(settings)
-    const contextValue: EntityContextValue<any> = useMemo(() => ({
-        entity: exposedEntity,
-        updateEntity: ((updateRequest: AEntityUpdateRequest<any>) => {
-            updateRequest.setBaseKeys(sourceKey, updateKey, deleteKey)
-            updateRequest.performLocalUpdate(entity, updateEntity)
-        }),
-        isSyncing: false,
-        settings, disabled, registerFieldDefinition, unregisterFieldDefinition
-    }), [exposedEntity,
+    const contextValue: EntityContextValue<any> = useMemo(() => {
+        return {
+            entity: exposedEntity,
+            updateEntity: ((updateRequest: AEntityUpdateRequest<any>) => {
+                updateRequest.setBaseKeys(sourceKey, updateKey, deleteKey)
+                updateRequest.performLocalUpdate(entity, updateEntity)
+            }),
+            isSyncing: false,
+            settings, disabled, registerFieldDefinition, unregisterFieldDefinition
+        }
+    }, [exposedEntity,
         sourceKey, updateKey, deleteKey,
         entity, updateEntity,
         settings, disabled, registerFieldDefinition, unregisterFieldDefinition
