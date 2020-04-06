@@ -51,7 +51,7 @@ function isValidValue(value) {
 const ImageField = forwardRef<SyncFieldReference, ImageFieldProps>((props, ref) => {
     const {sourceKey, updateKey, deleteKey, validate, label, mimeTypes = Object.values(ImageMimeType), hidden, deletable, disabled} = props
 
-    const {entity, updateEntity, disabled: entityDisabled} = useEntityContext()
+    const {entity, updateEntity, readonly: entityDisabled} = useEntityContext()
 
     const rawEntityValue = toKey(props.sourceKey).getFrom(entity)
     const valueType = isValidValue(rawEntityValue)

@@ -13,7 +13,7 @@ export interface GraphQLEntityProviderProps extends BaseEntityProviderProps {
      */
     deleteMutation: Mutation
     entity: IdentifiableEntity
-    disabled?: boolean
+    readonly?: boolean
 }
 
 export function isGraphQLEntityProviderProps(value: any): value is GraphQLEntityProviderProps {

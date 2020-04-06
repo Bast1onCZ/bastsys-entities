@@ -18,7 +18,8 @@ function isBoolean(value: unknown): value is boolean {
 }
 
 export default function useBooleanField(def: SyncFieldDefinition, ref?: Ref<any>): UseBooleanField {
-    const {entity, disabled, updateEntity} = useEntityContext()
+    const {entity, readonly: disabledEntity, updateEntity} = useEntityContext()
+    const disabled = def.disabled || disabledEntity
     const entityValue = useEntityValue(def)
     const exposedValue = useEntityValue(def, isBoolean, false)
 

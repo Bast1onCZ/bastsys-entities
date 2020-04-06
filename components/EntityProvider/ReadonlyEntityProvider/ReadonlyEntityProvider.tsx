@@ -17,7 +17,7 @@ const ReadonlyEntityProvider = forwardRef<EntityDefinition, ReadonlyEntityProvid
         onEntityUpdate: () => {
             new NotImplementedError()
         },
-        sourceKey, entity, disabled: true
+        sourceKey, entity, readonly: true
     }), [sourceKey, entity])
     const {isPrepared, fieldRefs, registerFieldDefinition, unregisterFieldDefinition} = useEntityFieldDefinitions(settings)
 
@@ -31,7 +31,7 @@ const ReadonlyEntityProvider = forwardRef<EntityDefinition, ReadonlyEntityProvid
             settings,
             registerFieldDefinition,
             unregisterFieldDefinition,
-            disabled: true
+            readonly: true
         }
     }, [exposedEntity, settings, registerFieldDefinition, unregisterFieldDefinition])
 

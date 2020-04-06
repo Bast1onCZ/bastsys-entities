@@ -33,7 +33,9 @@ export interface SelectFieldInput extends SyncFieldDefinition {
 export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): UseSelectField {
     const {sourceKey, updateKey, deleteKey, validate, options} = def
 
-    const {entity, updateEntity, disabled} = useEntityContext()
+    const {entity, updateEntity, readonly: disabledEntity} = useEntityContext()
+    const disabled = def.disabled || disabledEntity
+
     const value = toKey(sourceKey).getFrom(entity)
 
     const isEntitySelect = useMemo(() => {

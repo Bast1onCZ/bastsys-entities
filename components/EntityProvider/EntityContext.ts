@@ -12,7 +12,7 @@ export interface EntityContextValue<E extends Entity> {
   /**
    * If true, whole entity cannot be edited
    */
-  disabled: boolean
+  readonly: boolean
   registerFieldDefinition: (def: SyncFieldReference) => void
   unregisterFieldDefinition: (def: SyncFieldReference) => void
   settings: EntitySettings<E>
@@ -21,7 +21,7 @@ export interface EntityContextValue<E extends Entity> {
 export interface EntitySettings<E extends Entity> {
   type: UpdateMethodType
   entity: Entity | undefined
-  disabled: boolean
+  readonly: boolean
   sourceKey: FieldReference
   updateKey?: FieldReference
   deleteKey?: FieldReference

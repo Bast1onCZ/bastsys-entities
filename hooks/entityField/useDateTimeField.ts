@@ -44,7 +44,9 @@ const MOMENT_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<SyncFieldReference>): UseDateTimeField {
     const {sourceKey, updateKey, deleteKey, label, validate} = def
 
-    const {entity, updateEntity, disabled} = useEntityContext()
+    const {entity, updateEntity, readonly: disabledEntity} = useEntityContext()
+    const disabled = def.disabled || disabledEntity
+
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<Moment|null>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
@@ -91,9 +93,7 @@ export default function useDateTimeField(def: SyncFieldDefinition, ref: Ref<Sync
 
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.DATE_TIME,
-        sourceKey,
-        updateKey,
-        deleteKey,
+        ...def,
         ...currentValidation
     })
 

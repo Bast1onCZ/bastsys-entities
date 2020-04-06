@@ -6,6 +6,7 @@ import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import changeObject from '@bast1oncz/objects/changeObject'
 import values from 'lodash/values'
 import useForceUpdate from '@bast1oncz/state/dist/useForceUpdate'
+import isEqual from 'lodash/isEqual'
 
 export interface EntityFieldReferences {
   [index: string]: SyncFieldReference
@@ -43,9 +44,16 @@ export default function useEntityFieldDefinitions<T extends EntityFieldKeyDefini
     deleteKey: ref.deleteKey && joinKeys(settings.deleteKey || settings.updateKey || settings.sourceKey, ref.deleteKey)
   }), [settings.sourceKey, settings.updateKey, settings.deleteKey])
   const registerFieldDefinition = useCallback((ref: SyncFieldReference) => {
+    const storageKey = ref.sourceKey.toString()
+    const currentSourceKeyRef = fieldRefsRef.current[storageKey]
+    if(currentSourceKeyRef && !isEqual(currentSourceKeyRef, ref)) {
+      // this can happen if multiple fields of the same source key are defined, but the definition is not identical
+      throw new Error(`Attempted to register more sourceKey '${storageKey}' definitions, but these definitions are not equal`)
+    }
+
     setFieldRefs(
       changeObject(fieldRefsRef.current, {
-        [ref.sourceKey.toString()]: ref
+        [storageKey]: ref
       })
     )
     if (shouldRegisterToParent) {

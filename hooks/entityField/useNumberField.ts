@@ -21,8 +21,9 @@ export interface UseNumberField {
 }
 
 export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>): UseNumberField {
-    const {label, updateKey, sourceKey, deleteKey, validate} = def
-    const {entity, updateEntity, disabled} = useEntityContext()
+    const {label, sourceKey, validate} = def
+    const {entity, updateEntity, readonly: disabledEntity} = useEntityContext()
+    const disabled = def.disabled || disabledEntity
 
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<string|number>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing] = useState(false)
@@ -51,9 +52,7 @@ export default function useNumberField(def: SyncFieldDefinition, ref: Ref<any>):
 
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.NUMBER,
-        sourceKey,
-        updateKey,
-        deleteKey,
+        ...def,
         ...entityValueValidation
     })
 

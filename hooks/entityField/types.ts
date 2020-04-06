@@ -6,6 +6,7 @@ import {ReferableValue} from '../../components/syncField/EntityReference'
 export interface SyncFieldDefinition extends EntityFieldKeyDefinition {
   label?: ReactChild
   validate?: ReferableValue<ValidatorFunction>
+  disabled?: boolean
 }
 
 export interface UseSyncField<T> {

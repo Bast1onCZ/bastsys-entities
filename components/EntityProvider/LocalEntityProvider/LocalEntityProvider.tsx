@@ -8,13 +8,13 @@ import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequ
 import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntityDefinitionImperativeHandle'
 
 const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProps>((props, ref) => {
-    const {entity, sourceKey = '', updateKey, deleteKey, children, updateEntity, disabled = false} = props
+    const {entity, sourceKey = '', updateKey, deleteKey, children, updateEntity, readonly = false} = props
 
     const settings: EntitySettings<any> = useMemo(() => ({
         type: UpdateMethodType.LOCAL_UPDATE,
         onEntityUpdate: updateEntity,
-        sourceKey, updateKey, deleteKey, entity, disabled
-    }), [updateEntity, sourceKey, updateKey, deleteKey, entity, disabled])
+        sourceKey, updateKey, deleteKey, entity, readonly: readonly
+    }), [updateEntity, sourceKey, updateKey, deleteKey, entity, readonly])
 
     const exposedEntity = toKey(sourceKey).getFrom(entity)
 
@@ -27,12 +27,12 @@ const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProp
                 updateRequest.performLocalUpdate(entity, updateEntity)
             }),
             isSyncing: false,
-            settings, disabled, registerFieldDefinition, unregisterFieldDefinition
+            settings, readonly: readonly, registerFieldDefinition, unregisterFieldDefinition
         }
     }, [exposedEntity,
         sourceKey, updateKey, deleteKey,
         entity, updateEntity,
-        settings, disabled, registerFieldDefinition, unregisterFieldDefinition
+        settings, readonly, registerFieldDefinition, unregisterFieldDefinition
     ])
 
     useEntityDefinitionImperativeHandle({isPrepared, fieldRefs}, ref)

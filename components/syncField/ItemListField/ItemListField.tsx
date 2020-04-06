@@ -197,7 +197,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                                     sourceKey={joinKeys(settings.sourceKey, itemKey)}
                                     updateKey={settings.updateKey && joinKeys(settings.updateKey, itemKey)}
                                     deleteKey={settings.deleteKey && joinKeys(settings.deleteKey, itemKey)}
-                                    disabled={disabled}
+                                    readonly={disabled || settings.readonly}
                                 >
                                     {React.Children.map(children, (child: SyncFieldElement, i) => {
                                         return (
