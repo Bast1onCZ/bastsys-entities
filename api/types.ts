@@ -12,6 +12,10 @@ export interface IdentifiableEntity {
     id: string|Uuid
 }
 
+export function isIdentifiableEntity(value: any): value is IdentifiableEntity {
+    return value && typeof value === 'object' && typeof value.id === 'string' && value.id.length > 0
+}
+
 /**
  * Represents an entity that must not have id
  */

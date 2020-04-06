@@ -1,6 +1,6 @@
 import {SyncFieldDefinition} from './types'
-import {Ref, useCallback, useMemo} from 'react'
-import {IdentifiableEntity} from '../../api/types'
+import {ReactChild, Ref, useCallback, useMemo} from 'react'
+import {IdentifiableEntity, isIdentifiableEntity} from '../../api/types'
 import useEntityContext from '../../components/EntityProvider/useEntityContext'
 import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
@@ -10,33 +10,75 @@ import useResettableState from '@bast1oncz/state/dist/useResettableState'
 import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 import {useDynamicValidation, ValidationResult} from '../useValidation'
+import AEntityUpdateRequest from '../../logic/updateRequest/AEntityUpdateRequest'
+
+export interface SelectOption {
+    id: IdentifiableEntity['id'] extends '' ? never : IdentifiableEntity['id']
+    label: ReactChild
+    entity?: IdentifiableEntity
+}
 
 export interface UseSelectField {
     value: IdentifiableEntity['id']
-    confirmChange: (id: IdentifiableEntity['id']|null) => void
+    confirmChange: (id: string|null) => void
     isSyncing: boolean
     disabled: boolean
     validation: ValidationResult
 }
 
-export default function useSelectField(def: SyncFieldDefinition, ref: Ref<any>): UseSelectField {
-    const {sourceKey, updateKey, deleteKey, validate} = def
+export interface SelectFieldInput extends SyncFieldDefinition {
+    options?: SelectOption[]
+}
+
+export default function useSelectField(def: SelectFieldInput, ref: Ref<any>): UseSelectField {
+    const {sourceKey, updateKey, deleteKey, validate, options} = def
 
     const {entity, updateEntity, disabled} = useEntityContext()
     const value = toKey(sourceKey).getFrom(entity)
+
+    const isEntitySelect = useMemo(() => {
+        const isEntitySelect = (options || []).some(option => option.entity)
+        if(isEntitySelect) {
+            if(options?.some(option => !option.entity)) {
+                throw new Error('Entity is not defined in all options')
+            }
+            if(!!value && !isIdentifiableEntity(value)) {
+                throw new Error('Entity is not IdentifiableEntity while options are entities')
+            }
+        } else {
+            if(isIdentifiableEntity(value)) {
+                throw new Error('Entity value is IdentifiableEntity, but options are not')
+            }
+        }
+
+        return isEntitySelect
+    }, [value, options])
+
+    const valueId = isEntitySelect ? value?.id : value
+
     const validation = useDynamicValidation(entity, value, validate)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
     const confirmChange = useCallback((id: IdentifiableEntity['id']|null) => {
-        if(value === id) {
+        if(valueId === id) {
             // entity value is the same as new value
-            return null
+            return
         }
 
-        const promise = (id ? updateEntity(new EntitySetValueRequest(def, id)) : updateEntity(new EntityDeleteValueRequest(def))) || new ImmediatePromise(undefined)
+        let request: AEntityUpdateRequest<any>
+        if(id) {
+            const option = (options as SelectOption[]).find(option => option.id === id)
+            const valueToSet = (option as SelectOption).entity || {id: (option as SelectOption).id}
+
+            request = new EntitySetValueRequest(def, valueToSet)
+        } else {
+            request = new EntityDeleteValueRequest(def)
+        }
+
+        const promise = updateEntity(request) || new ImmediatePromise(undefined)
         setIsSyncing(true)
         promise.finally(resetIsSyncing)
-    }, [value, updateEntity])
+    }, [valueId, updateEntity, options])
 
     useSyncFieldImperativeHandle(ref, {
         type: SyncFieldType.SELECT,
@@ -47,10 +89,10 @@ export default function useSelectField(def: SyncFieldDefinition, ref: Ref<any>):
     })
 
     return useMemo(() => ({
-        value,
+        value: valueId,
         confirmChange,
         isSyncing,
         validation,
         disabled
-    }), [value, confirmChange, validation, isSyncing, disabled])
+    }), [valueId, confirmChange, validation, isSyncing, disabled])
 }

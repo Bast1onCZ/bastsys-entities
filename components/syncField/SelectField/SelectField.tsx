@@ -1,10 +1,9 @@
 import React, {ChangeEvent, forwardRef, memo, ReactChild, useCallback} from 'react'
-import useSelectField from '../../../hooks/entityField/useSelectField'
+import useSelectField, {SelectOption} from '../../../hooks/entityField/useSelectField'
 import {SyncFieldDefinition} from '../../../hooks/entityField/types'
 import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
-import {IdentifiableEntity} from '../../../api/types'
 import MenuItem from '@material-ui/core/MenuItem'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import FormHelperText from '@material-ui/core/FormHelperText'
@@ -21,11 +20,6 @@ export interface SelectFieldProps extends SyncFieldDefinition {
     hidden?: boolean
 }
 
-export interface SelectOption {
-    id: IdentifiableEntity['id'] extends '' ? never : IdentifiableEntity['id']
-    label: ReactChild
-}
-
 const loaderStyle = {margin: '7.5px 0'}
 
 const SelectField = forwardRef<SyncFieldReference, SelectFieldProps>((props, ref) => {
@@ -40,7 +34,6 @@ const SelectField = forwardRef<SyncFieldReference, SelectFieldProps>((props, ref
     const showLoader = !options || isSyncing
     const renderValue = useCallback((value) => {
         if (!options || showLoader) {
-            console.log('loader')
             return (
                 <LinearProgress style={loaderStyle}/>
             )

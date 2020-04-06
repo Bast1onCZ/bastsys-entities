@@ -16,10 +16,10 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.4",
     "@bast1oncz/components": "^3.8.2",
-    "@bast1oncz/objects": "^2.2.6",
+    "@bast1oncz/objects": "^2.3.1",
     "@bast1oncz/state": "^1.5.0",
     "@bast1oncz/strings": "^1.0.0",
-    "@material-ui/core": "^4.9.8",
+    "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "^4.9.6",

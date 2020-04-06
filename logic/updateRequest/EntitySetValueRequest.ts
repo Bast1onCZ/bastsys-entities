@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 import AEntityUpdateRequest from './AEntityUpdateRequest'
 import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
-import {Entity} from '../../api/types'
+import {Entity, isIdentifiableEntity} from '../../api/types'
 import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
 
 /**
@@ -14,7 +14,7 @@ export default class EntitySetValueRequest<E extends Entity> extends AEntityUpda
   sourceKey: FieldReference
   updateKey: FieldReference
 
-  value = null
+  value: any
 
   /**
    * @param {{sourceKey, updateKey?}} fieldDef
@@ -44,7 +44,7 @@ export default class EntitySetValueRequest<E extends Entity> extends AEntityUpda
         cloneDeep(entity),
         this.value
       )
-
+    console.log({request: this, newEntity, entity})
     return updateEntity(newEntity)
   }
 
@@ -55,13 +55,21 @@ export default class EntitySetValueRequest<E extends Entity> extends AEntityUpda
    * @returns {Promise<FetchResult<any>>}
    */
   performGraphqlUpdate(entity, updateMutation, deleteMutation) {
+    let remoteValueToSet
+    if(isIdentifiableEntity(this.value)) {
+      // if remote value is IdentifiableEntity, then only its id should be sent
+      remoteValueToSet = this.value.id
+    } else {
+      remoteValueToSet = this.value
+    }
+
     return this.apolloClient.mutate({
       mutation: updateMutation,
       variables: {
         filter: {
           id: entity.id
         },
-        input: joinKeys(this.baseUpdateKey, this.updateKey).setAt({}, this.value)
+        input: joinKeys(this.baseUpdateKey, this.updateKey).setAt({}, remoteValueToSet)
       }
     })
   }
