@@ -20,7 +20,7 @@ import EntityDeleteArrayItemRequest from '../../../logic/updateRequest/EntityDel
 import EntitySetOrderRequest from '../../../logic/updateRequest/EntitySetOrderRequest'
 import React, {cloneElement, forwardRef, memo, useCallback, useRef} from 'react'
 import {ReactSortable} from 'react-sortablejs'
-import $ from '@bast1oncz/strings/dist/classString'
+import $ from '@bast1oncz/strings/classString'
 import {SyncFieldElement} from '../types'
 import {makeStyles} from '@material-ui/styles'
 import {useEntityContext} from '../../EntityProvider/EntityContext'
@@ -199,9 +199,9 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                                     deleteKey={settings.deleteKey && joinKeys(settings.deleteKey, itemKey)}
                                     readonly={disabled || settings.readonly}
                                 >
-                                    {React.Children.map(children, (child: SyncFieldElement, i) => {
+                                    {React.Children.map(children, (child: SyncFieldElement) => {
                                         return (
-                                            <TableCell key={i}>
+                                            <TableCell key={itemKey.toString()}>
                                                 {cloneElement(child, {label: undefined})}
                                             </TableCell>
                                         )

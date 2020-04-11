@@ -3,7 +3,7 @@ import {EntityFieldKeyDefinition} from '../../logic/fieldReferences'
 import SyncFieldType from '../syncField/syncFieldType'
 import {ValidationResult} from '../../hooks/useValidation'
 import values from 'lodash/values'
-import {useEntityContext} from './EntityContext'
+import {EntityContextValue, useEntityContext} from './EntityContext'
 
 export interface SyncFieldReference extends EntityFieldKeyDefinition, ValidationResult {
     type: SyncFieldType
@@ -20,7 +20,12 @@ export default function useSyncFieldImperativeHandle(ref: Ref<SyncFieldReference
     // Context
     const {sourceKey, updateKey, deleteKey, disabled} = input
 
-    const {registerFieldDefinition, unregisterFieldDefinition} = useEntityContext()
+    let ctx: EntityContextValue<any>|{} = {}
+    try {
+        ctx = useEntityContext()
+    } catch(err) {}
+
+    const {registerFieldDefinition, unregisterFieldDefinition} = ctx as any
     useEffect(() => {
         if(!disabled) {
             registerFieldDefinition(input)
