@@ -16,9 +16,9 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.4",
     "@bast1oncz/components": "^3.8.2",
-    "@bast1oncz/objects": "^2.4.0",
+    "@bast1oncz/objects": "^2.6.1",
     "@bast1oncz/state": "^1.5.0",
-    "@bast1oncz/strings": "^1.0.0",
+    "@bast1oncz/strings": "^2.0.0",
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/pickers": "^3.2.10",
@@ -46,9 +46,9 @@
     "@types/graphql": "^14.5.0",
     "@types/lodash": "^4.14.149",
     "@types/moment": "^2.13.0",
-    "@types/node": "^13.11.0",
-    "@types/react": "^16.9.32",
-    "apollo-link": "^1.2.13",
+    "@types/node": "^13.11.1",
+    "@types/react": "^16.9.34",
+    "apollo-link": "^1.2.14",
     "typescript": "^3.8.3"
   }
 }

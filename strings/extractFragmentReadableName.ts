@@ -1,5 +1,5 @@
 import {Fragment} from '../api/types'
-import pascalToReadableCase from '@bast1oncz/strings/dist/pascalToReadableCase'
+import pascalToReadableCase from '@bast1oncz/strings/pascalToReadableCase'
 import extractFragmentName from '../strings/extractFragmentName'
 
 /**

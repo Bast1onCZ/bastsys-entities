@@ -1,5 +1,5 @@
 import {Entity, Fragment, Query} from '../types'
-import firstLetterToLowerCase from '@bast1oncz/strings/dist/firstLetterToLowerCase'
+import firstLetterToLowerCase from '@bast1oncz/strings/firstLetterToLowerCase'
 import extractFragmentName from '../../strings/extractFragmentName'
 import gql from 'graphql-tag'
 

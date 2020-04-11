@@ -18,7 +18,7 @@ export interface UseBooleanIndicator {
 export default function useBooleanButton<T>(input: UseBooleanButtonInput<T>) {
     const {updateKey, onCompleted} = input
 
-    const {entity, updateEntity, isSyncing: disabled} = useEntityContext<T>()
+    const {entity, updateEntity, isSyncing: disabled} = useEntityContext()
 
     const [isSyncing, setIsSyncing, resetIsSyncing] = useBooleanSetResetState()
 

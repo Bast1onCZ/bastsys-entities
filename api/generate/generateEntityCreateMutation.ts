@@ -1,4 +1,4 @@
-import firstLetterToLowerCase from '@bast1oncz/strings/dist/firstLetterToLowerCase'
+import firstLetterToLowerCase from '@bast1oncz/strings/firstLetterToLowerCase'
 import gql from 'graphql-tag'
 import {Fragment, IdentifiableEntity} from '../types'
 import extractFragmentName from '../../strings/extractFragmentName'

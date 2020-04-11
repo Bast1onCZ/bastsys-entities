@@ -1,5 +1,5 @@
 import {Fragment, Mutation} from '../types'
-import firstLetterToLowerCase from '@bast1oncz/strings/dist/firstLetterToLowerCase'
+import firstLetterToLowerCase from '@bast1oncz/strings/firstLetterToLowerCase'
 import gql from 'graphql-tag'
 import extractFragmentName from '../../strings/extractFragmentName'
 
