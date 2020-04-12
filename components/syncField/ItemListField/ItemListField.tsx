@@ -80,8 +80,8 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
 
         switch (settings.type) {
             case UpdateMethodType.LOCAL_UPDATE:
-                itemSourceKey.pushObjectKeyPointer(oldIndex)
-                itemUpdateKey.pushObjectKeyPointer(oldIndex)
+                itemSourceKey.pushArrayIndexPointer(oldIndex)
+                itemUpdateKey.pushArrayIndexPointer(oldIndex)
                 break
             case UpdateMethodType.GRAPHQL_UPDATE:
                 const id = (items[oldIndex] as IdentifiableEntity).id
@@ -182,7 +182,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
 
                         const itemKey = sourceKey.clone()
                         if (settings.type === UpdateMethodType.LOCAL_UPDATE) {
-                            itemKey.pushObjectKeyPointer(i)
+                            itemKey.pushArrayIndexPointer(i)
                         } else if (settings.type === UpdateMethodType.GRAPHQL_UPDATE) {
                             if(!id) {
                                 throw new Error('Item id not defined')

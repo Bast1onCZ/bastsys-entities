@@ -25,7 +25,7 @@ export interface EntitySettings<E extends Entity> {
   sourceKey: FieldReference
   updateKey?: FieldReference
   deleteKey?: FieldReference
-  onEntityUpdate?: (entity: Entity) => void
+  updateEntity?: (entity: Entity) => void
   updateMutation?: Mutation
   deleteMutation?: Mutation
 }

@@ -14,7 +14,7 @@ const ReadonlyEntityProvider = forwardRef<EntityDefinition, ReadonlyEntityProvid
 
     const settings: EntitySettings<any> = useMemo(() => ({
         type: UpdateMethodType.READ_ONLY,
-        onEntityUpdate: () => {
+        updateEntity: () => {
             new NotImplementedError()
         },
         sourceKey, entity, readonly: true

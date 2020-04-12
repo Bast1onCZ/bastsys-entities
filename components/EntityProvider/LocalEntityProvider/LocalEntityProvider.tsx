@@ -12,7 +12,7 @@ const LocalEntityProvider = forwardRef<EntityDefinition, LocalEntityProviderProp
 
     const settings: EntitySettings<any> = useMemo(() => ({
         type: UpdateMethodType.LOCAL_UPDATE,
-        onEntityUpdate: updateEntity,
+        updateEntity,
         sourceKey, updateKey, deleteKey, entity, readonly: readonly
     }), [updateEntity, sourceKey, updateKey, deleteKey, entity, readonly])
 
