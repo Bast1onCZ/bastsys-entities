@@ -32,7 +32,7 @@ export interface EntitySettings<E extends Entity> {
 
 const {context: EditableEntityContext, useContext} = prepareContext<EntityContextValue<any>>('Entity')
 
-export const useEntityContext = <T>() => {
+export const useEntityContext = <T = any>() => {
   return useContext() as EntityContextValue<T>
 }
 export default EditableEntityContext
