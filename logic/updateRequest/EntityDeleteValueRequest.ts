@@ -45,12 +45,12 @@ export default class EntityDeleteValueRequest<E extends Entity> extends AEntityU
    */
   performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntityResponseData<E>> {
     return this.apolloClient.mutate({
-      mutation: deleteMutation,
+      mutation: updateMutation,
       variables: {
         filter: {
-          id: [entity.id]
+          id: entity.id
         },
-        input: joinKeys(this.baseDeleteKey, this.deleteKey).setAt({}, true)
+        input: joinKeys(this.baseDeleteKey, this.deleteKey).setAt({}, null)
       }
     })
   }
