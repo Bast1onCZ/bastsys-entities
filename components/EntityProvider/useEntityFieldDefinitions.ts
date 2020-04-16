@@ -5,7 +5,7 @@ import {EntitySettings, useEntityContext} from './EntityContext'
 import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import changeObject from '@bast1oncz/objects/changeObject'
 import values from 'lodash/values'
-import useForceUpdate from '@bast1oncz/state/dist/useForceUpdate'
+import useForceUpdate from '@bast1oncz/state/useForceUpdate'
 import isEqual from 'lodash/isEqual'
 
 export interface EntityFieldReferences {

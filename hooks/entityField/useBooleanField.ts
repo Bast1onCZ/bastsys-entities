@@ -1,6 +1,6 @@
 import {SyncFieldDefinition, UseSyncField} from './types'
 import useEntityValue from './utils/useEntityValue'
-import useResettableState from '@bast1oncz/state/dist/useResettableState'
+import useResettableState from '@bast1oncz/state/useResettableState'
 import {Ref, useCallback, useMemo} from 'react'
 import useEntityContext from '../../components/EntityProvider/useEntityContext'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'

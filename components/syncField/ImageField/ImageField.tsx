@@ -8,7 +8,7 @@ import {ImageFieldProps} from './types'
 import SyncFieldType from '../syncFieldType'
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import ImageMimeType from './ImageMimeType'
-import useResettableState from '@bast1oncz/state/dist/useResettableState'
+import useResettableState from '@bast1oncz/state/useResettableState'
 import useFileDialog from '@bast1oncz/components/hooks/input/useFileDialog'
 
 import ImagePlaceholder from './ImagePlaceholder.png'
@@ -16,7 +16,7 @@ import EntityDeleteValueRequest from '../../../logic/updateRequest/EntityDeleteV
 import EntitySetFileValueRequest from '../../../logic/updateRequest/EntitySetFileValueRequest'
 import React, {CSSProperties, forwardRef, memo, useCallback} from 'react'
 import {useEntityContext} from '../../EntityProvider/EntityContext'
-import useIncrementalIdState from '@bast1oncz/state/dist/useIncrementalIdState'
+import useIncrementalIdState from '@bast1oncz/state/useIncrementalIdState'
 import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
 import {useDynamicValidation} from '../../../hooks/useValidation'
 

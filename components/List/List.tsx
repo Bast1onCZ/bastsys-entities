@@ -12,7 +12,7 @@ import ListContext, {ListContextValue} from './ListContext'
 import filterChildren from '@bast1oncz/objects/react/filterChildren'
 import Filter from '../Filter'
 import {FilterProps} from '../Filter/Filter'
-import useResettableState from '@bast1oncz/state/dist/useResettableState'
+import useResettableState from '@bast1oncz/state/useResettableState'
 
 const DEFAULT_DEFAULT_FILTER = {}
 

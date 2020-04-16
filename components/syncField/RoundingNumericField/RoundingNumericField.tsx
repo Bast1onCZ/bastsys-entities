@@ -1,5 +1,5 @@
 import React, {forwardRef, memo, useEffect} from 'react'
-import useSolidValue from '@bast1oncz/state/dist/useSolidValue'
+import useSolidValue from '@bast1oncz/state/useSolidValue'
 import RoundingNumericBareField from '@bast1oncz/components/components/form/RoundingNumericField'
 import useNumberField from '../../../hooks/entityField/useNumberField'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'

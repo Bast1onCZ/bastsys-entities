@@ -8,7 +8,7 @@ import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueReque
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../components/EntityProvider/useSyncFieldImperativeHandle'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
-import useResettableState from '@bast1oncz/state/dist/useResettableState'
+import useResettableState from '@bast1oncz/state/useResettableState'
 
 export interface UseStringField {
     tempValue?: string

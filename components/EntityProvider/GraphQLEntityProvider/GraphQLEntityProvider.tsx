@@ -7,7 +7,7 @@ import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequ
 import useEntityFieldDefinitions from '../useEntityFieldDefinitions'
 import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntityDefinitionImperativeHandle'
 import {useApolloClient} from '@apollo/react-hooks'
-import useResettableState from '@bast1oncz/state/dist/useResettableState'
+import useResettableState from '@bast1oncz/state/useResettableState'
 
 const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProviderProps>((props, ref) => {
     const {children, sourceKey = '', updateKey = '', deleteKey = '', entity, updateMutation, deleteMutation, readonly = false} = props
