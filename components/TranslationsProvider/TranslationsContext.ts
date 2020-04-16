@@ -1,5 +1,5 @@
 import {Language} from '../../api/types'
-import prepareContext from '@bast1oncz/components/dist/logic/prepareContext'
+import prepareContext from '@bast1oncz/components/logic/prepareContext'
 import {SolidDeep} from '@bast1oncz/objects/types/operations'
 
 export interface TranslationsContextValue {

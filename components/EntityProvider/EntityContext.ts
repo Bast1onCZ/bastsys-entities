@@ -3,7 +3,7 @@ import AEntityUpdateRequest from '../../logic/updateRequest/AEntityUpdateRequest
 import UpdateMethodType from './UpdateMethodType'
 import {FieldReference} from '../../logic/fieldReferences'
 import {SyncFieldReference} from './useSyncFieldImperativeHandle'
-import prepareContext from '@bast1oncz/components/dist/logic/prepareContext'
+import prepareContext from '@bast1oncz/components/logic/prepareContext'
 
 export interface EntityContextValue<E extends Entity> {
   entity: E

@@ -2,7 +2,7 @@ import React, {forwardRef, KeyboardEvent, memo, useCallback, useMemo, useRef} fr
 import useStringField from '../../../hooks/entityField/useStringField'
 import {SyncFieldDefinition} from '../../../hooks/entityField/types'
 import TextField from '@material-ui/core/TextField'
-import useValueChangeHandler from '@bast1oncz/components/dist/hooks/input/useValueChangeHandler'
+import useValueChangeHandler from '@bast1oncz/components/hooks/input/useValueChangeHandler'
 import {InputProps} from '@material-ui/core/Input'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import CircularProgress from '@material-ui/core/CircularProgress'

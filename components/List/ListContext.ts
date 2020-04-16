@@ -1,6 +1,6 @@
 import {Fragment, IdentifiableEntity} from '../../api/types'
 import {FilterType, OrderByInput} from './types'
-import prepareContext from '@bast1oncz/components/dist/logic/prepareContext'
+import prepareContext from '@bast1oncz/components/logic/prepareContext'
 
 export interface ListContextValue<E extends IdentifiableEntity> {
     entityFragment: Fragment

@@ -9,7 +9,7 @@ import SyncFieldType from '../syncFieldType'
 import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import ImageMimeType from './ImageMimeType'
 import useResettableState from '@bast1oncz/state/dist/useResettableState'
-import useFileDialog from '@bast1oncz/components/dist/hooks/input/useFileDialog'
+import useFileDialog from '@bast1oncz/components/hooks/input/useFileDialog'
 
 import ImagePlaceholder from './ImagePlaceholder.png'
 import EntityDeleteValueRequest from '../../../logic/updateRequest/EntityDeleteValueRequest'
