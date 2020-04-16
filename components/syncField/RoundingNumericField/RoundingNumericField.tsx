@@ -33,6 +33,11 @@ const RoundingNumericField = forwardRef<SyncFieldReference, RoundingNumericSyncF
                 max={props.max}
                 rounding={props.rounding}
                 step={props.step}
+
+                variant={props.variant}
+                inputClassName={props.inputClassName}
+                buttonVariant={props.buttonVariant}
+                buttonClassName={props.buttonClassName}
             />
         )
 })
