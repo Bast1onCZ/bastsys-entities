@@ -1,6 +1,6 @@
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
-import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
+import SmartButton from '@bast1oncz/components/components/SmartButton'
 import {isEntityReference} from '../EntityReference'
 import {NumberFieldProps} from './types'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'

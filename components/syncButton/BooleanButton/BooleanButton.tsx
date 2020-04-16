@@ -1,7 +1,7 @@
-import {SmartButtonProps} from '@bast1oncz/components/dist/components/SmartButton/types'
+import {SmartButtonProps} from '@bast1oncz/components/components/SmartButton/types'
 import React, {memo} from 'react'
 import {FieldReference} from '../../../logic/fieldReferences'
-import SmartButton from '@bast1oncz/components/dist/components/SmartButton'
+import SmartButton from '@bast1oncz/components/components/SmartButton'
 import useBooleanButton from '../../../hooks/entityIndicator/useBooleanIndicator'
 
 export type SyncButtonProps<T> = Omit<SmartButtonProps, 'onClick'> & {

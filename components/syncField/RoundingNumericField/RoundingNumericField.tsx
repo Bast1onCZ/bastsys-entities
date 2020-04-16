@@ -1,9 +1,9 @@
 import React, {forwardRef, memo, useEffect} from 'react'
 import useSolidValue from '@bast1oncz/state/dist/useSolidValue'
-import RoundingNumericBareField from '@bast1oncz/components/dist/components/form/RoundingNumericField'
+import RoundingNumericBareField from '@bast1oncz/components/components/form/RoundingNumericField'
 import useNumberField from '../../../hooks/entityField/useNumberField'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
-import {RoundingNumericFieldProps} from '@bast1oncz/components/dist/components/form/RoundingNumericField/types'
+import {RoundingNumericFieldProps} from '@bast1oncz/components/components/form/RoundingNumericField/types'
 import {SyncFieldDefinition} from '../../../hooks/entityField/types'
 
 export interface RoundingNumericSyncFieldProps extends Omit<RoundingNumericFieldProps, 'value' | 'onChange'>, SyncFieldDefinition {
