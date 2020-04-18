@@ -22,11 +22,6 @@ export default class EntityDeleteValueRequest<E extends Entity> extends AEntityU
     this.deleteKey = fieldDef.deleteKey || fieldDef.updateKey || fieldDef.sourceKey
   }
 
-  /**
-   * @param {Object} entity
-   * @param {function} updateEntity
-   * @returns {Promise|undefined}
-   */
   performLocalUpdate(entity: E, updateEntity: UpdateEntityFunction) {
     const newEntity = joinKeys(this.baseSourceKey, this.sourceKey)
       .setAt(
@@ -37,13 +32,7 @@ export default class EntityDeleteValueRequest<E extends Entity> extends AEntityU
     return updateEntity(newEntity)
   }
 
-  /**
-   * @param {Object} entity
-   * @param {Object} updateMutation
-   * @param {Object} deleteMutation
-   * @returns {Promise<FetchResult<any>>}
-   */
-  performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntityResponseData<E>> {
+  performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation): Promise<EntityResponseData<E>> {
     return this.apolloClient.mutate({
       mutation: updateMutation,
       variables: {

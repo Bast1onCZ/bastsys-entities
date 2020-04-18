@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep'
 import AEntityUpdateRequest from './AEntityUpdateRequest'
 import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
-import {Entity, isIdentifiableEntity} from '../../api/types'
+import {Entity, IdentifiableEntity, isIdentifiableEntity, Mutation} from '../../api/types'
 import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
 
 /**
@@ -48,13 +48,7 @@ export default class EntitySetValueRequest<E extends Entity> extends AEntityUpda
         return updateEntity(newEntity)
     }
 
-    /**
-     * @param {Object} entity
-     * @param {Object} updateMutation
-     * @param {Object} deleteMutation
-     * @returns {Promise<FetchResult<any>>}
-     */
-    performGraphqlUpdate(entity, updateMutation, deleteMutation) {
+    performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation) {
         let remoteValueToSet
         if (isIdentifiableEntity(this.value)) {
             // if remote value is IdentifiableEntity, then only its id should be sent

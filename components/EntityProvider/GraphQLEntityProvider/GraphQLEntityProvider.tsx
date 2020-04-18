@@ -10,13 +10,13 @@ import {useApolloClient} from '@apollo/react-hooks'
 import useResettableState from '@bast1oncz/state/useResettableState'
 
 const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProviderProps>((props, ref) => {
-    const {children, sourceKey = '', updateKey = '', deleteKey = '', entity, updateMutation, deleteMutation, readonly = false} = props
+    const {children, sourceKey = '', updateKey = '', deleteKey = '', entity, updateMutation, readonly = false} = props
 
     const exposedEntity = toKey(sourceKey).getFrom(entity)
     const settings = useMemo(() => ({
         type: UpdateMethodType.GRAPHQL_UPDATE,
-        sourceKey, updateKey, deleteKey, entity, updateMutation, deleteMutation, readonly: readonly
-    }), [sourceKey, updateKey, deleteKey, entity, updateMutation, deleteMutation, readonly])
+        sourceKey, updateKey, deleteKey, entity, updateMutation, readonly: readonly
+    }), [sourceKey, updateKey, deleteKey, entity, updateMutation, readonly])
     const {isPrepared, fieldRefs, registerFieldDefinition, unregisterFieldDefinition} = useEntityFieldDefinitions(settings)
 
     const client = useApolloClient()
@@ -35,7 +35,7 @@ const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProvider
             request.setApolloClient(client)
 
             setIsSyncing(true)
-            return request.performGraphqlUpdate(entity, updateMutation, deleteMutation)
+            return request.performGraphqlUpdate(entity, updateMutation)
                 .finally(resetIsSyncing)
         },
         isSyncing,
@@ -43,7 +43,7 @@ const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProvider
         registerFieldDefinition,
         unregisterFieldDefinition
     }), [
-        entity, updateMutation, deleteMutation, exposedEntity,
+        entity, updateMutation, exposedEntity,
         sourceKey, updateKey, deleteKey,
         settings,
         isSyncing, readonly, registerFieldDefinition, unregisterFieldDefinition

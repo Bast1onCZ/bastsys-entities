@@ -8,10 +8,6 @@ export interface GraphQLEntityProviderProps extends BaseEntityProviderProps {
      * Mutation that updates a value at entity
      */
     updateMutation: Mutation
-    /**
-     * Mutation that deletes a value at filtered entities (there only one entity is in the filter)
-     */
-    deleteMutation: Mutation
     entity: IdentifiableEntity
     readonly?: boolean
 }

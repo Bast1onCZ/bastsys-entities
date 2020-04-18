@@ -66,7 +66,6 @@ export default class EntitySetFileValueRequest<T extends Entity> extends AEntity
   /**
    * @param entity
    * @param updateMutation
-   * @param deleteMutation
    * @returns {Promise<Object>} promise containing apollo response
    */
   public performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation): Promise<EntityResponseData<T>> {

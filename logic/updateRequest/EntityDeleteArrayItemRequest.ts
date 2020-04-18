@@ -48,9 +48,8 @@ export default class EntityDeleteArrayItemRequest<T extends Entity> extends AEnt
   /**
    * @param entity
    * @param updateMutation
-   * @param deleteMutation
    */
-  performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntitiesResponseData<T>> {
+  performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation): Promise<EntitiesResponseData<T>> {
     const input = joinKeys(this.baseUpdateKey, this.updateKey)
         .clone()
         .pushArrayObjectIdentityPointer(this.itemIdentity)

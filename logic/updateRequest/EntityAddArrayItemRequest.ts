@@ -11,10 +11,10 @@ interface EntityItemListFieldKeyDefinition extends EntityFieldKeyDefinition {
 }
 
 export default class EntityAddArrayItemRequest<T extends IdentifiableEntity, I extends UnidentifiableEntity> extends AEntityUpdateRequest<T> {
-  private sourceKey: FieldReference
-  private updateKey: FieldReference
-  private itemFieldDefinitions: EntityFieldKeyDefinition[]
-  private item: I
+  private readonly sourceKey: FieldReference
+  private readonly updateKey: FieldReference
+  private readonly itemFieldDefinitions: EntityFieldKeyDefinition[]
+  private readonly item: I
   
   /**
    *
@@ -44,7 +44,7 @@ export default class EntityAddArrayItemRequest<T extends IdentifiableEntity, I e
     updateEntity(newEntity)
   }
   
-  performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntityResponseData<T>> {
+  performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation): Promise<EntityResponseData<T>> {
     const itemUpdateInput = localEntityToUpdateObject(this.itemFieldDefinitions, this.item)
     
     return this.apolloClient.mutate({

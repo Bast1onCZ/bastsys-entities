@@ -27,7 +27,6 @@ export interface EntitySettings<E extends Entity> {
   deleteKey?: FieldReference
   updateEntity?: (entity: Entity) => void
   updateMutation?: Mutation
-  deleteMutation?: Mutation
 }
 
 const {context: EditableEntityContext, useContext} = prepareContext<EntityContextValue<any>>('Entity')

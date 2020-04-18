@@ -35,9 +35,8 @@ abstract class AEntityUpdateRequest<T extends Entity> {
    *
    * @param entity
    * @param updateMutation
-   * @param deleteMutation
    */
-  public abstract performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntityResponseData<T>|EntitiesResponseData<T>>;
+  public abstract performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation): Promise<EntityResponseData<T>|EntitiesResponseData<T>>;
 }
 
 export default AEntityUpdateRequest

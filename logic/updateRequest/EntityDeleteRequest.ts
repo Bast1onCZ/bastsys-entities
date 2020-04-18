@@ -10,7 +10,7 @@ export default class EntityDeleteRequest<E extends Entity> extends AEntityUpdate
         updateEntity(null)
     }
 
-    performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntitiesResponseData<E>> {
+    performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation): Promise<EntitiesResponseData<E>> {
         return this.apolloClient.mutate({
             mutation: updateMutation,
             variables: {

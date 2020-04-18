@@ -33,7 +33,7 @@ export default class EntitySetOrderRequest<E extends Entity = Entity> extends AE
         updateEntity(newEntity)
     }
 
-    performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation, deleteMutation: Mutation): Promise<EntityResponseData<E>> {
+    performGraphqlUpdate(entity: IdentifiableEntity, updateMutation: Mutation): Promise<EntityResponseData<E>> {
         return this.apolloClient.mutate({
             mutation: updateMutation,
             variables: {
