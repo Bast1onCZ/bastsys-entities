@@ -30,7 +30,8 @@ export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFi
     const {tempValue, setTempValue, resetTempValue, isActive: isDirty} = useTempValue<string>(`${label || 'Input'} value will be lost`)
     const [isSyncing, setIsSyncing, resetIsSyncing] = useResettableState(false)
 
-    const entityValue = toKey(sourceKey).getFrom(entity) || ''
+    const entityValue = toKey(sourceKey).getFrom(entity)
+    const entityStringValue = entityValue || ''
     const localValue = tempValue !== undefined
         ? tempValue
         : entityValue
@@ -60,7 +61,7 @@ export default function useStringValue(def: SyncFieldDefinition, ref: Ref<SyncFi
     return useMemo(() => ({
         isDirty, isSyncing, tempValue,
         validation: localValueValidation,
-        value: entityValue,
+        value: entityStringValue,
         changeTempValue, confirmChange, disabled
     }), [isDirty, isSyncing, tempValue,
         localValueValidation,
