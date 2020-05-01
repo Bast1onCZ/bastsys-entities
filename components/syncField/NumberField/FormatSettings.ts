@@ -16,8 +16,8 @@ export function getPriceFormat(currency: Currency): FormatSettings {
   const {pattern} = currency
   
   const regResult = pattern.match(/^(.*){value}(.*)$/)
-  const prefix = regResult?.[1]
-  const suffix = regResult?.[2]
+  const prefix = regResult?.[1] as unknown
+  const suffix = regResult?.[2] as unknown
   
   if (typeof prefix !== 'string' || typeof suffix !== 'string') {
     throw new Error('Invalid currency format. Format must be like \'prefix{value}suffix\'')
@@ -34,6 +34,9 @@ export function getPriceFormat(currency: Currency): FormatSettings {
   }
 }
 
+export const PERCENT_FORMAT: FormatSettings = {
+  suffix: ' %'
+}
 export const WEIGHT_FORMAT: FormatSettings = {
   allowNegative: false,
   // decimalSeparator: ',',
