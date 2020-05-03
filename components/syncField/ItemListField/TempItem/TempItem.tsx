@@ -1,5 +1,5 @@
 import {EntityProviderReference} from '../../../EntityProvider'
-import React, {cloneElement, forwardRef, memo, useCallback, useImperativeHandle, useRef} from 'react'
+import React, {cloneElement, memo, useCallback, useRef} from 'react'
 import TableRow from '@material-ui/core/TableRow'
 import EntityProvider from '../../../EntityProvider/EntityProvider'
 import UpdateMethodType from '../../../EntityProvider/UpdateMethodType'
@@ -10,7 +10,6 @@ import AddIcon from '@material-ui/icons/Add'
 import TableFooter from '@material-ui/core/TableFooter'
 import RemoveIcon from '@material-ui/icons/DeleteOutline'
 import useTempValue from '../../../../hooks/useTempValue'
-import useResettableState from '@bast1oncz/state/useResettableState'
 import EntityAddArrayItemRequest from '../../../../logic/updateRequest/EntityAddArrayItemRequest'
 import useValidEntityListener from '../../../EntityProvider/useValidEntityListener'
 import ObjectPathKey from '@bast1oncz/objects/ObjectPathKey'
@@ -24,14 +23,13 @@ export interface TempItemProps {
     disabled: boolean
     isSyncing: boolean
     children: SyncFieldElement | SyncFieldElement[]
+
+    tempItemCreating: boolean
+    setTempItemCreating: (tempItemCreating: boolean) => void
 }
 
-export interface TempItemRef {
-    isCreating: boolean
-}
-
-const TempItem = forwardRef<TempItemRef, TempItemProps>((props, ref) => {
-    const {label, sourceKey, updateKey, deleteKey, disabled, isSyncing, children} = props
+const TempItem = (props: TempItemProps) => {
+    const {label, sourceKey, updateKey, deleteKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, children} = props
 
     const {updateEntity} = useEntityContext()
 
@@ -43,10 +41,9 @@ const TempItem = forwardRef<TempItemRef, TempItemProps>((props, ref) => {
         setTempItem(newTempEntity)
     }, [])
 
-    const [tempItemCreating, setTempItemCreating, resetTempItemCreating] = useResettableState(false)
     const tempItemEntityRef = useRef<EntityProviderReference>({fieldRefs: [], isValid: true, isPrepared: false})
     const tempItemCreate = useCallback(() => {
-        if(tempItem !== undefined) {
+        if (tempItem !== undefined) {
             const request = new EntityAddArrayItemRequest({
                 sourceKey,
                 updateKey,
@@ -57,14 +54,10 @@ const TempItem = forwardRef<TempItemRef, TempItemProps>((props, ref) => {
             const promise = updateEntity(request) || new Promise(resolve => resolve())
             promise
                 .then(resetTempItem)
-                .finally(resetTempItemCreating)
+                .finally(() => setTempItemCreating(false))
         }
-    }, [sourceKey, updateKey, deleteKey, tempItem])
+    }, [sourceKey, updateKey, deleteKey, tempItem, setTempItemCreating])
     useValidEntityListener(tempItemEntityRef, tempItemCreate, !tempItemActive || tempItemCreating)
-
-    useImperativeHandle(ref, () => ({
-        isCreating: tempItemCreating
-    }), [tempItemCreating])
 
     return (
         <TableFooter>
@@ -103,6 +96,6 @@ const TempItem = forwardRef<TempItemRef, TempItemProps>((props, ref) => {
             </TableRow>
         </TableFooter>
     )
-})
+}
 
 export default memo(TempItem)

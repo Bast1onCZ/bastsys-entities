@@ -13,7 +13,7 @@ import NotImplementedError from '@bast1oncz/objects/error/NotImplementedError'
 import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import EntityDeleteArrayItemRequest from '../../../logic/updateRequest/EntityDeleteArrayItemRequest'
 import EntitySetOrderRequest from '../../../logic/updateRequest/EntitySetOrderRequest'
-import React, {cloneElement, forwardRef, memo, useCallback, useRef} from 'react'
+import React, {cloneElement, forwardRef, memo, useCallback, useRef, useState} from 'react'
 import {ReactSortable} from 'react-sortablejs'
 import $ from '@bast1oncz/strings/classString'
 import {SyncFieldElement} from '../types'
@@ -21,7 +21,7 @@ import {makeStyles} from '@material-ui/styles'
 import {useEntityContext} from '../../EntityProvider/EntityContext'
 import EntityProvider from '../../EntityProvider/EntityProvider'
 import Head from './Head'
-import TempItem, {TempItemRef} from './TempItem/TempItem'
+import TempItem from './TempItem/TempItem'
 import useToKey from '../../../hooks/useToKey'
 
 const useCls = makeStyles((theme: any) => ({
@@ -115,8 +115,8 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
         }
     }, [updateEntity])
 
-    const tempItemRef = useRef<TempItemRef>({isCreating: false})
-    const isSyncing = isSyncingOrder || isRemoving || tempItemRef.current.isCreating
+    const [tempItemCreating, setTempItemCreating] = useState(false)
+    const isSyncing = isSyncingOrder || isRemoving || tempItemCreating
 
     return (
         <div>
@@ -185,13 +185,14 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                 </ReactSortable>
                 {/* Temp item row */}
                 <TempItem
-                    ref={tempItemRef}
                     sourceKey={sourceKey}
                     updateKey={updateKey}
                     deleteKey={deleteKey}
                     label={label?.toString()}
                     isSyncing={isSyncing}
                     disabled={disabled}
+                    tempItemCreating={tempItemCreating}
+                    setTempItemCreating={setTempItemCreating}
                 >
                     {props.children}
                 </TempItem>
