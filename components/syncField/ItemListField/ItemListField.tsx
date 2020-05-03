@@ -133,7 +133,6 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                     {props.children}
                 </Head>
                 <ReactSortable
-                    key={isSyncing.toString()} // TODO: remove this key as soon as change is implemented by plugin creator
                     tag={SortableTableBody}
                     list={items}
                     onChange={handleOrderDragChange}
