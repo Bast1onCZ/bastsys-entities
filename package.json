@@ -6,6 +6,7 @@
     "compile": "tsc"
   },
   "author": "bast1oncz",
+  "keywords": ["react", "entity", "entities", "local", "remote", "graphql"],
   "repository": {
     "url": "https://github.com/Bast1onCZ/bastsys-entities",
     "type": "git"
