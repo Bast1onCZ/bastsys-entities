@@ -1,20 +1,16 @@
 import Table from '@material-ui/core/Table'
 import TableBody, {TableBodyProps} from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
-import TableFooter from '@material-ui/core/TableFooter'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import {IdentifiableEntity} from '../../../api/types'
 import SmartButton from '@bast1oncz/components/components/SmartButton'
 import UpdateMethodType from '../../EntityProvider/UpdateMethodType'
 import {DragInfo, ItemListSyncFieldProps} from './types'
-import AddIcon from '@material-ui/icons/Add'
 import RemoveIcon from '@material-ui/icons/DeleteOutline'
 import useResettableState from '@bast1oncz/state/useResettableState'
-import useTempValue from '../../../hooks/useTempValue'
 import NotImplementedError from '@bast1oncz/objects/error/NotImplementedError'
-import {joinKeys, toKey} from '@bast1oncz/objects/ObjectPathKey'
-import EntityAddArrayItemRequest from '../../../logic/updateRequest/EntityAddArrayItemRequest'
+import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import EntityDeleteArrayItemRequest from '../../../logic/updateRequest/EntityDeleteArrayItemRequest'
 import EntitySetOrderRequest from '../../../logic/updateRequest/EntitySetOrderRequest'
 import React, {cloneElement, forwardRef, memo, useCallback, useRef} from 'react'
@@ -23,14 +19,14 @@ import $ from '@bast1oncz/strings/classString'
 import {SyncFieldElement} from '../types'
 import {makeStyles} from '@material-ui/styles'
 import {useEntityContext} from '../../EntityProvider/EntityContext'
-import {EntityProviderReference} from '../../EntityProvider'
-import useValidEntityListener from '../../EntityProvider/useValidEntityListener'
 import EntityProvider from '../../EntityProvider/EntityProvider'
 import Head from './Head'
+import TempItem, {TempItemRef} from './TempItem/TempItem'
+import useToKey from '../../../hooks/useToKey'
 
 const useCls = makeStyles((theme: any) => ({
     row: {
-        transition: 'all 0.3s ease',
+        transition: 'all 0.3s ease'
     },
     active: {
         background: theme.palette.primary.light
@@ -48,10 +44,10 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
     const {label, disabled = false, children, orderable} = props
     const cls = useCls()
 
-    const sourceKey = toKey(props.sourceKey)
-    const updateKey = toKey(props.updateKey || sourceKey)
-    const deleteKey = toKey(props.deleteKey || updateKey)
-    const itemIdSourceKey = toKey(props.itemIdSourceKey || 'id')
+    const sourceKey = useToKey(props.sourceKey)
+    const updateKey = useToKey(props.updateKey || sourceKey)
+    const deleteKey = useToKey(props.deleteKey || updateKey)
+    const itemIdSourceKey = useToKey(props.itemIdSourceKey || 'id')
 
     const {entity, updateEntity, settings} = useEntityContext()
     const [orderChangeAwaitingItems, setOrderChangeAwaitingItems, resetOrderChangeAwaitingItems] = useResettableState<IdentifiableEntity[] | null>(null)
@@ -119,35 +115,8 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
         }
     }, [updateEntity])
 
-    // Creating - temp item
-    const {
-        tempValue: tempItem, setTempValue: setTempItem, resetTempValue: resetTempItem, isActive: tempItemActive
-    } = useTempValue<object>(`The last value of ${label || 'list of entities'} will be lost`)
-    const activateTempItem = useCallback(() => setTempItem({}), [])
-    const changeTempItem = useCallback(newTempEntity => {
-        setTempItem(newTempEntity)
-    }, [])
-
-    const [tempItemCreating, setTempItemCreating, resetTempItemCreating] = useResettableState(false)
-    const tempItemEntityRef = useRef<EntityProviderReference>({fieldRefs: [], isValid: true, isPrepared: false})
-    const tempItemCreate = useCallback(() => {
-        if(tempItem !== undefined) {
-            const request = new EntityAddArrayItemRequest({
-                sourceKey,
-                updateKey,
-                deleteKey,
-                itemFieldDefinitions: tempItemEntityRef.current.fieldRefs
-            }, tempItem)
-            setTempItemCreating(true)
-            const promise = updateEntity(request) || new Promise(resolve => resolve())
-            promise
-                .then(resetTempItem)
-                .finally(resetTempItemCreating)
-        }
-    }, [sourceKey, updateKey, deleteKey, tempItem])
-    useValidEntityListener(tempItemEntityRef, tempItemCreate, !tempItemActive || tempItemCreating)
-
-    const isSyncing = isSyncingOrder || isRemoving || tempItemCreating
+    const tempItemRef = useRef<TempItemRef>({isCreating: false})
+    const isSyncing = isSyncingOrder || isRemoving || tempItemRef.current.isCreating
 
     return (
         <div>
@@ -177,7 +146,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                         if (settings.type === UpdateMethodType.LOCAL_UPDATE) {
                             itemKey.pushArrayIndexPointer(i)
                         } else if (settings.type === UpdateMethodType.GRAPHQL_UPDATE) {
-                            if(!id) {
+                            if (!id) {
                                 throw new Error('Item id not defined')
                             }
                             itemKey.pushArrayObjectIdentityPointer(itemIdSourceKey.setAt({}, id))
@@ -215,41 +184,17 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                     })}
                 </ReactSortable>
                 {/* Temp item row */}
-                <TableFooter>
-                    <TableRow>
-                        {tempItem !== undefined ? (
-                            <EntityProvider
-                                ref={tempItemEntityRef}
-                                type={UpdateMethodType.LOCAL_UPDATE}
-                                entity={tempItem}
-                                updateEntity={changeTempItem}
-                            >
-                                {React.Children.map(children, (child: SyncFieldElement, i) => {
-                                    return (
-                                        <TableCell key={i}>
-                                            {cloneElement(child, {label: undefined})}
-                                        </TableCell>
-                                    )
-                                })}
-                            </EntityProvider>
-                        ) : React.Children.map(children, (child, i) => (
-                            <TableCell key={i}/>
-                        ))
-                        }
-                        <TableCell padding="checkbox">
-                            {!tempItemActive ? (
-                                <SmartButton type="icon" disabled={disabled || isSyncing} onClick={activateTempItem}>
-                                    <AddIcon/>
-                                </SmartButton>
-                            ) : (
-                                <SmartButton type="icon" loading={tempItemCreating} disabled={disabled}
-                                             onClick={resetTempItem}>
-                                    <RemoveIcon/>
-                                </SmartButton>
-                            )}
-                        </TableCell>
-                    </TableRow>
-                </TableFooter>
+                <TempItem
+                    ref={tempItemRef}
+                    sourceKey={sourceKey}
+                    updateKey={updateKey}
+                    deleteKey={deleteKey}
+                    label={label?.toString()}
+                    isSyncing={isSyncing}
+                    disabled={disabled}
+                >
+                    {props.children}
+                </TempItem>
             </Table>
         </div>
     )

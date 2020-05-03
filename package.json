@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
-    "@bast1oncz/components": "^4.1.4",
+    "@bast1oncz/components": "^4.1.5",
     "@bast1oncz/objects": "^2.8.0",
     "@bast1oncz/state": "^2.0.0",
     "@bast1oncz/strings": "^2.1.6",

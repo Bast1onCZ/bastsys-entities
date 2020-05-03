@@ -4,7 +4,7 @@ import {FieldReference} from '../../../logic/fieldReferences'
 import SmartButton from '@bast1oncz/components/components/SmartButton'
 import useBooleanButton from '../../../hooks/entityIndicator/useBooleanIndicator'
 
-export type SyncButtonProps<T> = Omit<SmartButtonProps, 'onClick'> & {
+export type SyncButtonProps<T> = Omit<SmartButtonProps, 'size' | 'onClick'> & {
     updateKey: FieldReference
     onCompleted?: (prevEntity: T, newEntity: T) => void
 }
