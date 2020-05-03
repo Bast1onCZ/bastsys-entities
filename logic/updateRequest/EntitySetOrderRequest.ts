@@ -24,6 +24,8 @@ export default class EntitySetOrderRequest<E extends Entity = Entity> extends AE
 
     performLocalUpdate(entity: E, updateEntity: UpdateEntityFunction) {
         const itemListFieldKeyPointers = toKey(this.movedItemKey.sourceKey).getPointers()
+        itemListFieldKeyPointers.pop()
+
         const itemListFieldKey = new ObjectPathKey(itemListFieldKeyPointers)
 
         const newEntity = cloneDeep(entity)

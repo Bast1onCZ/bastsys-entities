@@ -191,7 +191,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                         }
 
                         return (
-                            <TableRow key={i} className={$(cls.row, orderable && cls.draggable)}>
+                            <TableRow key={id || i} className={$(cls.row, orderable && cls.draggable)}>
                                 <EntityProvider
                                     {...settings}
                                     sourceKey={joinKeys(settings.sourceKey, itemKey)}
