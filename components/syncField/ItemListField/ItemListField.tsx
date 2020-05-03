@@ -33,6 +33,9 @@ const useCls = makeStyles((theme: any) => ({
     },
     draggable: {
         cursor: 'pointer'
+    },
+    fieldCell: {
+        verticalAlign: 'top !important'
     }
 }))
 
@@ -163,7 +166,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                                 >
                                     {React.Children.map(children, (child: SyncFieldElement) => {
                                         return (
-                                            <TableCell key={itemKey.toString()}>
+                                            <TableCell key={itemKey.toString()} className={cls.fieldCell}>
                                                 {cloneElement(child, {label: undefined})}
                                             </TableCell>
                                         )

@@ -14,6 +14,7 @@ import EntityAddArrayItemRequest from '../../../../logic/updateRequest/EntityAdd
 import useValidEntityListener from '../../../EntityProvider/useValidEntityListener'
 import ObjectPathKey from '@bast1oncz/objects/ObjectPathKey'
 import {useEntityContext} from '../../../EntityProvider/EntityContext'
+import makeStyles from '@material-ui/styles/makeStyles/makeStyles'
 
 export interface TempItemProps {
     label?: string
@@ -28,9 +29,16 @@ export interface TempItemProps {
     setTempItemCreating: (tempItemCreating: boolean) => void
 }
 
+const useFieldCellCls = makeStyles({
+    root: {
+        verticalAlign: 'top !important'
+    }
+})
+
 const TempItem = (props: TempItemProps) => {
     const {label, sourceKey, updateKey, deleteKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, children} = props
 
+    const fieldCellCls = useFieldCellCls()
     const {updateEntity} = useEntityContext()
 
     const {
@@ -71,14 +79,14 @@ const TempItem = (props: TempItemProps) => {
                     >
                         {React.Children.map(children, (child: SyncFieldElement) => {
                             return (
-                                <TableCell key={child.props.sourceKey.toString()}>
+                                <TableCell key={child.props.sourceKey.toString()} classes={fieldCellCls} size="small">
                                     {cloneElement(child, {label: undefined})}
                                 </TableCell>
                             )
                         })}
                     </EntityProvider>
                 ) : React.Children.map(children, (child, i) => (
-                    <TableCell key={i}/>
+                    <TableCell key={i} classes={fieldCellCls} size="small"/>
                 ))
                 }
                 <TableCell padding="checkbox" size="small">
