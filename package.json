@@ -1,12 +1,19 @@
 {
   "name": "@bast1oncz/entities",
-  "version": "3.3.2",
+  "version": "3.3.3",
   "description": "Local and remote graphql entity handling",
   "scripts": {
     "compile": "tsc"
   },
   "author": "bast1oncz",
-  "keywords": ["react", "entity", "entities", "local", "remote", "graphql"],
+  "keywords": [
+    "react",
+    "entity",
+    "entities",
+    "local",
+    "remote",
+    "graphql"
+  ],
   "repository": {
     "url": "https://github.com/Bast1onCZ/bastsys-entities",
     "type": "git"
