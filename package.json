@@ -6,6 +6,10 @@
     "compile": "tsc"
   },
   "author": "bast1oncz",
+  "repository": {
+    "url": "https://github.com/Bast1onCZ/bastsys-entities",
+    "type": "git"
+  },
   "main": "index.js",
   "files": [
     "**/*.js",
