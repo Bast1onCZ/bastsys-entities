@@ -2,7 +2,6 @@ import Table from '@material-ui/core/Table'
 import TableBody, {TableBodyProps} from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableFooter from '@material-ui/core/TableFooter'
-import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import {IdentifiableEntity} from '../../../api/types'
@@ -27,6 +26,7 @@ import {useEntityContext} from '../../EntityProvider/EntityContext'
 import {EntityProviderReference} from '../../EntityProvider'
 import useValidEntityListener from '../../EntityProvider/useValidEntityListener'
 import EntityProvider from '../../EntityProvider/EntityProvider'
+import Head from './Head'
 
 const useCls = makeStyles((theme: any) => ({
     row: {
@@ -157,16 +157,9 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
             </Typography>
             }
             <Table size="small">
-                <TableHead>
-                    <TableRow>
-                        {React.Children.map(children, (child: SyncFieldElement, i) =>
-                            <TableCell key={i}>
-                                {child.props.label}
-                            </TableCell>
-                        )}
-                        <TableCell padding="checkbox"/>
-                    </TableRow>
-                </TableHead>
+                <Head>
+                    {props.children}
+                </Head>
                 <ReactSortable
                     key={isSyncing.toString()} // TODO: remove this key as soon as change is implemented by plugin creator
                     tag={SortableTableBody}
