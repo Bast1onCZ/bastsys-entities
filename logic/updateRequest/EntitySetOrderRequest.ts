@@ -4,6 +4,7 @@ import AEntityUpdateRequest, {UpdateEntityFunction} from './AEntityUpdateRequest
 import {EntityFieldKeyDefinition} from '../fieldReferences'
 import ObjectPathKey, {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import {EntityResponseData} from '../../api/generate/generateEntityQuery'
+import {ItemSubEntity} from '../../components/syncField/ItemListField/types'
 
 interface IOrderable {
     order: number
@@ -12,7 +13,7 @@ interface IOrderable {
 export default class EntitySetOrderRequest<E extends Entity = Entity> extends AEntityUpdateRequest<E> {
     private readonly prevOrder: number
     private readonly newOrder: number
-    private movedItemKey: EntityFieldKeyDefinition
+    private readonly movedItemKey: EntityFieldKeyDefinition
 
     constructor(movedItemKey: EntityFieldKeyDefinition, prevOrder: number, newOrder: number) {
         super()
@@ -50,7 +51,7 @@ export default class EntitySetOrderRequest<E extends Entity = Entity> extends AE
      *
      * @param items
      */
-    public getExpectedResult(items: IdentifiableEntity[]): IdentifiableEntity[] {
+    public getExpectedResult(items: ItemSubEntity[]): ItemSubEntity[] {
         items = [...items]
         const currentItem = items[this.prevOrder]
         items.splice(this.prevOrder, 1)

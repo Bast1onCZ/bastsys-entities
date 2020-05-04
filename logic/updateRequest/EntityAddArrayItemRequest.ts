@@ -1,31 +1,35 @@
 import cloneDeep from 'lodash/cloneDeep'
-import {IdentifiableEntity, Mutation, UnidentifiableEntity} from '../../api/types'
+import {IdentifiableEntity, Mutation} from '../../api/types'
 import {EntityFieldKeyDefinition, FieldReference} from '../fieldReferences'
 import AEntityUpdateRequest, {UpdateEntityFunction} from './AEntityUpdateRequest'
-import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
+import ObjectPathKey, {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import localEntityToUpdateObject from '../localEntityToUpdateObject'
 import {EntityResponseData} from '../../api/generate/generateEntityQuery'
+import {v4 as uuid4} from 'uuid'
 
 interface EntityItemListFieldKeyDefinition extends EntityFieldKeyDefinition {
   itemFieldDefinitions: EntityFieldKeyDefinition[]
+  itemIdSourceKey: ObjectPathKey
 }
 
-export default class EntityAddArrayItemRequest<T extends IdentifiableEntity, I extends UnidentifiableEntity> extends AEntityUpdateRequest<T> {
+export default class EntityAddArrayItemRequest<T extends IdentifiableEntity> extends AEntityUpdateRequest<T> {
   private readonly sourceKey: FieldReference
   private readonly updateKey: FieldReference
+  private readonly itemIdSourceKey: ObjectPathKey
   private readonly itemFieldDefinitions: EntityFieldKeyDefinition[]
-  private readonly item: I
+  private readonly item: object
   
   /**
    *
    * @param def
    * @param item
    */
-  constructor(def: EntityItemListFieldKeyDefinition, item: I) {
+  constructor(def: EntityItemListFieldKeyDefinition, item: object) {
     super()
     
     this.sourceKey = def.sourceKey
     this.updateKey = def.updateKey || def.sourceKey
+    this.itemIdSourceKey = def.itemIdSourceKey
     this.itemFieldDefinitions = def.itemFieldDefinitions
     this.item = item
   }
@@ -33,13 +37,15 @@ export default class EntityAddArrayItemRequest<T extends IdentifiableEntity, I e
   performLocalUpdate(entity: T, updateEntity: UpdateEntityFunction): void {
     const newEntity = cloneDeep(entity)
     
-    const fullSourceKey = joinKeys(this.baseSourceKey, this.sourceKey)
-    let itemArray: I[] = fullSourceKey.getFrom(newEntity)
+    const listSourceKey = joinKeys(this.baseSourceKey, this.sourceKey)
+    let itemArray: object[] = listSourceKey.getFrom(newEntity)
     if (!itemArray) {
       itemArray = []
-      fullSourceKey.setAt(newEntity, itemArray)
+      listSourceKey.setAt(newEntity, itemArray)
     }
-    itemArray.push(this.item)
+    itemArray.push(
+        this.itemIdSourceKey.setAt(this.item, uuid4())
+    )
     
     updateEntity(newEntity)
   }

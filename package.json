@@ -28,7 +28,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
     "@bast1oncz/components": "^4.1.5",
-    "@bast1oncz/objects": "^2.8.0",
+    "@bast1oncz/objects": "^2.8.1",
     "@bast1oncz/state": "^2.0.0",
     "@bast1oncz/strings": "^2.1.6",
     "@material-ui/core": "^4.9.12",
@@ -44,7 +44,8 @@
     "react-apollo": "^3.1.5",
     "react-dom": "^16.13.1",
     "react-number-format": "^4.4.1",
-    "react-sortablejs": "^2.0.11"
+    "react-sortablejs": "^2.0.11",
+    "uuid": "^8.0.0"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.9.2",
@@ -60,6 +61,7 @@
     "@types/moment": "^2.13.0",
     "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
+    "@types/uuid": "^7.0.3",
     "apollo-link": "^1.2.14",
     "typescript": "^3.8.3"
   }

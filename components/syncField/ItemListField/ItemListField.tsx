@@ -3,17 +3,16 @@ import TableBody, {TableBodyProps} from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
-import {IdentifiableEntity} from '../../../api/types'
 import SmartButton from '@bast1oncz/components/components/SmartButton'
 import UpdateMethodType from '../../EntityProvider/UpdateMethodType'
-import {DragInfo, ItemListSyncFieldProps} from './types'
+import {DragInfo, ItemListSyncFieldProps, ItemSubEntity} from './types'
 import RemoveIcon from '@material-ui/icons/DeleteOutline'
 import useResettableState from '@bast1oncz/state/useResettableState'
 import NotImplementedError from '@bast1oncz/objects/error/NotImplementedError'
 import {joinKeys} from '@bast1oncz/objects/ObjectPathKey'
 import EntityDeleteArrayItemRequest from '../../../logic/updateRequest/EntityDeleteArrayItemRequest'
 import EntitySetOrderRequest from '../../../logic/updateRequest/EntitySetOrderRequest'
-import React, {cloneElement, forwardRef, memo, useCallback, useRef, useState} from 'react'
+import React, {cloneElement, forwardRef, memo, useCallback, useMemo, useRef, useState} from 'react'
 import {ReactSortable} from 'react-sortablejs'
 import $ from '@bast1oncz/strings/classString'
 import {SyncFieldElement} from '../types'
@@ -53,8 +52,15 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
     const itemIdSourceKey = useToKey(props.itemIdSourceKey || 'id')
 
     const {entity, updateEntity, settings} = useEntityContext()
-    const [orderChangeAwaitingItems, setOrderChangeAwaitingItems, resetOrderChangeAwaitingItems] = useResettableState<IdentifiableEntity[] | null>(null)
-    const items: IdentifiableEntity[] = orderChangeAwaitingItems || sourceKey.getFrom(entity) || []
+    const [orderChangeAwaitingItems, setOrderChangeAwaitingItems, resetOrderChangeAwaitingItems] = useResettableState<ItemSubEntity[] | null>(null)
+
+    const items = useMemo<ItemSubEntity[]>(() => {
+        const items: any[] = orderChangeAwaitingItems || sourceKey.getFrom(entity) || []
+        return items.map(item => ({
+            id: itemIdSourceKey.getFrom(item),
+            ...item
+        }))
+    }, [orderChangeAwaitingItems || sourceKey.getFrom(entity), itemIdSourceKey])
 
     // Changing order
     const isSyncingOrder = !!orderChangeAwaitingItems
@@ -83,7 +89,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                 itemUpdateKey.pushArrayIndexPointer(oldIndex)
                 break
             case UpdateMethodType.GRAPHQL_UPDATE:
-                const id = (items[oldIndex] as IdentifiableEntity).id
+                const id = items[oldIndex].id
                 itemSourceKey.pushArrayObjectIdentityPointer({id})
                 itemUpdateKey.pushArrayObjectIdentityPointer({id})
                 break
@@ -93,7 +99,8 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
 
         const setOrderRequest = new EntitySetOrderRequest({
             sourceKey: itemSourceKey,
-            updateKey: itemUpdateKey
+            updateKey: itemUpdateKey,
+
         }, oldIndex, newIndex)
         const expectedMoveResult = setOrderRequest.getExpectedResult(items)
 
@@ -106,7 +113,7 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
     const [removingItemId, setRemovingItemId, resetRemovingItemId] = useResettableState(null)
     const isRemoving = !!removingItemId
     const removeItem = useCallback(item => {
-        const id = itemIdSourceKey.getFrom(item)
+        const {id} = item
         const identity = itemIdSourceKey.setAt({}, id)
 
         const promise = updateEntity(
@@ -129,9 +136,11 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
             </Typography>
             }
             <Table size="small">
+                {/* Field labels */}
                 <Head>
                     {props.children}
                 </Head>
+                {/* Item fields */}
                 <ReactSortable
                     tag={SortableTableBody}
                     list={items}
@@ -140,22 +149,21 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                     disabled={!orderable || isSyncing || disabled}
                     ghostClass={cls.active}
                 >
-                    {/* Items */}
                     {items.map((item, i) => {
-                        const id = itemIdSourceKey.getFrom(item)
-
-                        const itemKey = sourceKey.clone()
-                        if (settings.type === UpdateMethodType.LOCAL_UPDATE) {
-                            itemKey.pushArrayIndexPointer(i)
-                        } else if (settings.type === UpdateMethodType.GRAPHQL_UPDATE) {
-                            if (!id) {
-                                throw new Error('Item id not defined')
-                            }
-                            itemKey.pushArrayObjectIdentityPointer(itemIdSourceKey.setAt({}, id))
+                        const {id} = item
+                        if (!id) {
+                            throw new Error('Item id not defined')
                         }
 
+                        const itemKey = sourceKey.clone()
+                            if(settings.type === UpdateMethodType.LOCAL_UPDATE) {
+                                itemKey.pushArrayIndexPointer(i)
+                            } else {
+                                itemKey.pushArrayObjectIdentityPointer({id})
+                            }
+
                         return (
-                            <TableRow key={id || i} className={$(cls.row, orderable && cls.draggable)}>
+                            <TableRow key={id} className={$(cls.row, orderable && cls.draggable)}>
                                 <EntityProvider
                                     {...settings}
                                     sourceKey={joinKeys(settings.sourceKey, itemKey)}
@@ -185,11 +193,12 @@ const ItemListField = ((props: ItemListSyncFieldProps) => {
                         )
                     })}
                 </ReactSortable>
-                {/* Temp item row */}
+                {/* Temp item fields */}
                 <TempItem
                     sourceKey={sourceKey}
                     updateKey={updateKey}
                     deleteKey={deleteKey}
+                    itemIdSourceKey={itemIdSourceKey}
                     label={label?.toString()}
                     isSyncing={isSyncing}
                     disabled={disabled}

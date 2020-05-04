@@ -21,6 +21,7 @@ export interface TempItemProps {
     sourceKey: ObjectPathKey
     updateKey: ObjectPathKey
     deleteKey: ObjectPathKey
+    itemIdSourceKey: ObjectPathKey
     disabled: boolean
     isSyncing: boolean
     children: SyncFieldElement | SyncFieldElement[]
@@ -36,7 +37,7 @@ const useFieldCellCls = makeStyles({
 })
 
 const TempItem = (props: TempItemProps) => {
-    const {label, sourceKey, updateKey, deleteKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, children} = props
+    const {label, sourceKey, updateKey, deleteKey, itemIdSourceKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, children} = props
 
     const fieldCellCls = useFieldCellCls()
     const {updateEntity} = useEntityContext()
@@ -56,6 +57,7 @@ const TempItem = (props: TempItemProps) => {
                 sourceKey,
                 updateKey,
                 deleteKey,
+                itemIdSourceKey,
                 itemFieldDefinitions: tempItemEntityRef.current.fieldRefs
             }, tempItem)
             setTempItemCreating(true)
