@@ -24,22 +24,23 @@ export interface TempItemProps {
     itemIdSourceKey: ObjectPathKey
     disabled: boolean
     isSyncing: boolean
+    orderable?: boolean
     children: SyncFieldElement | SyncFieldElement[]
 
     tempItemCreating: boolean
     setTempItemCreating: (tempItemCreating: boolean) => void
 }
 
-const useFieldCellCls = makeStyles({
-    root: {
+const useCls = makeStyles({
+    fieldCell: {
         verticalAlign: 'top !important'
     }
 })
 
 const TempItem = (props: TempItemProps) => {
-    const {label, sourceKey, updateKey, deleteKey, itemIdSourceKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, children} = props
+    const {label, sourceKey, updateKey, deleteKey, itemIdSourceKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, orderable, children} = props
 
-    const fieldCellCls = useFieldCellCls()
+    const cls = useCls()
     const {updateEntity} = useEntityContext()
 
     const {
@@ -81,25 +82,27 @@ const TempItem = (props: TempItemProps) => {
                     >
                         {React.Children.map(children, (child: SyncFieldElement) => {
                             return (
-                                <TableCell key={child.props.sourceKey.toString()} classes={fieldCellCls} size="small">
+                                <TableCell key={child.props.sourceKey.toString()} className={cls.fieldCell}
+                                           size="small">
                                     {cloneElement(child, {label: undefined})}
                                 </TableCell>
                             )
                         })}
                     </EntityProvider>
                 ) : React.Children.map(children, (child, i) => (
-                    <TableCell key={i} classes={fieldCellCls} size="small"/>
+                    <TableCell key={i} className={cls.fieldCell} size="small"/>
                 ))
                 }
+                {orderable && <TableCell/>}
                 <TableCell padding="checkbox" size="small">
                     {!tempItemActive ? (
                         <SmartButton type="icon" disabled={disabled || isSyncing} onClick={activateTempItem}>
-                            <AddIcon/>
+                            <AddIcon fontSize="small"/>
                         </SmartButton>
                     ) : (
                         <SmartButton type="icon" loading={tempItemCreating} disabled={disabled}
                                      onClick={resetTempItem}>
-                            <RemoveIcon/>
+                            <RemoveIcon fontSize="small"/>
                         </SmartButton>
                     )}
                 </TableCell>
