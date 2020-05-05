@@ -14,7 +14,7 @@ export interface FilterProps<T> {
      * Used filter on init
      */
     defaultFilter?: T
-    children: ReactElement<SyncFieldDefinition> | ReactElement<SyncFieldDefinition>[]
+    children?: ReactElement<SyncFieldDefinition> | ReactElement<SyncFieldDefinition>[]
 }
 
 function Filter<T>(props: FilterProps<T>) {
