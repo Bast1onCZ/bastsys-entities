@@ -96,6 +96,7 @@ function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: Li
         page,
         setPage,
         pageLimit,
+        offset: (page - 1) * pageLimit,
         setPageLimit: changePageLimit,
         setOrderBy, // const
         getDetailUrl

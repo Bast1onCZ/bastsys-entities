@@ -10,6 +10,7 @@ export interface ListContextValue<E extends IdentifiableEntity> {
     page: number
     setPage: (page: number) => void
     pageLimit: number
+    offset: number
     lastPage: number
     setPageLimit: (pageLimit: number) => void
     orderBy: OrderByInput[]
