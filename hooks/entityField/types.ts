@@ -9,9 +9,9 @@ export interface SyncFieldDefinition extends EntityFieldKeyDefinition {
   disabled?: boolean
 }
 
-export interface UseSyncField<T> {
+export interface UseSyncField<T, R extends boolean = false> {
   value: T
   isSyncing: boolean
   disabled: boolean
-  confirmChange: ((value: T) => void|Promise<unknown>) | ((value?: T) => void|Promise<unknown>)
+  confirmChange: R extends true ? ((value: T) => void|Promise<unknown>) : ((value?: T) => void|Promise<unknown>)
 }

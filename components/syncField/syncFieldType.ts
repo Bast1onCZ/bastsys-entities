@@ -7,7 +7,8 @@ enum SyncFieldType {
   IMAGE,
   ITEM_LIST,
   BOOLEAN,
-  DATE_TIME
+  DATE_TIME,
+  SCALAR_ARRAY
 }
 
 export default SyncFieldType

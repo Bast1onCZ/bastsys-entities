@@ -9,7 +9,7 @@ import useSyncFieldImperativeHandle from '../../components/EntityProvider/useSyn
 import {useDynamicValidation} from '../useValidation'
 import SyncFieldType from '../../components/syncField/syncFieldType'
 
-export interface UseBooleanField extends UseSyncField<boolean> {
+export interface UseBooleanField extends UseSyncField<boolean, true> {
 
 }
 

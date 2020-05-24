@@ -12,6 +12,7 @@ export {default as useNumberField} from './hooks/entityField/useNumberField'
 export {default as useSelectField} from './hooks/entityField/useSelectField'
 export {default as useBooleanField} from './hooks/entityField/useBooleanField'
 export {default as useDateTimeField} from './hooks/entityField/useDateTimeField'
+export {default as useArrayField} from './hooks/entityField/useArrayField'
 
 export {default as StringField, TranslatedStringField} from './components/syncField/StringField'
 export {default as HtmlField, TranslatedHtmlField} from './components/syncField/HtmlField'
@@ -22,6 +23,7 @@ export {default as ImageField, TranslatedImageField} from './components/syncFiel
 export {default as BooleanField, TranslatedBooleanField} from './components/syncField/BooleanField'
 export {default as DateField, TranslatedDateField} from './components/syncField/DateField'
 export {default as DateTimeField, TranslatedDateTimeField} from './components/syncField/DateTimeField'
+export {default as StringListField, TranslatedStringListField} from './components/syncField/StringListField'
 
 export {default as useBooleanIndicator} from './hooks/entityIndicator/useBooleanIndicator'
 
