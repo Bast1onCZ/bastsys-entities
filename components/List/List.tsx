@@ -13,8 +13,12 @@ import filterChildren from '@bast1oncz/objects/react/filterChildren'
 import Filter from '../Filter'
 import {FilterProps} from '../Filter/Filter'
 import useResettableState from '@bast1oncz/state/useResettableState'
+import hash from 'object-hash'
+import useCookie from '@bast1oncz/cookies/useCookie'
+import moment from 'moment'
 
 const DEFAULT_DEFAULT_FILTER = {}
+const settingsExpiration = moment().add(1, 'year').valueOf()
 
 function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: ListProps<F>) {
     const {
@@ -24,12 +28,36 @@ function List<E extends IdentifiableEntity, F extends FilterType = {}>(props: Li
         children
     } = props
 
+    // cookie stored page limit
+    const cookieId = useMemo(() => {
+        return hash({
+            entityFragment: JSON.stringify(entityFragment), // stringify because of an error of js class instance
+            list: true
+        })
+    }, [entityFragment])
+    const [settingsString, setSettingsString] = useCookie(cookieId, {expires: settingsExpiration})
+    const {pageLimit} = useMemo(() => {
+        const parsedObject = settingsString ? JSON.parse(settingsString) : {}
+
+        return {
+            pageLimit: parsedObject.pageLimit || defaultPageLimit
+        }
+    }, [settingsString, defaultPageLimit])
+    const setPageLimit = useCallback((pageLimit: number) => {
+        const settings = settingsString ? JSON.parse(settingsString) : {}
+        const newSettings = {
+            ...settings,
+            pageLimit
+        }
+
+        setSettingsString(JSON.stringify(newSettings))
+    }, [settingsString, setSettingsString])
+
     // -- Order by --
     const [orderBy, setOrderBy] = useState<OrderByInput[]>([])
 
     // -- Pagination --
     const [page, setPage] = useState<number>(1)
-    const [pageLimit, setPageLimit] = useState<number>(defaultPageLimit)
     const changePageLimit = useCallback((newPageLimit: number) => {
         // changes page limit so that new page is adjusted
         const currentOffset = (page - 1) * pageLimit
