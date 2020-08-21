@@ -1,5 +1,5 @@
 interface Currency {
-  pattern: string
+  format: string
 }
 
 export interface FormatSettings {
@@ -13,9 +13,9 @@ export interface FormatSettings {
 }
 
 export function getPriceFormat(currency: Currency): FormatSettings {
-  const {pattern} = currency
+  const {format} = currency
   
-  const regResult = pattern.match(/^(.*){value}(.*)$/)
+  const regResult = format.match(/^(.*){value}(.*)$/)
   const prefix = regResult?.[1] as unknown
   const suffix = regResult?.[2] as unknown
   
