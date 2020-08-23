@@ -12,7 +12,7 @@ export interface ItemListSyncFieldProps extends SyncFieldDefinition {
   itemIdSourceKey?: FieldReference
   disabled?: boolean
   children: SyncFieldElement | SyncFieldElement[]
-  orderable?: boolean
+  indexable?: boolean
 }
 
 export interface DragInfo {

@@ -24,7 +24,7 @@ export interface TempItemProps {
     itemIdSourceKey: ObjectPathKey
     disabled: boolean
     isSyncing: boolean
-    orderable?: boolean
+    indexable?: boolean
     children: SyncFieldElement | SyncFieldElement[]
 
     tempItemCreating: boolean
@@ -38,7 +38,7 @@ const useCls = makeStyles({
 })
 
 const TempItem = (props: TempItemProps) => {
-    const {label, sourceKey, updateKey, deleteKey, itemIdSourceKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, orderable, children} = props
+    const {label, sourceKey, updateKey, deleteKey, itemIdSourceKey, disabled, isSyncing, tempItemCreating, setTempItemCreating, indexable, children} = props
 
     const cls = useCls()
     const {updateEntity} = useEntityContext()
@@ -93,7 +93,7 @@ const TempItem = (props: TempItemProps) => {
                     <TableCell key={i} className={cls.fieldCell} size="small"/>
                 ))
                 }
-                {orderable && <TableCell/>}
+                {indexable && <TableCell/>}
                 <TableCell padding="checkbox" size="small">
                     {!tempItemActive ? (
                         <SmartButton type="icon" disabled={disabled || isSyncing} onClick={activateTempItem}>

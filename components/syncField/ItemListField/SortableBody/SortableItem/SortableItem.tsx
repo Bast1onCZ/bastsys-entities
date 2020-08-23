@@ -22,7 +22,7 @@ export interface SortableItemProps {
     isSyncing: boolean
     itemIndex: number
     removeItem: (item: ItemSubEntity) => void
-    orderable?: boolean
+    indexable?: boolean
     children: SyncFieldElement | SyncFieldElement[]
 }
 
@@ -45,7 +45,7 @@ const Handle = SortableHandle(({disabled}) => {
 })
 
 const SortableItem = SortableElement((props: SortableItemProps) => {
-    const {item, fieldSourceKey, disableActions, itemIndex, isSyncing, removeItem, orderable, children} = props
+    const {item, fieldSourceKey, disableActions, itemIndex, isSyncing, removeItem, indexable, children} = props
 
     const {settings} = useEntityContext()
 
@@ -87,7 +87,7 @@ const SortableItem = SortableElement((props: SortableItemProps) => {
                     )
                 })}
             </EntityProvider>
-            {orderable &&
+            {indexable &&
             <Handle disabled={disableOrderChange}/>
             }
             <TableCell padding="checkbox" size="small">

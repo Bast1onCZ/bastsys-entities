@@ -10,17 +10,17 @@ interface IOrderable {
     order: number
 }
 
-export default class EntitySetOrderRequest<E extends Entity = Entity> extends AEntityUpdateRequest<E> {
-    private readonly prevOrder: number
-    private readonly newOrder: number
+export default class EntitySetIndexRequest<E extends Entity = Entity> extends AEntityUpdateRequest<E> {
+    private readonly prevIndex: number
+    private readonly newIndex: number
     private readonly movedItemKey: EntityFieldKeyDefinition
 
-    constructor(movedItemKey: EntityFieldKeyDefinition, prevOrder: number, newOrder: number) {
+    constructor(movedItemKey: EntityFieldKeyDefinition, prevIndex: number, newIndex: number) {
         super()
 
         this.movedItemKey = movedItemKey
-        this.prevOrder = prevOrder
-        this.newOrder = newOrder
+        this.prevIndex = prevIndex
+        this.newIndex = newIndex
     }
 
     performLocalUpdate(entity: E, updateEntity: UpdateEntityFunction) {
@@ -41,7 +41,7 @@ export default class EntitySetOrderRequest<E extends Entity = Entity> extends AE
             mutation: updateMutation,
             variables: {
                 filter: {id: entity.id},
-                input: ObjectPathKey.join(this.movedItemKey.updateKey || this.movedItemKey.sourceKey, 'order').setAt({}, this.newOrder)
+                input: ObjectPathKey.join(this.movedItemKey.updateKey || this.movedItemKey.sourceKey, 'index').setAt({}, this.newIndex)
             }
         })
     }
@@ -53,9 +53,9 @@ export default class EntitySetOrderRequest<E extends Entity = Entity> extends AE
      */
     public getExpectedResult(items: ItemSubEntity[]): ItemSubEntity[] {
         items = [...items]
-        const currentItem = items[this.prevOrder]
-        items.splice(this.prevOrder, 1)
-        items.splice(this.newOrder, 0, currentItem)
+        const currentItem = items[this.prevIndex]
+        items.splice(this.prevIndex, 1)
+        items.splice(this.newIndex, 0, currentItem)
 
         return items
     }

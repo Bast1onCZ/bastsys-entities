@@ -13,12 +13,12 @@ export interface SortableBodyProps {
     syncingItemId?: string
     disabled: boolean
     removeItem: (item: ItemSubEntity) => void
-    orderable?: boolean
+    indexable?: boolean
     children: SyncFieldElement | SyncFieldElement[]
 }
 
 const SortableBody = SortableContainer((props: SortableBodyProps) => {
-    const {tableBodyRef, fieldSourceKey, items, disabled, syncingItemId, removeItem, orderable, children} = props
+    const {tableBodyRef, fieldSourceKey, items, disabled, syncingItemId, removeItem, indexable, children} = props
 
     return (
         <TableBody ref={tableBodyRef}>
@@ -34,7 +34,7 @@ const SortableBody = SortableContainer((props: SortableBodyProps) => {
                         disableActions={disabled}
                         fieldSourceKey={fieldSourceKey}
                         removeItem={removeItem}
-                        orderable={orderable}
+                        indexable={indexable}
                     >
                         {children}
                     </SortableItem>
