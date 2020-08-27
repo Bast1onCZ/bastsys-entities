@@ -1,6 +1,5 @@
-import NumberSyncField from './NumberField'
+import NumberSyncField, {NumberFieldProps} from './NumberField'
 import withTranslatedField from '../withTranslatedField'
-import {NumberFieldProps} from './types'
 
 export {getPriceFormat} from './FormatSettings'
 export const TranslatedNumberField = withTranslatedField<NumberFieldProps>(NumberSyncField)

@@ -1,16 +1,17 @@
 import InputAdornment from '@material-ui/core/InputAdornment'
 import TextField from '@material-ui/core/TextField'
 import SmartButton from '@bast1oncz/components/components/SmartButton'
-import {isEntityReference} from '../EntityReference'
-import {NumberFieldProps} from './types'
+import {isEntityReference, ReferableValue} from '../EntityReference'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
-import React, {forwardRef, memo, useMemo, useRef} from 'react'
+import React, {forwardRef, InputHTMLAttributes, memo, useMemo, useRef} from 'react'
 import EditIcon from '@material-ui/icons/EditOutlined'
 import NumberFormat from 'react-number-format'
 import useValueChangeHandler from '@bast1oncz/components/hooks/input/useValueChangeHandler'
 import {makeStyles} from '@material-ui/core/styles'
-import { useEntityContext } from '../../EntityProvider/EntityContext'
+import {useEntityContext} from '../../EntityProvider/EntityContext'
 import useNumberField from '../../../hooks/entityField/useNumberField'
+import {SyncFieldDefinition} from '../../../hooks/entityField/types'
+import {FormatSettings} from './FormatSettings'
 
 const useCls = makeStyles({
     numberField: {
@@ -20,6 +21,14 @@ const useCls = makeStyles({
         }
     }
 })
+
+export interface NumberFieldProps extends SyncFieldDefinition {
+    label?: string
+    disabled?: boolean
+    hidden?: boolean
+    format?: ReferableValue<FormatSettings | undefined>
+    autoComplete: InputHTMLAttributes<any>['autoComplete']
+}
 
 const NumberField = forwardRef<SyncFieldReference, NumberFieldProps>((props, ref) => {
     const {entity} = useEntityContext()
@@ -82,6 +91,7 @@ const NumberField = forwardRef<SyncFieldReference, NumberFieldProps>((props, ref
                 inputRef={inputRef}
                 className={cls.numberField}
                 label={props.label}
+                autoComplete={props.autoComplete}
                 value={shownValue}
                 error={validation.hasError}
                 helperText={validation.error}

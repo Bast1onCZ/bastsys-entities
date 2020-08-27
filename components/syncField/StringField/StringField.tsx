@@ -1,4 +1,4 @@
-import React, {forwardRef, KeyboardEvent, memo, useCallback, useMemo, useRef} from 'react'
+import React, {forwardRef, InputHTMLAttributes, KeyboardEvent, memo, useCallback, useMemo, useRef} from 'react'
 import useStringField from '../../../hooks/entityField/useStringField'
 import {SyncFieldDefinition} from '../../../hooks/entityField/types'
 import TextField from '@material-ui/core/TextField'
@@ -13,10 +13,11 @@ export interface StringFieldProps extends SyncFieldDefinition {
     hidden?: boolean
     multiline?: boolean
     disabled?: boolean
+    autoComplete?: InputHTMLAttributes<any>['autoComplete']
 }
 
 const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref) => {
-    const {label, multiline, disabled, hidden} = props
+    const {label, multiline, disabled, hidden, autoComplete} = props
     const {changeTempValue, confirmChange, isDirty, isSyncing, tempValue, validation, value, disabled: entityDisabled} = useStringField(props, ref)
 
     const shownValue = isDirty ? tempValue : value
@@ -59,6 +60,7 @@ const StringField = forwardRef<SyncFieldReference, StringFieldProps>((props, ref
         : (
             <TextField
                 label={label}
+                autoComplete={autoComplete}
                 inputRef={inputRef}
                 value={shownValue}
                 InputProps={InputProps}
