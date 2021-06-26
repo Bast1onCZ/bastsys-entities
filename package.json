@@ -4,7 +4,7 @@
   "description": "Local and remote graphql entity handling",
   "scripts": {
     "compile": "tsc",
-    "prepublish": "tsc"
+    "prepare": "npm run compile"
   },
   "author": "bast1oncz",
   "keywords": [
