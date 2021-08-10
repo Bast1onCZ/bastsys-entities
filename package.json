@@ -31,7 +31,7 @@
     "@bast1oncz/components": "^5.0.0",
     "@bast1oncz/cookies": "^2.1.1",
     "@bast1oncz/objects": "^2.2.1",
-    "@bast1oncz/state": "^2.0.0",
+    "@bast1oncz/state": "^3.0.0",
     "@bast1oncz/strings": "^2.5.0",
     "@date-io/moment": "^1.3.13",
     "@material-ui/core": "^4.9.2",

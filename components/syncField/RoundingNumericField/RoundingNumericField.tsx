@@ -1,10 +1,10 @@
 import React, {forwardRef, memo, useEffect} from 'react'
-import useSolidValue from '@bast1oncz/state/useSolidValue'
 import RoundingNumericBareField from '@bast1oncz/components/components/form/RoundingNumericField'
 import useNumberField from '../../../hooks/entityField/useNumberField'
 import {SyncFieldReference} from '../../EntityProvider/useSyncFieldImperativeHandle'
 import {RoundingNumericFieldProps} from '@bast1oncz/components/components/form/RoundingNumericField/types'
 import {SyncFieldDefinition} from '../../../hooks/entityField/types'
+import useStableState from '@bast1oncz/state/useStableState'
 
 export interface RoundingNumericSyncFieldProps extends Omit<RoundingNumericFieldProps, 'value' | 'onChange'>, SyncFieldDefinition {
     hidden?: boolean
@@ -15,7 +15,7 @@ const RoundingNumericField = forwardRef<SyncFieldReference, RoundingNumericSyncF
 
     const shownValue = (isDirty ? tempValue : value) as number
 
-    const solidTempValue = useSolidValue(tempValue, 1000)
+    const solidTempValue = useStableState(tempValue, 1000)
     useEffect(() => {
         if (solidTempValue !== undefined && value !== solidTempValue) {
             confirmChange()
