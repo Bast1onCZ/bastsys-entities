@@ -6,7 +6,7 @@ import {toKey} from '@bast1oncz/objects/ObjectPathKey'
 import AEntityUpdateRequest from '../../../logic/updateRequest/AEntityUpdateRequest'
 import useEntityFieldDefinitions from '../useEntityFieldDefinitions'
 import useEntityDefinitionImperativeHandle, {EntityDefinition} from '../useEntityDefinitionImperativeHandle'
-import {useApolloClient} from '@apollo/react-hooks'
+import {useApolloClient} from '@apollo/client'
 import useResettableState from '@bast1oncz/state/useResettableState'
 
 const GraphQLEntityProvider = forwardRef<EntityDefinition, GraphQLEntityProviderProps>((props, ref) => {

@@ -5,7 +5,7 @@ import React, {
     useState
 } from 'react'
 import {FilterType, ListProps, ListResponse, OrderByInput, PaginationInput} from './types'
-import {useQuery} from '@apollo/react-hooks'
+import {useQuery} from '@apollo/client'
 import generateEntityListQuery from '../../api/generate/generateEntityListQuery'
 import {IdentifiableEntity} from '../../api/types'
 import ListContext, {ListContextValue} from './ListContext'

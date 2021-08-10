@@ -1,6 +1,6 @@
 import {Entity, IdentifiableEntity, Mutation, UnidentifiableEntity} from '../../api/types'
 import {FieldReference} from '../fieldReferences'
-import ApolloClient from 'apollo-client'
+import {ApolloClient} from '@apollo/client'
 import {EntityResponseData} from '../../api/generate/generateEntityQuery'
 import {EntitiesResponseData} from './EntityDeleteRequest'
 
