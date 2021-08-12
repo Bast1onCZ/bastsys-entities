@@ -1,9 +1,9 @@
 import {useCallback, useMemo} from 'react'
 import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
-import {useEntityContext} from '../../index'
 import useBooleanSetResetState from '@bast1oncz/state/useBooleanSetResetState'
 import EntitySetValueRequest from '../../logic/updateRequest/EntitySetValueRequest'
 import {FieldReference} from '../../logic/fieldReferences'
+import {useEntityContext} from '../../components/EntityProvider/EntityContext'
 
 export interface UseBooleanButtonInput<T> {
     updateKey: FieldReference
