@@ -39,7 +39,7 @@
     "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "^4.10.0",
     "graphql-tag": "^2.10.3",
-    "leave-confirm": "^1.0.0",
+    "leave-confirm": "^2.0.0",
     "lodash": "^4.17.19",
     "moment": "^2.26.0",
     "object-hash": "^2.0.3",

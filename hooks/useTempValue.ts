@@ -1,5 +1,5 @@
 import useResettableState from '@bast1oncz/state/useResettableState'
-import useLeaveConfirm from 'leave-confirm/dist/useLeaveConfirm'
+import useLeaveConfirm from 'leave-confirm/useLeaveConfirm'
 
 interface TempValueHookResult<T> {
   tempValue: T|undefined,
