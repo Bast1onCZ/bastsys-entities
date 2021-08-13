@@ -10,19 +10,17 @@ import useSyncFieldImperativeHandle, {SyncFieldReference} from '../../EntityProv
 import ImageMimeType from './ImageMimeType'
 import useResettableState from '@bast1oncz/state/useResettableState'
 import useFileDialog from '@bast1oncz/components/hooks/input/useFileDialog'
-
-import ImagePlaceholder from './ImagePlaceholder.png'
 import EntityDeleteValueRequest from '../../../logic/updateRequest/EntityDeleteValueRequest'
 import EntitySetFileValueRequest from '../../../logic/updateRequest/EntitySetFileValueRequest'
-import React, {CSSProperties, forwardRef, memo, useCallback} from 'react'
+import React, {CSSProperties, forwardRef, memo, Ref, useCallback, useMemo} from 'react'
 import {useEntityContext} from '../../EntityProvider/EntityContext'
 import useIncrementalIdState from '@bast1oncz/state/useIncrementalIdState'
 import ImmediatePromise from '@bast1oncz/objects/ImmediatePromise'
 import {useDynamicValidation} from '../../../hooks/useValidation'
 
-const IMAGE_SOURCE_TYPE = {
-    DATA_URL: 1,
-    LINK: 2
+enum IMAGE_SOURCE_TYPE {
+    DATA_URL = 1,
+    LINK = 2
 }
 
 const mediaStyle: CSSProperties = {
@@ -30,8 +28,6 @@ const mediaStyle: CSSProperties = {
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat'
 }
-
-const DEFAULT_ENTITY_VALUE = {link: ImagePlaceholder}
 
 /**
  * @param value
@@ -48,14 +44,16 @@ function isValidValue(value) {
     return false
 }
 
-const ImageField = forwardRef<SyncFieldReference, ImageFieldProps>((props, ref) => {
-    const {sourceKey, updateKey, deleteKey, validate, label, mimeTypes = Object.values(ImageMimeType), hidden, deletable, disabled} = props
+const ImageField = forwardRef((props: ImageFieldProps, ref: Ref<SyncFieldReference>) => {
+    const {sourceKey, updateKey, deleteKey, validate, label, mimeTypes = Object.values(ImageMimeType), hidden, deletable, disabled, placeholder} = props
 
     const {entity, updateEntity, readonly: entityDisabled} = useEntityContext()
 
+    const defaultEntityValue = useMemo(() => placeholder && {link: placeholder}, [placeholder])
+
     const rawEntityValue = toKey(props.sourceKey).getFrom(entity)
     const valueType = isValidValue(rawEntityValue)
-    const entityValue = valueType ? rawEntityValue : DEFAULT_ENTITY_VALUE
+    const entityValue = valueType ? rawEntityValue : defaultEntityValue
     const validation = useDynamicValidation(entity, rawEntityValue, validate)
 
     // update

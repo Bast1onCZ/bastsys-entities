@@ -7,4 +7,8 @@ export interface ImageFieldProps extends SyncFieldDefinition {
   deletable?: boolean
   hidden?: boolean
   disabled?: boolean
+  /**
+   * Image shown when no image is selected
+   */
+  placeholder?: string
 }
